@@ -4,7 +4,7 @@
     padding: 1.75rem 1.5rem;
     position: relative;
     text-align: center;
-    border-radius: var(--radius-user-card);
+    border-radius: var(--radius-card);
     box-shadow: var(--surface2);
 }
 
@@ -16,7 +16,7 @@
         bottom: -4px;
         width: 94%;
         z-index: -1;
-        border-radius: var(--radius-user-card);
+        border-radius: var(--radius-card);
         inset-inline: 0;
         margin: auto;
     }

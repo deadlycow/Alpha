@@ -12,6 +12,6 @@
 .team-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(auto, 18.75rem));
-    gap: 1.875rem;
-    padding: 2.25rem 4.688rem;
+    gap: 1rem;
+    padding: 2.25rem 2.5rem;
 }

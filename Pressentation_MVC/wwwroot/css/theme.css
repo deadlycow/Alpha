@@ -6,6 +6,7 @@
     --gray-200: #F0F1F5;
     --gray-300: #E8EAED;
     --gray-400: #E3E5E8;
+    --test: ##1A1926;
     --border-100: #EBEEF2;
     --border-200: #E3E5E8;
     --border-300: #C6C8CC;
@@ -47,6 +48,7 @@
     --font-12: 0.75rem;
     --border-radius-16: 1rem;
     --border-radius-14: 0.875rem;
+    --border-radius-10: 0.625rem;
     --border-radius-8: 0.5rem;
     --font-weight-bold: 700;
     --font-weight-semibold: 600;
@@ -68,10 +70,14 @@
     --color-link: var(--accent);
     --color-input-border: var(--border-100);
     --color-list-options: var(--body-light);
+    --color-card-description: var(--body-dark);
+    --color-card-summary-text: var(--heading);
+    --color-card-company-name: var(--body-light);
     --radius-nav-link: var(--border-radius-16);
     --radius-container: var(--border-radius-16);
-    --radius-user-card: var(--border-radius-16);
+    --radius-card: var(--border-radius-16);
     --radius-card-span: var(--border-radius-8);
+    --radius-time-container: var(--border-radius-10);
     --bg-color: var(--background);
     --bg-nav-link: var(--accent-10);
     --bg-card-color: var(--surface);
@@ -84,6 +90,7 @@
     --shadow-popup-30: var(--popup-30);
     --shadow-popup-80: var(--popup-80);
     --shadow-button: var(--button);
+    --time-container-bg-color: var(--gray-200);
 }
 
 [data-theme="dark"] {
