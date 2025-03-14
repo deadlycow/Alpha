@@ -1,0 +1,30 @@
+﻿@{
+    var links = new List<LinkItem>
+    {
+    new LinkItem
+    {
+    Text = "Projects",
+    Controller = "Home",
+    Action = "Project",
+    LinkClass = Html.IsActive("Project", "Home"),
+    ImageUrl = "/images/projects-active.svg",
+    Classes = new List<string> { "side-nav-link" },
+    ImgClasses = new List<string> { "nav-icon" }
+    },
+    new LinkItem
+    {
+    Text = "Team Members",
+    Controller = "Home",
+    Action = "Team",
+    LinkClass = Html.IsActive("Team", "Home"),
+    ImageUrl = "/images/contacts-active.svg",
+    Classes = new List<string> { "side-nav-link" },
+    ImgClasses = new List<string> { "nav-icon" }
+    }
+    };
+}
+<link rel="stylesheet" href="~/css/components/_SideNav.css" />
+@await Html.PartialAsync("Partials/Components/_AlphaLogo")
+<ul class="side-nav-list">
+    @await Html.PartialAsync("Partials/Components/_NavItemList", links)
+</ul>

@@ -1,0 +1,6 @@
+﻿@model (string Id, string Label, string Type, string Placeholder)
+
+<div class="form-input">
+    <label for="@Model.Id">@Model.Label</label>
+    <input id="@Model.Id" class="input-field" type="@Model.Type" placeholder="@Model.Placeholder" required />
+</div>

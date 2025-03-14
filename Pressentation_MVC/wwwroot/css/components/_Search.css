@@ -1,0 +1,20 @@
+﻿.search-container {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.search-icon {
+    user-select: none;
+}
+
+.search-input {
+    border: none;
+    background-color: transparent;
+    font-size: var(--font-15);
+}
+    .search-input::placeholder {
+        color: var(--color-body);
+    }
+    .search-input:focus {
+        outline: none;
+    }

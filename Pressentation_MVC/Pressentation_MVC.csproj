@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="Views\Home\Project.cshtml" />
+    <None Include="wwwroot\css\account\login.css" />
+    <None Include="wwwroot\css\components\_AlphaLogo.css" />
+    <None Include="wwwroot\css\layouts\_Layout.css" />
+  </ItemGroup>
+
+</Project>

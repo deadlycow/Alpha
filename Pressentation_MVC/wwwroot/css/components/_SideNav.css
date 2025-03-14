@@ -1,0 +1,35 @@
+﻿.side-nav-list {
+    padding-top: 1.688rem;
+}
+
+    .side-nav-list a {
+        display: flex;
+        align-items: center;
+    }
+
+.nav-icon {
+    filter: grayscale(100%) brightness(0.7);
+    transition: filter 0.3s ease;
+    padding-right: 1rem;
+}
+
+.side-nav-link.active .nav-icon {
+    filter: grayscale(0%) brightness(1);
+}
+
+.side-nav-link {
+    color: var(--color-header);
+    font-size: var(--font-15);
+    font-weight: var(--font-weight-semibold);
+    border-radius: var(--radius-nav-link);
+    padding: 1.125rem;
+}
+
+    .side-nav-link.active {
+        background-color: var(--bg-nav-link);
+        color: var(--color-nav-link-text);
+    }
+
+    .side-nav-link:hover {
+        background-color: var(--bg-nav-link);
+    }

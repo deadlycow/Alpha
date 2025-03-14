@@ -1,0 +1,44 @@
+﻿.btn {
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    padding: 0.875rem 1.5rem;
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-15);
+    border-radius: var(--border-radius-14);
+    cursor: pointer;
+    position: relative;
+}
+
+.btn-primary {
+    background-color: var(--btn-primary-background-color);
+    border: 1px solid var(--btn-primary-border-color);
+    color: var(--btn-primary-text-color);
+    box-shadow: var(--button);
+}
+
+    .btn-primary:hover {
+        background-color: var(--btn-primary-hover);
+    }
+
+.btn-gray {
+    background-color: var(--btn-gray-background-color);
+    border: none;
+    color: var(--btn-gray-text-color);
+}
+
+    .btn-gray:hover {
+        background-color: var(--btn-gray-hover);
+    }
+
+
+.btn-google::before {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    content: url(../images/google-icon.svg);
+}
+
+.btn img {
+    padding-right: .5rem;
+}

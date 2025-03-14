@@ -1,0 +1,128 @@
+﻿:root {
+    --heading: #1A1926;
+    --body-light: #637085;
+    --body-dark: #28263B;
+    --gray-100: #F5F7FA;
+    --gray-200: #F0F1F5;
+    --gray-300: #E8EAED;
+    --gray-400: #E3E5E8;
+    --border-100: #EBEEF2;
+    --border-200: #E3E5E8;
+    --border-300: #C6C8CC;
+    --background: #F1F3F7;
+    --surface: #FFFFFF;
+    --accent: #2D99FF;
+    --orange: #FF9640;
+    --red: #FF6640;
+    --yellow: #FFD422;
+    --blue: #2CD9D9;
+    --green: #31D482;
+    --purple: #826AF9;
+    --dark-green: #24B26B;
+    --dark-orange: #F09330;
+    --dark-yellow: #FCBB42;
+    --dark-red: #E94D3F;
+    --dark-blue: #2D7DCC;
+    --dark-purple: #634CD4;
+    --accent-dark: #2682D9;
+    --accent-10: #1A8EFF1A;
+    --green-10: #55d46a1A;
+    --red-10: #FF66401A;
+    --purple-10: #826AF91A;
+    --surface1: 0px 20px 30px -18px #040F151A;
+    --surface2: 0px 40px 30px -30px #040F150F;
+    --popup: 0px 40px 30px -30px #040F1526, 0px 50px 50px 0px #040F1526;
+    --popup-30: 0px 8px 30px 0px #040F151A;
+    --popup-80: 0px 16px 80px 0px #040F1526, 0px 40px 20px -30px #040F151A;
+    --button: 0px 4px 16px 0px #0081FF2E;
+    --font-h1: 2.25rem;
+    --font-h2: 2rem;
+    --font-h3: 1.75rem;
+    --font-h4: 1.5rem;
+    --font-h5: 1.25rem;
+    --font-h6: 1.125rem;
+    --font-26: 1.625rem;
+    --font-15: 0.938rem;
+    --font-14: 0.875rem;
+    --font-12: 0.75rem;
+    --border-radius-16: 1rem;
+    --border-radius-14: 0.875rem;
+    --border-radius-8: 0.5rem;
+    --font-weight-bold: 700;
+    --font-weight-semibold: 600;
+    --font-weight-medium: 500;
+    --font-weight-normal: 400;
+    /* Custom */
+    --btn-primary-text-color: var(--surface);
+    --btn-primary-border-color: var(--surface);
+    --btn-primary-background-color: var(--accent);
+    --btn-primary-hover: var(--accent-dark);
+    --btn-gray-text-color: var(--heading);
+    --btn-gray-border-color: var(--surface);
+    --btn-gray-background-color: var(--gray-100);
+    --btn-gray-hover: var(--gray-300);
+    --color-heading: var(--heading);
+    --color-or-text: var(--body-light);
+    --color-nav-link-text: var(--accent);
+    --color-checkbox-text: var(--body-dark);
+    --color-link: var(--accent);
+    --color-input-border: var(--border-100);
+    --color-list-options: var(--body-light);
+    --radius-nav-link: var(--border-radius-16);
+    --radius-container: var(--border-radius-16);
+    --radius-user-card: var(--border-radius-16);
+    --radius-card-span: var(--border-radius-8);
+    --bg-color: var(--background);
+    --bg-nav-link: var(--accent-10);
+    --bg-card-color: var(--surface);
+    --bg-card-color-span: var(--gray-200);
+    --layout-border: var(--border-200);
+    --placeholder: var(--body-light);
+    --shadow-surface1: var(--surface1);
+    --shadow-surface2: var(--surface2);
+    --shadow-popup: var(--popup);
+    --shadow-popup-30: var(--popup-30);
+    --shadow-popup-80: var(--popup-80);
+    --shadow-button: var(--button);
+}
+
+[data-theme="dark"] {
+    --color-heading: var(--surface);
+    --bg-color: #151517;
+}
+
+h1 {
+    font-size: var(--font-h1);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-heading);
+}
+
+h2 {
+    font-size: var(--font-h2);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-heading);
+}
+
+h3 {
+    font-size: var(--font-h3);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-heading);
+}
+
+h4 {
+    font-size: var(--font-h4);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-heading);
+}
+
+h5 {
+    font-size: var(--font-h5);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-heading);
+}
+
+h6 {
+    font-size: var(--font-h6);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-heading);
+}

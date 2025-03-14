@@ -1,0 +1,60 @@
+﻿.login-container {
+    display: grid;
+    background-color: var(--surface);
+    margin: auto;
+    padding: 6.25rem 6.25rem 1.813rem;
+    border-radius: var(--radius-container);
+    box-shadow: var(--surface2);
+    position: relative;
+}
+
+    .login-container::after {
+        content: "";
+        background-color: var(--surface);
+        position: absolute;
+        bottom: -4px;
+        height: 2rem;
+        width: 98%;
+        z-index: -1;
+        border-radius: var(--radius-container);
+        inset-inline: 0;
+        margin-inline: auto;
+    }
+
+    .login-container h1 {
+        text-align: center;
+    }
+
+    .login-container .btn-gray {
+        margin-top: 1.688rem;
+        margin-bottom: 2.313rem;
+        display: block;
+    }
+
+.form-me {
+    display: flex;
+    justify-content: space-between;
+    padding-block: 0.875rem 1.375rem;
+    font-size: var(--font-15);
+    color: var(--color-checkbox-text);
+}
+
+    .form-me a {
+        text-decoration: none;
+        font-size: var(--font-15);
+        color: var(--color-link);
+    }
+
+.btn.btn-primary {
+    width: 100%
+}
+
+.noAccount {
+    padding-top: 3.688rem;
+    text-align: center;
+}
+
+    .noAccount a {
+        text-decoration: none;
+        color: var(--color-link);
+    }

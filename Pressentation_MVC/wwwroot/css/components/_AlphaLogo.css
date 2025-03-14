@@ -1,0 +1,14 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+.brand-wrapper {
+    display: flex;
+    align-items: center;
+    margin-left: 0.688rem;
+}
+
+.brand-name {
+    font-size: var(--font-26);
+    font-family: "Comfortaa", sans-serif;
+    font-weight: var(--font-weight-bold);
+    padding-left: 0.625rem;
+}

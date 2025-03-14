@@ -1,0 +1,17 @@
+﻿.team-header {
+    display: flex;
+    justify-content: space-between;
+    padding-inline: 1.875rem;
+    padding-top: 1.875rem;
+}
+
+    .team-header .btn {
+        width: auto;
+    }
+
+.team-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(auto, 18.75rem));
+    gap: 1.875rem;
+    padding: 2.25rem 4.688rem;
+}

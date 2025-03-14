@@ -1,0 +1,42 @@
+﻿.form-input {
+    display: grid;
+    gap: 0.563rem;
+    min-width: 25rem;
+    padding-top: 1.875rem;
+}
+
+    .form-input label {
+        font-size: var(--font-15);
+        font-weight: var(--font-weight-semibold);
+        color: var(--color-heading);
+    }
+
+.input-field {
+    border: 1px solid var(--color-input-border);
+    border-radius: var(--border-radius-14);
+    padding: 0.875rem 1rem;
+    font-size: var(--font-15);
+    
+}
+    .input-field::placeholder {
+        color: var(--placeholder);
+    }
+
+.password-container {
+    position: relative;
+}
+.toggle-password {
+    position:absolute;
+    right: .75rem;
+    bottom: .8rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.eye-icon {
+    height: 1.5rem;
+    aspect-ratio: 1/1;
+}

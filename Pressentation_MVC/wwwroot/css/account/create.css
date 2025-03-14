@@ -1,0 +1,52 @@
+﻿.create-container {
+    display: grid;
+    background-color: var(--surface);
+    margin: auto;
+    padding: 4rem 6.25rem 1.813rem;
+    border-radius: var(--radius-container);
+    box-shadow: var(--surface1);
+    position: relative;
+}
+
+    .create-container::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        inset-inline: 0;
+        margin: auto;
+        height: 2rem;
+        width: 98%;
+        border-radius: var(--radius-container);
+        z-index: -1;
+        background-color: var(--surface);
+    }
+
+    .create-container a {
+        text-decoration: none;
+        font-size: var(--font-15);
+        color: var(--color-link);
+    }
+
+    .create-container h1 {
+        text-align: center;
+    }
+
+    .create-container .btn-google {
+        margin-top: 1.688rem;
+        margin-bottom: 2.313rem;
+    }
+
+.form-terms {
+    padding-block: 0.875rem 1.375rem;
+    font-size: var(--font-15);
+    color: var(--color-checkbox-text);
+}
+
+.btn.btn-primary {
+    width: 100%;
+}
+
+.sign-in {
+    padding-top: 3.375rem;
+    text-align: center;
+}

@@ -1,0 +1,14 @@
+﻿<link rel="stylesheet" href="~/css/home/team.css" asp-append-version="true" />
+<div class="team-header">
+    <h2>Team Members</h2>
+    <button class="btn btn-primary"><img src="~/images/plus-icon.svg"/> Add member</button>
+</div>
+<div class="team-container">
+    @await Html.PartialAsync("Partials/Components/_UserCard")
+    @await Html.PartialAsync("Partials/Components/_UserCard")
+    @await Html.PartialAsync("Partials/Components/_UserCard")
+    @await Html.PartialAsync("Partials/Components/_UserCard")
+    @await Html.PartialAsync("Partials/Components/_UserCard")
+    @await Html.PartialAsync("Partials/Components/_UserCard")
+    @await Html.PartialAsync("Partials/Components/_UserCard")
+</div> 

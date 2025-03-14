@@ -1,0 +1,22 @@
+﻿@{
+    var linkItems = new List<LinkItem>
+    {
+        new LinkItem
+        {
+            ImageUrl = "/images/bell-icon.svg",
+        },
+        new LinkItem
+        {
+            ImageUrl = "/images/setting-icon.svg",
+        }
+    };
+}
+
+<link rel="stylesheet" href="~/css/components/_TopNav.css" />
+@await Html.PartialAsync("Partials/Components/_Search")
+<ul class="top-nav-list">
+    @await Html.PartialAsync("Partials/Components/_NavItemList", linkItems)
+</ul>
+<div class="profile-container">
+    <img class="profile-avatar" src="~/images/profiles/1.svg" alt="avatar" />
+</div>
