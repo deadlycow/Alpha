@@ -5,7 +5,7 @@
 }
 
     .panel-admin .admin-header, span {
-        font-family: "Poppins";
+        font-family: "Poppins", sans-serif;
         font-size: 72px;
         line-height: 90px;
     }
@@ -13,10 +13,11 @@
     .panel-admin span {
         color: var(--orange);
     }
-    .panel-admin p {
-        font-size:var(--font-15);
+    .panel-admin .admin-header {
+        color: var(--surface);
     }
 
     .panel-admin p, .admin-header {
-        color: var(--surface)
+        color: var(--surface);
+        font-size:var(--font-15);
     }
