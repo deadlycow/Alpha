@@ -14,4 +14,9 @@ public class AccountController : Controller
   {
     return View();
   }
+  [AllowAnonymous]
+  public IActionResult AdminLogin()
+  {
+    return View();
+  }
 }

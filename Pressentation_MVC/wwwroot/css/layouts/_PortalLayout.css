@@ -1,0 +1,34 @@
+﻿body {
+    background-color: var(--background);
+}
+
+.center-screen {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    height: 100dvh;
+}
+
+.border-div {
+    display: grid;
+    background-color: var(--surface);
+    margin: auto;
+    padding: 3.25rem 6.25rem 1.813rem;
+    border-radius: var(--radius-container);
+    box-shadow: var(--surface2);
+    position: relative;
+}
+
+    .border-div::after {
+        content: "";
+        background-color: var(--surface);
+        position: absolute;
+        bottom: -4px;
+        height: 2rem;
+        width: 98%;
+        z-index: -1;
+        border-radius: var(--radius-container);
+        inset-inline: 0;
+        margin-inline: auto;
+    }

@@ -1,35 +1,17 @@
 ﻿.login-container {
     display: grid;
-    background-color: var(--surface);
     margin: auto;
-    padding: 6.25rem 6.25rem 1.813rem;
-    border-radius: var(--radius-container);
-    box-shadow: var(--surface2);
-    position: relative;
 }
 
-    .login-container::after {
-        content: "";
-        background-color: var(--surface);
-        position: absolute;
-        bottom: -4px;
-        height: 2rem;
-        width: 98%;
-        z-index: -1;
-        border-radius: var(--radius-container);
-        inset-inline: 0;
-        margin-inline: auto;
-    }
+.login-container .login {
+    text-align: center;
+}
 
-    .login-container h1 {
-        text-align: center;
-    }
-
-    .login-container .btn-gray {
-        margin-top: 1.688rem;
-        margin-bottom: 2.313rem;
-        display: block;
-    }
+.login-container .btn-gray {
+    margin-top: 1.688rem;
+    margin-bottom: 2.313rem;
+    display: block;
+}
 
 .form-me {
     display: flex;

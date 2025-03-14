@@ -5,17 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Pressentation_MVC</title>
     <script type="importmap"></script>
+    <link rel="stylesheet" href="~/css/layouts/_PortalAdminLayout.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/account/login.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/main.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/layouts/_PortalLayout.css" asp-append-version="true" />
-
 </head>
 <body>
-    <div class="center-screen">
-        <div class="border-div">
+    <main>
+        <div>
             @RenderBody()
         </div>
-    </div>
-
+        <div class="login-container">
+            <partial name="Partials/Components/Login/_LoginHeader" />
+            <partial name="Partials/Components/Login/_LoginBody" />
+        </div>
+    </main>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

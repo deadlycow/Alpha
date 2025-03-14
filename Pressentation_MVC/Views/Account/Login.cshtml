@@ -2,29 +2,9 @@
     Layout = "~/Views/Shared/_PortalLayout.cshtml";
     ViewData["Title"] = "Login";
 }
-<link rel="stylesheet" href="~/css/account/login.css" />
+<link rel="stylesheet" href="~/css/account/login.css" asp-append-version="true" />
 <div class="login-container">
-    <h1>Login</h1>
-    <button class="btn btn-gray btn-google">Login with Google</button>
-    <div class="or-text">or</div>
-    <form>
-        <div class="form-input">
-            <label for="email">Email</label>
-            <input id="email" class="input-field" type="email" placeholder="Your email address" required />
-        </div>
-        <div class="form-input password-container">
-            <label for="password">Password</label>
-            <input id="password" class="input-field" type="password" placeholder="Enter your password" required />
-            <img class="toggle-password eye-icon" src="/images/eye-closed.svg" alt="Toggle Password">
-        </div>
-        <div class="form-me">
-            <div>
-                <input id="rememberMe" type="checkbox" />
-                <label for="rememberMe">Remember me</label>
-            </div>
-            <a href="#">Forgot Password?</a>
-        </div>
-        <button class="btn btn-primary" type="submit">Login</button>
-    </form>
-    <p class="noAccount">Don't have an account? <a asp-controller="Account" asp-action="Create">Sign Up</a></p>
+    <partial name="Partials/Components/Login/_LoginHeader" />
+    <partial name="Partials/Components/Login/_LoginBody" />
+    <partial name="Partials/Components/_NoAccount" />
 </div>

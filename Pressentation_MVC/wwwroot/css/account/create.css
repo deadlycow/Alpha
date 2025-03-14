@@ -1,25 +1,7 @@
 ﻿.create-container {
     display: grid;
-    background-color: var(--surface);
     margin: auto;
-    padding: 4rem 6.25rem 1.813rem;
-    border-radius: var(--radius-container);
-    box-shadow: var(--surface1);
-    position: relative;
 }
-
-    .create-container::after {
-        content: "";
-        position: absolute;
-        bottom: -4px;
-        inset-inline: 0;
-        margin: auto;
-        height: 2rem;
-        width: 98%;
-        border-radius: var(--radius-container);
-        z-index: -1;
-        background-color: var(--surface);
-    }
 
     .create-container a {
         text-decoration: none;

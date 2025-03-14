@@ -1,9 +1,0 @@
-﻿body {
-    background-color: var(--background);
-}
-.center-screen {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    height: 100dvh;
-}

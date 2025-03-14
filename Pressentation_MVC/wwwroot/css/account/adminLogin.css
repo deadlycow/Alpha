@@ -1,0 +1,22 @@
+﻿.panel-admin {
+    justify-self: start;
+    align-self: end;
+    padding: 3.125rem 5rem;
+}
+
+    .panel-admin .admin-header, span {
+        font-family: "Poppins";
+        font-size: 72px;
+        line-height: 90px;
+    }
+
+    .panel-admin span {
+        color: var(--orange);
+    }
+    .panel-admin p {
+        font-size:var(--font-15);
+    }
+
+    .panel-admin p, .admin-header {
+        color: var(--surface)
+    }

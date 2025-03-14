@@ -6,7 +6,7 @@ namespace Pressentation_MVC.Controllers
   public class HomeController : Controller
   {
     //[Authorize]
-    //[Route("projects")]
+    [Route("projects")]
     public IActionResult Project()
     {
       return View();

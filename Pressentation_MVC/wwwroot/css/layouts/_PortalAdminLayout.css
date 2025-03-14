@@ -1,0 +1,24 @@
+﻿main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+    main > *:first-child {
+        display: flex;
+        background-image: url("/images/blur.svg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 100vh;
+        width: 100%;
+        position: relative;
+        z-index: -2;
+    }
+
+        main > *:first-child::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: #FFFFFF1A;
+            backdrop-filter: blur(60px);
+            z-index: -1;
+        }
