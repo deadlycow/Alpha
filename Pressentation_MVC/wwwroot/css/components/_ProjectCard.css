@@ -8,6 +8,7 @@
     position: relative;
     gap: 1rem;
     min-height: 17.25rem;
+    min-width: 21.875rem;
     box-shadow: var(--surface2);
 }
 
@@ -24,10 +25,29 @@
         z-index: -1;
     }
 
-    .project-card .project-more {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
+.project-card-header {
+    align-self: center;
+    display: grid;
+    gap: .2rem;
+}
+
+.project-more {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+    display: flex;
+    padding: .5rem;
+}
+
+    .project-more:hover {
+        background-color: var(--bg-more-hover);
+        border-radius: var(--border-radius-12);
+    }
+
+    .project-more.show {
+        background-color: var(--bg-more-hover);
+        border-radius: var(--border-radius-12);
     }
 
 .card-company {

@@ -6,7 +6,6 @@
     --gray-200: #F0F1F5;
     --gray-300: #E8EAED;
     --gray-400: #E3E5E8;
-    --test: ##1A1926;
     --border-100: #EBEEF2;
     --border-200: #E3E5E8;
     --border-300: #C6C8CC;
@@ -48,6 +47,7 @@
     --font-12: 0.75rem;
     --border-radius-16: 1rem;
     --border-radius-14: 0.875rem;
+    --border-radius-12: 0.75rem;
     --border-radius-10: 0.625rem;
     --border-radius-8: 0.5rem;
     --font-weight-bold: 700;
@@ -73,6 +73,8 @@
     --color-card-description: var(--body-dark);
     --color-card-summary-text: var(--heading);
     --color-card-company-name: var(--body-light);
+    --color-current-user-text: var(--heading);
+    --color-slider: var(--surface);
     --radius-nav-link: var(--border-radius-16);
     --radius-container: var(--border-radius-16);
     --radius-card: var(--border-radius-16);
@@ -82,7 +84,13 @@
     --bg-nav-link: var(--accent-10);
     --bg-card-color: var(--surface);
     --bg-card-color-span: var(--gray-200);
+    --bg-popout-menu: var(--surface);
+    --bg-current-user: var(--gray-100);
+    --bg-switch-off: var(--gray-200);
+    --bg-switch-on: var(--accent);
+    --bg-more-hover: var(--gray-100);
     --layout-border: var(--border-200);
+    --layout-border-menu: var(--border-100);
     --placeholder: var(--body-light);
     --shadow-surface1: var(--surface1);
     --shadow-surface2: var(--surface2);

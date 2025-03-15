@@ -1,11 +1,13 @@
 ﻿<link rel="stylesheet" href="~/css/components/_ProjectCard.css" asp-append-version="true" />
 <div class="project-card">
     <img src="~/images/projectIcons/1.svg" />
-    <div>
+    <div class="project-card-header">
         <h6>Project Name</h6>
         <p class="card-company">Company, Inc.</p>
     </div>
-    <a class="project-more" href="#"><img src="~/images/more-icon.svg" /></a>
+    <div class="project-more">
+        <img src="~/images/more-icon.svg" />
+    </div>
     <p class="project-description">Description - simply dummy text of the printing and been the industry's standard d </p>
     <div class="project-time-summary">
         <div class="time-container">
@@ -21,4 +23,5 @@
             <img src="~/images/profiles/6.svg" />
         </div>
     </div>
+    <partial name="Partials/Components/PopOutMenu/_ProjectOptions" />
 </div>
