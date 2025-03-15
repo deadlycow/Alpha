@@ -1,0 +1,17 @@
+﻿.modal-overlay {
+    display:flex;
+    place-content: center;
+    flex-wrap: wrap;
+    position: absolute;
+    inset: 0;
+/*    background-color: var(--bg-overlay);*/
+    background-color: black;
+    margin: 0;
+}
+
+.bg-modal {
+    background-color: var(--bg-modal);
+    display: grid;
+    padding: 1.875rem;
+    border-radius: var(--border-radius-16);
+}

@@ -29,5 +29,5 @@
 .project-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(auto, 18.75rem));
-    gap: 1rem;
+    gap: 1.875rem;
 }

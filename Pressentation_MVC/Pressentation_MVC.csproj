@@ -13,4 +13,8 @@
     <None Include="wwwroot\css\layouts\_Layout.css" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Business\Business.csproj" />
+  </ItemGroup>
+
 </Project>

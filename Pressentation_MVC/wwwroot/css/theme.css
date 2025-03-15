@@ -29,6 +29,7 @@
     --green-10: #55d46a1A;
     --red-10: #FF66401A;
     --purple-10: #826AF91A;
+    --overlay: #1A1A1A33;
     --surface1: 0px 20px 30px -18px #040F151A;
     --surface2: 0px 40px 30px -30px #040F150F;
     --popup: 0px 40px 30px -30px #040F1526, 0px 50px 50px 0px #040F1526;
@@ -89,6 +90,8 @@
     --bg-switch-off: var(--gray-200);
     --bg-switch-on: var(--accent);
     --bg-more-hover: var(--gray-100);
+    --bg-modal: var(--surface);
+    --bg-overlay: var(--overlay);
     --layout-border: var(--border-200);
     --layout-border-menu: var(--border-100);
     --placeholder: var(--body-light);
