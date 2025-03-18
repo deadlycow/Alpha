@@ -1,40 +1,40 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Business.Models;
-public class Member
+namespace Pressentation_MVC.ViewModels;
+public class MemberViewModel
 {
   public int Id { get; set; }
-
-  [Display(Name = "First Name", Prompt = "Enter first name")]
+  
+  [Display(Name = "First Name", Prompt = "Your first name")]
   [DataType(DataType.Text)]
   [Required(ErrorMessage = "Required")]
   public string FirstName { get; set; } = null!;
 
-  [Display(Name = "Last Name", Prompt = "Enter first name")]
+  [Display(Name = "Last Name", Prompt = "Your last name")]
   [DataType(DataType.Text)]
   [Required(ErrorMessage = "Required")]
   public string LastName { get; set; } = null!;
 
-  [Display(Name = "Email", Prompt = "Enter email")]
+  [Display(Name = "Email", Prompt = "Your email address")]
   [DataType(DataType.EmailAddress)]
   [Required(ErrorMessage = "Required")]
   public string Email { get; set; } = null!;
 
-  public int? Phone { get; set; }
+  [Display(Name = "Phone", Prompt = "Your phone number")]
+  public string? Phone { get; set; }
 
-  [Display(Name = "Titel", Prompt = "Enter a titel")]
+  [Display(Name = "Job Title", Prompt = "Your job title")]
   [DataType(DataType.Text)]
   [Required(ErrorMessage = "Required")]
   public string Title { get; set; } = null!;
 
-  [Display(Name = "Address", Prompt = "Enter Address")]
+  [Display(Name = "Address", Prompt = "Your address")]
   [DataType(DataType.Text)]
   [Required(ErrorMessage = "Required")]
   public string Address { get; set; } = null!;
 
-  [Display(Name = "Date of Birth")]
-  [DataType(DataType.Date)]
+  [Display(Name = "Date of birth")]
+  [DataType(DataType.Text)]
   [Required(ErrorMessage = "Required")]
-  public DateOnly Date { get; set; }
-
+  public DateOnly DateOfBirth { get; set; }
 }

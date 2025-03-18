@@ -12,7 +12,7 @@
     gap: .5rem;
 }
 
-    .options-container.show{
+    .options-container.show {
         display: grid;
     }
 

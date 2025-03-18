@@ -1,8 +1,12 @@
 ﻿<link rel="stylesheet" href="~/css/components/_UserCard.css" asp-append-version="true" />
+
 <div class="user-card">
-    <a class="user-card__more" href="#"><img src="~/images/more-icon.svg" /></a>
+    <div data-menu="true" class="user-card__more">
+        <img src="~/images/more-icon.svg" />
+        <partial name="Partials/Components/PopOutMenu/_MemberOptions" />
+    </div>
     <div class="user-card__image">
-        <img src="~/images/profiles/1.svg"/>
+        <img src="~/images/profiles/1.svg" />
     </div>
     <div class="user-card__info">
         <h4>Andreas Karlsson</h4>

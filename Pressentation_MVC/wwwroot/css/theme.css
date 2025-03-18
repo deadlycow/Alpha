@@ -6,6 +6,7 @@
     --gray-200: #F0F1F5;
     --gray-300: #E8EAED;
     --gray-400: #E3E5E8;
+    --gray-333: #333333B3;
     --border-100: #EBEEF2;
     --border-200: #E3E5E8;
     --border-300: #C6C8CC;
@@ -76,6 +77,7 @@
     --color-card-company-name: var(--body-light);
     --color-current-user-text: var(--heading);
     --color-slider: var(--surface);
+    --color-modal-label: var(--heading);
     --radius-nav-link: var(--border-radius-16);
     --radius-container: var(--border-radius-16);
     --radius-card: var(--border-radius-16);
@@ -92,6 +94,8 @@
     --bg-more-hover: var(--gray-100);
     --bg-modal: var(--surface);
     --bg-overlay: var(--overlay);
+    --bg-camera: var(--gray-333);
+    --border-camera: var(--gray-300);
     --layout-border: var(--border-200);
     --layout-border-menu: var(--border-100);
     --placeholder: var(--body-light);

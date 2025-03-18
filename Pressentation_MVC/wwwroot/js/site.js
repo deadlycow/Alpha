@@ -15,14 +15,8 @@ const toggleShow = (e) => {
     let targetClass = "";
     let containerClass = "";
 
-    if (e.currentTarget.classList.contains("profile-container")) {
+    if (e.currentTarget.classList.contains("settings")) {
         targetClass = ".options-container";
-    }
-    if (e.currentTarget.classList.contains("project-more")) {
-        const parent = e.currentTarget.closest(".project-card");
-        if (!parent) return;
-        targetClass = ".edit-container";
-        containerClass = parent;
     }
 
     const div = containerClass ? containerClass.querySelector(targetClass) : document.querySelector(targetClass);
@@ -35,8 +29,40 @@ document.querySelectorAll(".toggle-password").forEach(icon => {
     icon.addEventListener("click", togglePassword);
 });
 
-document.querySelectorAll(".project-more").forEach(more => {
-    more.addEventListener("click", toggleShow);
-});
-document.querySelector(".profile-container").addEventListener("click", toggleShow);
+document.querySelector(".settings").addEventListener("click", toggleShow);
+
+const menuButtons = document.querySelectorAll('[data-menu="true"]');
+menuButtons.forEach(button => {
+    button.addEventListener('click', (event) => {
+        const currentCard = event.currentTarget.closest('[data-menu]');
+        if (currentCard) {
+            const menu = currentCard.querySelector('[data-display]');
+            if (menu) {
+                menu.style.display = (menu.style.display === 'grid') ? 'none' : 'grid';
+            }
+        }
+    })
+})
+
+const modalButtons = document.querySelectorAll('[data-modal="true"]');
+console.log(modalButtons)
+modalButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const modalTarget = button.getAttribute('data-target');
+        const modal = document.querySelector(modalTarget);
+
+        if (modal)
+            modal.style.display = 'flex';
+    })
+})
+
+const closeButtons = document.querySelectorAll('[data-close="true"');
+closeButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const modal = button.closest('.modal-overlay');
+        if (modal)
+            modal.style.display = 'none';
+    })
+})
+
 

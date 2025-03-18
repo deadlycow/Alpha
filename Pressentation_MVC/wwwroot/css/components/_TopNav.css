@@ -11,6 +11,12 @@
 
     .top-nav-list li {
         display: flex;
+        cursor: pointer;
+    }
+
+    .top-nav-list li:last-child
+    {
+        position: relative;
     }
 
     .top-nav-list a {
@@ -21,7 +27,6 @@
     height: 2.5rem;
     aspect-ratio: 1/1;
     position: relative;
-    cursor: pointer;
 }
 
 .profile-avatar {

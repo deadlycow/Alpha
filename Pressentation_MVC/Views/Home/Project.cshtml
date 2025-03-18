@@ -1,8 +1,10 @@
 ﻿<link rel="stylesheet" href="~/css/home/project.css" asp-append-version="true" />
+
+<partial name="Partials/Modals/_AddProject" />
 <div class="project-container">
     <div class="project-header">
         <h2>Project</h2>
-        <button class="btn btn-primary"><img src="~/images/plus-icon.svg" />Add Project</button>
+        <button type="button" data-modal="true" data-target="#addProjectModal" class="btn btn-primary"><img src="~/images/plus-icon.svg" />Add Project</button>
     </div>
     <div class="sort-options">
         <ul class="options-list">
@@ -12,9 +14,6 @@
         </ul>
     </div>
     <div class="project-grid">
-       <partial name="Partials/Components/_ProjectCard" />
-       <partial name="Partials/Components/_ProjectCard" />
-       <partial name="Partials/Components/_ProjectCard" />
        <partial name="Partials/Components/_ProjectCard" />
        <partial name="Partials/Components/_ProjectCard" />
     </div>
