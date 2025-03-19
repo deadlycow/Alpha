@@ -11,41 +11,34 @@
     }
 }
 
-const toggleShow = (e) => {
-    let targetClass = "";
-    let containerClass = "";
-
-    if (e.currentTarget.classList.contains("settings")) {
-        targetClass = ".options-container";
-    }
-
-    const div = containerClass ? containerClass.querySelector(targetClass) : document.querySelector(targetClass);
-    if (div) {
-        div.classList.toggle("show");
-    }
-};
-
 document.querySelectorAll(".toggle-password").forEach(icon => {
     icon.addEventListener("click", togglePassword);
 });
 
-document.querySelector(".settings").addEventListener("click", toggleShow);
-
 const menuButtons = document.querySelectorAll('[data-menu="true"]');
 menuButtons.forEach(button => {
     button.addEventListener('click', (event) => {
+
+
         const currentCard = event.currentTarget.closest('[data-menu]');
         if (currentCard) {
+
             const menu = currentCard.querySelector('[data-display]');
-            if (menu) {
-                menu.style.display = (menu.style.display === 'grid') ? 'none' : 'grid';
+
+            const isOpen = menu.style.display === 'grid';
+
+            document.querySelectorAll('[data-display]').forEach(menu => {
+                menu.style.display = 'none';
+            });
+
+            if (!isOpen) {
+                menu.style.display = 'grid';
             }
         }
-    })
-})
+    });
+});
 
 const modalButtons = document.querySelectorAll('[data-modal="true"]');
-console.log(modalButtons)
 modalButtons.forEach(button => {
     button.addEventListener('click', () => {
         const modalTarget = button.getAttribute('data-target');

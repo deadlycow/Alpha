@@ -1,4 +1,4 @@
-﻿.options-container {
+﻿.user-options-container {
     display: none;
     position: absolute;
     top: 2.7rem;
@@ -11,10 +11,6 @@
     min-width: 18.75rem;
     gap: .5rem;
 }
-
-    .options-container.show{
-        display: grid;
-    }
 
 .switch-container,
 .logout-container a,

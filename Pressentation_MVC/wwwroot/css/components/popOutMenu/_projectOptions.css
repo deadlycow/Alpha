@@ -1,8 +1,8 @@
-﻿.edit-container {
+﻿.project-options-container {
     display: none;
     position: absolute;
-    right: 1rem;
-    top: 4rem;
+    right: 0;
+    top: 2.8rem;
     background-color: var(--bg-popout-menu);
     min-width: 230px;
     padding: .5rem;
@@ -10,24 +10,20 @@
     box-shadow: var(--popup-80);
 }
 
-.edit-container.show {
-    display: grid;
-}
-
-.edit-item {
+.options-group {
     padding: 0.875rem;
     display: flex;
     gap: 1rem;
     font-size: var(--font-15);
 }
 
-    .edit-item:hover {
+    .options-group:hover {
         background-color: var(--bg-more-hover);
         border-radius: var(--border-radius-14);
         cursor: pointer;
     }
 
-    .edit-item:last-child {
+    .options-group:last-child {
         border-top: 1px solid var(--layout-border-menu);
         color: var(--red);
     }

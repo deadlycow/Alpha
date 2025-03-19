@@ -1,14 +1,13 @@
 ﻿<link rel="stylesheet" href="~/css/components/popOutMenu/_memberOptions.css" asp-append-version="true" />
 
-<div data-display="true" class="options-container">
-    <div class="user-container">
-        Edit
+<div data-display="true" class="member-options-container">
+    <div data-modal="true" data-target="#editMemberModal" class="member-options-group">
+        <img src="~/images/edit-icon.svg" />
+        <p>Edit</p>
     </div>
-   
-    <div class="logout-container">
-        <a href="#">
-            <img src="~/images/delete-icon.svg" />
-            <p>Delete</p>
-        </a>
+
+    <div class="member-options-group">
+        <img src="~/images/delete-icon.svg" />
+        <p>Delete</p>
     </div>
 </div>

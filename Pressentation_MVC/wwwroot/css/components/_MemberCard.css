@@ -1,4 +1,4 @@
-﻿.user-card {
+﻿.member-card {
     background-color: var(--bg-card-color);
     display: grid;
     padding: 1.75rem 1.5rem;
@@ -8,7 +8,7 @@
     box-shadow: var(--surface2);
 }
 
-    .user-card::after {
+    .member-card::after {
         content: "";
         height: 2rem;
         background-color: var(--bg-card-color);
@@ -21,41 +21,48 @@
         margin: auto;
     }
 
-.user-card__more {
+.member-card-more {
     position: absolute;
     top: 1.25rem;
     right: 1.5rem;
+    display: flex;
+    padding: .5rem;
+}
+.member-card-more:hover {
+    cursor: pointer;
+    background-color: var(--bg-more-hover);
+    border-radius: var(--border-radius-12);
 }
 
-.user-card__image {
+.member-card-image {
     padding-block: 1.25rem 1rem;
 }
 
-    .user-card__image img {
+    .member-card-image img {
         height: 100%;
         aspect-ratio: 1/1;
     }
 
-.user-card__info h4 {
+.member-card-info h4 {
     padding-bottom: 0.438rem;
 }
 
-.user-card__info span {
+.member-card-info span {
     background-color: var(--bg-card-color-span);
     padding: 0.438rem 0.875rem;
     border-radius: var(--radius-card-span);
     font-size: var(--font-12);
 }
 
-.user-card__email {
+.member-card-email {
     padding-top: 1.438rem;
 }
 
-.user-card__phone {
+.member-card-phone {
     padding-top: 0.813rem
 }
 
-.user-card__button {
+.member-card-button {
     margin-top: 1.5rem;
     font-size: var(--font-15);
 }

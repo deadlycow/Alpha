@@ -1,0 +1,26 @@
+﻿@using Pressentation_MVC.ViewModels
+@model ClientViewModel
+<link rel="stylesheet" href="~/css/modals/_addClient.css" asp-append-version="true" />
+
+<div id="addClientModal" class="modal-overlay">
+    <div class="bg-modal">
+        <div class="client-header">
+            <h2>New Client</h2>
+            <img class="close-modal" data-close="true" src="~/images/close-icon.svg" />
+        </div>
+        <div class="image-previewer circle ">
+            <img class="image-preview" src="" />
+            <input accept="image/*" class="hide" />
+        </div>
+        <form novalidate>
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <div class="field-group">
+                    <input asp-for="Name" />
+                    <span></span>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Client</button>
+        </form>
+    </div>
+</div>

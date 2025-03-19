@@ -1,0 +1,20 @@
+﻿@model MemberViewModel
+
+<link rel="stylesheet" href="~/css/components/_MemberCard.css" asp-append-version="true" />
+
+<div class="member-card">
+    <div data-menu="true" class="member-card-more">
+        <img src="~/images/more-icon.svg" />
+        <partial name="Partials/Components/PopOutMenu/_MemberOptions" />
+    </div>
+    <div class="member-card-image">
+        <img src="~/images/profiles/1.svg" />
+    </div>
+    <div class="member-card-info">
+        <h4>@Model.FirstName @Model.LastName</h4>
+        <span>@Model.Title</span>
+        <p class="member-card-email">@Model.Email</p>
+        <p class="member-card-phone">@Model.Phone</p>
+    </div>
+    <button class="member-card-button btn btn-gray">Message</button>
+</div>

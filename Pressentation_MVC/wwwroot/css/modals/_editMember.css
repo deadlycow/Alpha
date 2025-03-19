@@ -1,0 +1,130 @@
+﻿.modal-overlay {
+  display: none;
+  place-content: center;
+  flex-wrap: wrap;
+  position: absolute;
+  inset: 0;
+  background-color: var(--bg-overlay);
+  margin: 0;
+  z-index: 1;
+}
+
+.bg-modal {
+  background-color: var(--bg-modal);
+  display: grid;
+  padding: 1.875rem;
+  border-radius: var(--border-radius-16);
+}
+
+.member-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.close-modal {
+  cursor: pointer;
+}
+
+.image-previewer {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: 2rem auto 1.5rem auto;
+  border: 1px dashed var(--border-camera);
+  height: 9.375rem;
+  aspect-ratio: 1/1;
+  padding: 3.125rem;
+  /*    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='100' ry='100' stroke='%23333' stroke-width='1' stroke-dasharray='5' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");*/
+  /*    border-radius: 100px;*/
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+}
+
+  .image-previewer::after {
+    content: url(/images/camera-icon.svg);
+    background-color: var(--bg-camera);
+    padding: .8rem;
+    border-radius: 50%;
+  }
+
+  .image-previewer.selected::after {
+    content: url(/images/edit-icon-transparant.svg);
+    background-color: var(--bg-camera);
+    position: absolute;
+    bottom: 0;
+  }
+
+  .image-previewer.circle {
+    border-radius: 50%;
+  }
+
+  .image-previewer.square {
+    border-radius: var(--border-radius-16);
+  }
+
+.image-preview {
+  display: flex;
+}
+
+.hide {
+  display: none;
+}
+
+.form-group-flex {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+  .form-group label {
+    font-size: var(--font-15);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-modal-label);
+  }
+
+.field-group {
+  margin-top: 9px;
+}
+
+  .field-group input {
+    font-size: var(--font-15);
+    padding: .875rem 1rem;
+    border-radius: var(--border-radius-14);
+    border: 1px solid var(--layout-border-menu);
+    width: 100%;
+  }
+
+    .field-group input:focus {
+      outline: none;
+    }
+
+.custom-arrow {
+  width: 100%;
+  position: relative;
+}
+
+  .custom-arrow::after {
+    content: url(/images/arrow-down-icon.svg);
+    filter: grayscale(100%) brightness(0);
+    position: absolute;
+    right: .875rem;
+    top: 1rem;
+  }
+
+  .custom-arrow select {
+    appearance: none;
+    font-size: var(--font-15);
+    padding: .875rem 1rem;
+    cursor: pointer;
+    border: 1px solid var(--layout-border-menu);
+    border-radius: var(--border-radius-14);
+    width: 100%;
+  }
+
+    .custom-arrow select:focus {
+      outline: none;
+    }

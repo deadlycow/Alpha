@@ -1,0 +1,95 @@
+﻿@using Pressentation_MVC.ViewModels
+@model MemberViewModel
+<link rel="stylesheet" href="~/css/modals/_editMember.css" asp-append-version="true" />
+
+<div id="editMemberModal" class="modal-overlay">
+    <div class="bg-modal">
+        <div class="member-header">
+            <h2>Edit Member</h2>
+            <img class="close-modal" data-close="true" src="~/images/close-icon.svg" />
+        </div>
+        <div class="image-previewer circle ">
+            <img class="image-preview" src="" />
+            <input accept="image/*" class="hide" />
+        </div>
+        <form novalidate>
+            <div class="form-group-flex">
+                <div class="form-group">
+                    <label asp-for="FirstName"></label>
+                    <div class="field-group">
+                        <input asp-for="FirstName"/>
+                        <span></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastName"></label>
+                    <div class="field-group">
+                        <input asp-for="LastName" />
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <div class="field-group">
+                    <input asp-for="Email" />
+                    <span></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone"></label>
+                <div class="field-group">
+                    <input asp-for="Phone" />
+                    <span></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Title"></label>
+                <div class="field-group">
+                    <input asp-for="Title" />
+                    <span></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address"></label>
+                <div class="field-group">
+                    <input asp-for="Address" />
+                    <span></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfBirth"></label>
+                <div class="field-group form-group-flex">
+                    <div class="custom-arrow">
+                        <select id="day" name="day">
+                            <option value="" disabled selected>Day</option>
+                            @for (int i = 1; i <= 31; i++)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="custom-arrow">
+                        <select id="month" name="month">
+                            <option value="" disabled selected>Month</option>
+                            @for (int i = 1; i <= 12; i++)
+                            {
+                                <option value="@i">@System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i)</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="custom-arrow">
+                        <select id="year" name="year">
+                            <option value="" disabled selected>Year</option>
+                            @for (int i = DateTime.Now.Year; i >= 1900; i--)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</div>
