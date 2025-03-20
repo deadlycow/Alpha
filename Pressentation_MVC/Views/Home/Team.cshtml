@@ -1,32 +1,16 @@
 ﻿<link rel="stylesheet" href="~/css/home/team.css" asp-append-version="true" />
-@model MemberViewModel
-@{
-    var testMember = new MemberViewModel
-            {
-                FirstName = "Andreas",
-                LastName = "Karlsson",
-                Title = "Kungen av mat",
-                Email = "mail@mail.com",
-                Phone = "070-00112378",
-            };
-    var member = new MemberViewModel
-            {
-                FirstName = "Test Name",
-                Title = "Test Title",
-                Email = "test@example.com",
-                Phone = "+4670-123 12 12",
-                
-            };
-}
+@model List<MemberViewModel>
 
-<partial name="Partials/Modals/_AddMember" />
-<partial name="Partials/Modals/_EditMember" />
+<partial name="Partials/Modals/_AddMember" model="new MemberViewModel()" />
+<partial name="Partials/Modals/_EditMember" model="new MemberViewModel()" />
 
 <div class="team-header">
     <h2>Team Members</h2>
     <button type="button" data-modal="true" data-target="#addMemberModal" class="btn btn-primary"><img src="~/images/plus-icon.svg" /> Add Member</button>
 </div>
 <div class="team-container">
-    <partial name="Partials/Components/_MemberCard" model="testMember"/>
-    <partial name="Partials/Components/_MemberCard" model="member" />
+    @foreach (var member in Model)
+    {
+        <partial name="Partials/Components/_MemberCard" model="member" />
+    }
 </div>

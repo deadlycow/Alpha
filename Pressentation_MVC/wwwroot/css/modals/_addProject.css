@@ -1,5 +1,5 @@
 ﻿.modal-overlay {
-    display: none;
+    display: grid;
     place-content: center;
     flex-wrap: wrap;
     position: absolute;
@@ -28,31 +28,40 @@
 .image-previewer {
     display: flex;
     justify-content: center;
-    align-content: center;
+    align-items: center;
     margin: 2rem auto 1.5rem auto;
-    border: 1px dashed var(--border-camera);
+    border: 2px dashed var(--border-camera);
+    border-spacing: 4rem;
     height: 9.375rem;
     aspect-ratio: 1/1;
-    padding: 3.125rem;
-    /*    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='100' ry='100' stroke='%23333' stroke-width='1' stroke-dasharray='5' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");*/
-    /*    border-radius: 100px;*/
     cursor: pointer;
     overflow: hidden;
     position: relative;
 }
 
+
+    .image-previewer.selected {
+        border: none;
+    }
+
     .image-previewer::after {
-        content: url(/images/camera-icon.svg);
+        content: '\f030';
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
         background-color: var(--bg-camera);
+        color: var(--surface);
         padding: .8rem;
         border-radius: 50%;
+        position: relative;
+        bottom: 0;
     }
 
     .image-previewer.selected::after {
-        content: url(/images/edit-icon-transparant.svg);
-        background-color: var(--bg-camera);
+        content: '\f044';
+        font-weight: 600;
         position: absolute;
-        bottom: 0;
+        bottom: .5rem;
+        border: none;
     }
 
     .image-previewer.circle {
@@ -60,7 +69,7 @@
     }
 
     .image-previewer.square {
-        border-radius: var(--border-radius-16);
+        border-radius: 2.5rem;
     }
 
 .image-preview {

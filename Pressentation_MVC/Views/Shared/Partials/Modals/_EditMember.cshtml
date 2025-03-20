@@ -1,6 +1,5 @@
-﻿@using Pressentation_MVC.ViewModels
+﻿<link rel="stylesheet" href="~/css/modals/_editMember.css" asp-append-version="true" />
 @model MemberViewModel
-<link rel="stylesheet" href="~/css/modals/_editMember.css" asp-append-version="true" />
 
 <div id="editMemberModal" class="modal-overlay">
     <div class="bg-modal">
@@ -17,7 +16,7 @@
                 <div class="form-group">
                     <label asp-for="FirstName"></label>
                     <div class="field-group">
-                        <input asp-for="FirstName"/>
+                        <input asp-for="FirstName" />
                         <span></span>
                     </div>
                 </div>
