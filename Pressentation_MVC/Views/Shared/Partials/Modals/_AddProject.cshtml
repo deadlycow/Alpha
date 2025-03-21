@@ -1,7 +1,6 @@
 ﻿<link rel="stylesheet" href="~/css/modals/_addProject.css" asp-append-version="true" />
 @model ProjectViewModel
 
-
 <div id="addProjectModal" class="modal-overlay">
     <div class="bg-modal">
         <div class="member-header">
@@ -13,7 +12,7 @@
                 <img class="image-preview" src="" />
                 <input asp-for="ProjectImage" type="file" accept="image/*" class="hide" />
             </div>
-           
+
             <div class="form-group">
                 <label asp-for="Name"></label>
                 <div class="field-group">
@@ -47,16 +46,13 @@
             <div class="form-group">
                 <label asp-for="Description"></label>
                 <div class="field-group">
-                    <textarea asp-for="Description" ></textarea>
+                    <textarea asp-for="Description"></textarea>
                     <span></span>
                 </div>
             </div>
             <div class="form-group">
                 <label asp-for="Members"></label>
-                <div class="field-group">
-                    <input asp-for="Members" />
-                    <span></span>
-                </div>
+                <partial name="Partials/Components/_CompactMemberList" />
             </div>
             <div class="form-group">
                 <label asp-for="Budget"></label>

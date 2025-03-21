@@ -14,6 +14,7 @@
     display: grid;
     padding: 1.875rem;
     border-radius: var(--border-radius-16);
+    min-width: 34.375rem;
 }
 
 .member-header {

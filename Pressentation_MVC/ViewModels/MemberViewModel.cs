@@ -3,6 +3,8 @@
 namespace Pressentation_MVC.ViewModels;
 public class MemberViewModel
 {
+  [DataType(DataType.Upload)]
+  public IFormFile? MemberImage { get; set; }
   public int Id { get; set; }
   
   [Display(Name = "First Name", Prompt = "Your first name")]

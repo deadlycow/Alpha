@@ -96,7 +96,9 @@
     --bg-modal: var(--surface);
     --bg-overlay: var(--overlay);
     --bg-camera: var(--gray-333);
+    --bg-compact-li: var(--gray-100);
     --border-camera: var(--gray-300);
+    --border-compact: var(--border-100);
     --layout-border: var(--border-200);
     --layout-border-menu: var(--border-100);
     --placeholder: var(--body-light);

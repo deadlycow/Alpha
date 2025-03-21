@@ -1,0 +1,72 @@
+﻿.compact-container {
+    border: 1px solid var(--border-compact);
+    padding: .4rem;
+    margin-top: .5rem;
+    border-radius: var(--border-radius-14);
+    width: 100%;
+    position: relative;
+}
+
+.compact-search-field { 
+    display: none;
+}
+
+.compact-search {
+    position: absolute;
+    right: .5rem;
+    top: .5rem;
+}
+
+.compact-search-icon {
+    cursor: pointer;
+}
+
+.compact-search.active {
+    position: revert;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 0 .5rem .5rem;
+    border-bottom: 1px solid var(--border-compact);
+    margin-bottom: .125rem;
+}
+
+.compact-search.active .compact-search-field {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: var(--font-15);
+    display: flex;
+}
+
+.compact-ul {
+    display: flex;
+    gap: .125rem;
+    flex-wrap: wrap;
+    max-width: 100%;
+}
+
+.compact-li {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .438rem 1.75rem .438rem .438rem;
+    background-color: var(--bg-compact-li);
+    border-radius: var(--border-radius-8);
+    font-size: var(--font-14);
+    position: relative;
+    white-space: nowrap;
+}
+
+.compact-li-img {
+    height: 1.375rem;
+    aspect-ratio: 1/1;
+}
+
+.compact-li-close {
+    position: absolute;
+    right: .5rem;
+    height: .75rem;
+    aspect-ratio: 1/1;
+    cursor: pointer;
+}
