@@ -9,4 +9,8 @@ public class RoleEntity
   [Required]
   [Column(TypeName = "nvarchar(25)")]
   public string Name { get; set; } = null!;
+
+  public ICollection<MemberEntity>? Members { get; set; }
+
+  public ICollection<NotificationRoleEntity>? NotificationRoleEntities { get; set; }
 }
