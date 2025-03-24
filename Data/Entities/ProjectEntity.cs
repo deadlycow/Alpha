@@ -29,4 +29,6 @@ public class ProjectEntity
   [Required]
   [Column(TypeName = "bit")]
   public bool Status { get; set; } = false;
+
+  public ICollection<NotificationEntity>? Notifications { get; set; }
 }

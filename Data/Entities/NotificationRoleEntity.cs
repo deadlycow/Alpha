@@ -3,8 +3,6 @@
 namespace Data.Entities;
 public class NotificationRoleEntity
 {
-  [Key]
-  public int Id { get; set; }
   public int NotificationId { get; set; }
   public NotificationEntity? Notification { get; set; }
 

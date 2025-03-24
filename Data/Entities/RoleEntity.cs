@@ -12,5 +12,5 @@ public class RoleEntity
 
   public ICollection<MemberEntity>? Members { get; set; }
 
-  public ICollection<NotificationRoleEntity>? NotificationRoleEntities { get; set; }
+  public ICollection<NotificationRoleEntity>? NotificationRoles { get; set; }
 }

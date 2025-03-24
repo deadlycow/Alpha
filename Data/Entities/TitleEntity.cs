@@ -9,5 +9,5 @@ public class TitleEntity
   [Required]
   [Column(TypeName = "nvarchar(50)")]
   public string Name { get; set; } = null!;
-  public ICollection<MemberEntity>? MemberEntities { get; set; }
+  public ICollection<MemberEntity>? Members { get; set; }
 }

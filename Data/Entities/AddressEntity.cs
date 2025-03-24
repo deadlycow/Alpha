@@ -15,5 +15,5 @@ public class AddressEntity
   [Required]
   public int PostalCode { get; set; }
 
-  public ICollection<MemberEntity>? MemberEntities { get; set; }
+  public MemberEntity? Member { get; set; }
 }

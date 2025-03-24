@@ -33,4 +33,8 @@ public class MemberEntity
 
   [Column(TypeName = "nvarchar(255)")]
   public string? ProfileImage { get; set; }
+
+  public AddressEntity? Address { get; set; }
+
+  public ICollection<NotificationEntity>? Notifications { get; set; }
 }
