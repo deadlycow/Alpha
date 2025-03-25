@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Data.Entities;
 public class AddressEntity
 {
-  [Key]
-  public int Id { get; set; }
+  [Key, ForeignKey("Member")]
+  public string MemberId { get; set; } = null!;
   [Required]
   [Column(TypeName = "nvarchar(100)")]
   public required string Street { get; set; }
@@ -15,5 +15,5 @@ public class AddressEntity
   [Required]
   public int PostalCode { get; set; }
 
-  public MemberEntity? Member { get; set; }
+  public MemberEntity Member { get; set; } = null!;
 }

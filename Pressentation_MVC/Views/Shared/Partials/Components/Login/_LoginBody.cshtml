@@ -1,11 +1,13 @@
-﻿<form>
+﻿@model MemberLoginForm
+
+<form method="post" novalidate asp-controller="Account" asp-action="Login">
     <div class="form-input">
-        <label for="email">Email</label>
-        <input id="email" class="input-field" type="email" placeholder="Your email address" required />
+        <label asp-for="Email"></label>
+        <input id="email" asp-for="Email" class="input-field" type="email" />
     </div>
     <div class="form-input password-container">
-        <label for="password">Password</label>
-        <input id="password" class="input-field" type="password" placeholder="Enter your password" required />
+        <label asp-for="Password">Password</label>
+        <input id="password" asp-for="Password" class="input-field" type="password" />
         <img class="toggle-password eye-icon" src="/images/eye-closed.svg" alt="Toggle Password">
     </div>
     <div class="form-me">
@@ -17,3 +19,8 @@
     </div>
     <button class="btn btn-primary" type="submit">Login</button>
 </form>
+
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <p>@ViewBag.ErrorMessage</p>
+}

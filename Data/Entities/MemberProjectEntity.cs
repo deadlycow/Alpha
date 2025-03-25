@@ -8,6 +8,6 @@ public class MemberProjectEntity
   public ProjectEntity Project { get; set; } = null!;
 
   [Required]
-  public int MemberId { get; set; }
+  public string MemberId { get; set; } = null!;
   public MemberEntity Member { get; set; } = null!;
 }

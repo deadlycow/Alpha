@@ -4,9 +4,9 @@ using Pressentation_MVC.ViewModels;
 
 namespace Pressentation_MVC.Controllers
 {
+  [Authorize]
   public class HomeController : Controller
   {
-    //[Authorize]
     //[Route("projects")]
     public IActionResult Project()
     {

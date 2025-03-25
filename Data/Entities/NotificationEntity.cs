@@ -15,7 +15,7 @@ public class NotificationEntity
   [Column(TypeName = "datetime")]
   public DateTime CreatedAt { get; set; }
   
-  public int MemberId { get; set; }
+  public string? MemberId { get; set; }
   public MemberEntity? Member { get; set; }
 
   public int ProjectId { get; set; }
