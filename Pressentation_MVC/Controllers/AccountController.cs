@@ -1,41 +1,66 @@
+using Business.Services;
 using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Pressentation_MVC.Controllers;
 [Route("/auth")]
-public class AccountController : Controller
+public class AccountController(AuthService authService) : Controller
 {
+  private readonly AuthService _authService = authService;
+
   [Route("login")]
   public IActionResult Login()
   {
     ViewBag.ErrorMessage = string.Empty;
-
     return View(new MemberLoginForm());
   }
 
   [HttpPost]
   [Route("login")]
-  public IActionResult Login(MemberLoginForm form)
+  public async Task<IActionResult> Login(MemberLoginForm form)
   {
     ViewBag.ErrorMessage = string.Empty;
-    if (!ModelState.IsValid)
+    if (ModelState.IsValid)
     {
-      ViewBag.ErrorMessage = "Incorrect email or password";
-      return View(form);
+      if (await _authService.LoginAsync(form))
+        return LocalRedirect("~/");
     }
-    return View();
+
+    ViewBag.ErrorMessage = "Incorrect email or password";
+    return View(form);
   }
 
-  [Route("create")]
-  public IActionResult Create()
+  [Route("signup")]
+  public IActionResult Signup()
   {
-    return View();
+    return View(new MemberSignUpForm());
   }
-  
+
+  [HttpPost]
+  [Route("signup")]
+  public async Task<IActionResult> Signup(MemberSignUpForm form)
+  {
+    if (ModelState.IsValid)
+    {
+      var result = await _authService.SignUpAsync(form);
+      if (result.Succeeded)
+        return LocalRedirect("~/");
+      else 
+        ViewBag.ErrorMessage = string.Join(", ", result.Errors.Select(e => e.Description));
+    }
+    return View(form);
+  }
+
   [Route("admin")]
   public IActionResult Admin()
   {
     return View();
+  }
+  public async Task<IActionResult> Logout()
+  {
+    await _authService.LogoutAsync();
+    return LocalRedirect("~/");
   }
 }

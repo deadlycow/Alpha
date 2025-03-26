@@ -1,12 +1,16 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Business.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Pressentation_MVC.ViewModels;
+using System.Threading.Tasks;
 
 namespace Pressentation_MVC.Controllers
 {
   [Authorize]
-  public class HomeController : Controller
+  public class HomeController(MemberService memberService) : Controller
   {
+    private readonly MemberService _memberService = memberService;
+
     //[Route("projects")]
     public IActionResult Project()
     {
@@ -30,31 +34,11 @@ namespace Pressentation_MVC.Controllers
       return View(testProjects);
     }
     [Route("team")]
-    public IActionResult Team()
+    public async Task<IActionResult> Team()
     {
-      var testMembers = new List<MemberViewModel>
-      {
-        new()
-          {
-          Id = 1,
-          FirstName = "Andreas",
-          LastName = "Karlsson",
-          Title = "Kungen av mat",
-          Email = "mail@mail.com",
-          Phone = "070-00112378",
-          },
-        new()
-          {
-          Id = 2,
-          FirstName = "Hankan",
-          LastName = "Larrsoon",
-          Title = "Kungen av mat",
-          Email = "mail@mail.com",
-          Phone = "070-00112378",
-          }
-      };
+      var members = await _memberService.GetAllMembers();
 
-      return View(testMembers);
+      return View(members);
     }
     [Route("clients")]
     public IActionResult Clients()

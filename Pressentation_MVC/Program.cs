@@ -1,3 +1,4 @@
+using Business.Services;
 using Data.Contexts;
 using Data.Entities;
 using Microsoft.AspNetCore.Identity;
@@ -24,6 +25,9 @@ builder.Services.ConfigureApplicationCookie(options =>
   options.SlidingExpiration = true;
 });
 
+builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<MemberService>();
+
 //builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
 //    .AddCookie(options =>
 //    {
@@ -39,7 +43,7 @@ app.UseHsts();
 app.UseHttpsRedirection();
 app.UseRouting();
 
-//app.UseAuthentication();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();

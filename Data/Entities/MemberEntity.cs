@@ -14,10 +14,7 @@ public class MemberEntity : IdentityUser
   [Column(TypeName = "nvarchar(50)")]
   public string LastName { get; set; } = null!;
   [ProtectedPersonalData]
-  [Required]
-  public DateOnly BirthDate { get; set; }
-  [Required]
-  public string Title { get; set; } = null!;
+  public DateOnly? BirthDate { get; set; }
   [ProtectedPersonalData]
   [Column(TypeName = "nvarchar(255)")]
   public string? ProfileImage { get; set; }

@@ -32,3 +32,15 @@
     padding-top: 3.375rem;
     text-align: center;
 }
+
+.form-input .field-validation-error {
+    position: absolute;
+    font-size: var(--font-12);
+    color: var(--validation-error-text);
+    border-top-right-radius: var(--border-radius-14);
+    border-top-left-radius: var(--border-radius-14);
+    right: 0;
+    top: 2.2rem;
+    background-color: var(--validation-error-bg);
+    padding: .5rem .5rem 1rem .5rem;
+}

@@ -1,5 +1,5 @@
 ﻿<link rel="stylesheet" href="~/css/components/_MemberCard.css" asp-append-version="true" />
-@model MemberViewModel
+@model Member
 
 
 <div class="member-card">
@@ -12,7 +12,7 @@
     </div>
     <div class="member-card-info">
         <h4>@Model.FirstName @Model.LastName</h4>
-        <span>@Model.Title</span>
+        <span></span>
         <p class="member-card-email">@Model.Email</p>
         <p class="member-card-phone">@Model.Phone</p>
     </div>

@@ -109,6 +109,8 @@
     --shadow-popup-80: var(--popup-80);
     --shadow-button: var(--button);
     --time-container-bg-color: var(--gray-200);
+    --validation-error-bg: var(--red-10);
+    --validation-error-text:var(--red);
 }
 
 [data-theme="dark"] {
