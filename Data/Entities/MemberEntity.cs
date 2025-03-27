@@ -19,7 +19,9 @@ public class MemberEntity : IdentityUser
   [Column(TypeName = "nvarchar(255)")]
   public string? ProfileImage { get; set; }
   [ProtectedPersonalData]
+  [Column(TypeName = "nvarchar(100)")]
+  public string? JobTitle { get; set; }
+  [ProtectedPersonalData]
   public AddressEntity? Address { get; set; }
-
-  public TitleEntity? Title { get; set; }
+  public ICollection<MemberProjectEntity>? Projects { get; set; }
 }

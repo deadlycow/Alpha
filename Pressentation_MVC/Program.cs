@@ -1,6 +1,8 @@
 using Business.Services;
 using Data.Contexts;
 using Data.Entities;
+using Data.Interfaces;
+using Data.Repositories;
 using Data.Seeders;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +31,8 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<MemberService>();
+builder.Services.AddScoped<IClientRepository, ClientRepository>();
+builder.Services.AddScoped<ClientService>();
 
 var app = builder.Build();
 
@@ -39,7 +43,7 @@ app.UseRouting();
 
 await DatabaseSeeder.SeedRolesAndAdminAsync(app.Services);
 
-  app.UseAuthentication();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();

@@ -5,7 +5,7 @@ public class MemberViewModel
 {
   [DataType(DataType.Upload)]
   public IFormFile? MemberImage { get; set; }
-  public int Id { get; set; }
+  public string Id { get; set; } = null!;
   
   [Display(Name = "First Name", Prompt = "Your first name")]
   [DataType(DataType.Text)]
@@ -28,15 +28,13 @@ public class MemberViewModel
   [Display(Name = "Job Title", Prompt = "Your job title")]
   [DataType(DataType.Text)]
   [Required(ErrorMessage = "Required")]
-  public string Title { get; set; } = null!;
+  public string? Title { get; set; }
 
   [Display(Name = "Address", Prompt = "Your address")]
   [DataType(DataType.Text)]
-  [Required(ErrorMessage = "Required")]
-  public string Address { get; set; } = null!;
+  public string? Address { get; set; }
 
   [Display(Name = "Date of birth")]
   [DataType(DataType.Text)]
-  [Required(ErrorMessage = "Required")]
-  public DateOnly DateOfBirth { get; set; }
+  public DateOnly? DateOfBirth { get; set; }
 }

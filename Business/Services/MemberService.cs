@@ -18,6 +18,7 @@ public class MemberService(UserManager<MemberEntity> userManager)
       LastName = x.LastName,
       Email = x.Email,
       Phone = x.PhoneNumber,
+      JobTitle = x.JobTitle,
     });
     return members;
   }

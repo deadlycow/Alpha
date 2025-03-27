@@ -8,10 +8,10 @@ public class AddressEntity
   public string MemberId { get; set; } = null!;
   [Required]
   [Column(TypeName = "nvarchar(100)")]
-  public required string Street { get; set; }
+  public string Street { get; set; } = null!;
   [Required]
   [Column(TypeName = "nvarchar(50)")]
-  public required string City { get; set; }
+  public string City { get; set; } = null!;
   [Required]
   public int PostalCode { get; set; }
 

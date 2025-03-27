@@ -15,3 +15,16 @@ VALUES
     ((SELECT Id FROM Users WHERE Email = 'Andreas@domain.com'), @RoleId),
     ((SELECT Id FROM Users WHERE Email = 'Oskar@domain.com'), @RoleId),
     ((SELECT Id FROM Users WHERE Email = 'Lina@domain.com'), @RoleId);
+
+
+-- Skapa Clients
+INSERT INTO Client (Name)
+VALUES 
+    ('Google, Inc'), 
+    ('Facebook, Inc'), 
+    ('ArtTemplate, Inc'), 
+    ('Slack Technologies, Inc'),
+    ('GitLab, Inc')
+
+--delete from AspNetUsers
+--where JobTitle is null

@@ -14,21 +14,22 @@ public class ProjectEntity
   [Required]
   [Column(TypeName = "date")]
   public DateOnly StartDate { get; set; } = new DateOnly();
+  [Column(TypeName = "date")]
   public DateOnly? EndDate { get; set; }
   [Required]
   [Column(TypeName = "money")]
-  public decimal Budget { get; set; } 
-
-  [Required]
-  public int ClientId { get; set; }
-  [Required]
-  public required ClientEntity Client { get; set; }
-  
+  public decimal Budget { get; set; }
   [Column(TypeName = "nvarchar(255)")]
   public string? ProjectImage { get; set; }
   [Required]
   [Column(TypeName = "bit")]
   public bool Status { get; set; } = false;
 
-  public ICollection<NotificationEntity>? Notifications { get; set; }
+  [Required]
+  public int ClientId { get; set; }
+  [Required]
+  public ClientEntity? Client { get; set; }
+  
+  public ICollection<MemberProjectEntity>? MemberProject { get; set; }
+  
 }

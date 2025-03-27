@@ -5,7 +5,7 @@ public interface IBaseRepository<TEntity> where TEntity : class
 {
   Task BeginTransactionAsync();
   Task CommitTransactionAsync();
-  Task RollBackTransactionAsync();
+  Task RollbackTransactionAsync();
 
   Task<TEntity?> CreateAsync(TEntity entity);
   Task<IEnumerable<TEntity>?> GetAllAsync(Func<IQueryable<TEntity>, IQueryable<TEntity>>? includeExpression = null);

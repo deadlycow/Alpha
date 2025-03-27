@@ -1,6 +1,7 @@
 ﻿<link rel="stylesheet" href="~/css/home/clients.css" asp-append-version="true" />
+@model IEnumerable<Client>
 
-<partial name="Partials/Modals/_AddClient" />
+<partial name="Partials/Modals/_AddClient" model="new ClientViewModel()"/>
 <div class="clients-container">
     <div class="clients-header">
         <h2>Clients</h2>
@@ -13,42 +14,20 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>
-                    <img src="" />
-                    img
-                </td>
-                <td>
-                    Client 1
-                </td>
-                <td>
-                    Button for delete
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <img src="" />
-                    img
-                </td>
-                <td>
-                    Client 2
-                </td>
-                <td>
-                    Button for delete
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <img src="" />
-                    img
-                </td>
-                <td>
-                    Client 3
-                </td>
-                <td>
-                    Button for delete
-                </td>
-            </tr>
+            @foreach (var client in Model)
+            {
+                <tr>
+                    <td>
+                        <img src="~/images/projectIcons/1.svg" />
+                    </td>
+                    <td>
+                        @client.Name
+                    </td>
+                    <td>
+                        <i class="fas fa-trash"></i>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>
