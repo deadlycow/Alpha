@@ -6,7 +6,7 @@ namespace Data.Contexts;
 public class DataContext(DbContextOptions<DataContext> options) : IdentityDbContext<MemberEntity>(options)
 {
   public DbSet<AddressEntity> Address { get; set; }
-
+  public DbSet<TitleEntity> Title { get; set; }
 
   //protected override void OnModelCreating(ModelBuilder modelBuilder)
   //{

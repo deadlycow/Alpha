@@ -8,16 +8,19 @@
             Projects
         </a>
     </li>
-    <li>
-        <a class="side-nav-link @(Context.Request.Path == "/team" ? "active" : "")" asp-controller="Home" asp-action="Team">
-            <img class="nav-icon" src="~/images/contacts-icon.svg" alt="portfolio icon" />
-            Team Members
-        </a>
-    </li>
-    <li>
-        <a class="side-nav-link @(Context.Request.Path == "/clients" ? "active" : "")" asp-controller="Home" asp-action="Clients">
-            <img class="nav-icon" src="~/images/handshake-icon.svg" alt="portfolio icon" />
-            Clients
-        </a>
-    </li>
+    @if (User.IsInRole("Admin"))
+    {
+        <li>
+            <a class="side-nav-link @(Context.Request.Path == "/team" ? "active" : "")" asp-controller="Home" asp-action="Team">
+                <img class="nav-icon" src="~/images/contacts-icon.svg" alt="portfolio icon" />
+                Team Members
+            </a>
+        </li>
+        <li>
+            <a class="side-nav-link @(Context.Request.Path == "/clients" ? "active" : "")" asp-controller="Home" asp-action="Clients">
+                <img class="nav-icon" src="~/images/handshake-icon.svg" alt="portfolio icon" />
+                Clients
+            </a>
+        </li>
+    }
 </ul>

@@ -1,6 +1,7 @@
 using Business.Services;
 using Data.Contexts;
 using Data.Entities;
+using Data.Seeders;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<DataContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("dbAlpha")));
+
 
 builder.Services.AddIdentity<MemberEntity, IdentityRole>(options =>
 {
@@ -28,14 +30,6 @@ builder.Services.ConfigureApplicationCookie(options =>
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<MemberService>();
 
-//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-//    .AddCookie(options =>
-//    {
-//      options.LoginPath = "/Account/Login";
-//      options.AccessDeniedPath = "/Account/AccessDenied";
-//    });
-//builder.Services.AddAuthorization();
-
 var app = builder.Build();
 
 app.UseHsts();
@@ -43,7 +37,9 @@ app.UseHsts();
 app.UseHttpsRedirection();
 app.UseRouting();
 
-app.UseAuthentication();
+await DatabaseSeeder.SeedRolesAndAdminAsync(app.Services);
+
+  app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();

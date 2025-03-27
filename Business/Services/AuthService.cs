@@ -30,7 +30,11 @@ public class AuthService(SignInManager<MemberEntity> signInManager, UserManager<
       LastName = signupForm.LastName,
     };
 
-    return await _userManager.CreateAsync(memberEntity, signupForm.Password);
+    var result = await _userManager.CreateAsync(memberEntity, signupForm.Password);
+    if (result.Succeeded)
+      await _userManager.AddToRoleAsync(memberEntity, "User");
+
+    return result;
   }
 
   public async Task LogoutAsync()

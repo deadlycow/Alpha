@@ -2,16 +2,15 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Pressentation_MVC.ViewModels;
-using System.Threading.Tasks;
 
 namespace Pressentation_MVC.Controllers
 {
-  [Authorize]
+  [Authorize(Roles = "Admin, User")]
   public class HomeController(MemberService memberService) : Controller
   {
     private readonly MemberService _memberService = memberService;
 
-    //[Route("projects")]
+    [Authorize(Roles ="Admin, User")]
     public IActionResult Project()
     {
       List<ProjectViewModel> testProjects = [

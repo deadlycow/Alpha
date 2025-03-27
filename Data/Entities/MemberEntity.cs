@@ -20,4 +20,6 @@ public class MemberEntity : IdentityUser
   public string? ProfileImage { get; set; }
   [ProtectedPersonalData]
   public AddressEntity? Address { get; set; }
+
+  public TitleEntity? Title { get; set; }
 }

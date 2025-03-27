@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Pressentation_MVC.Controllers;
 [Route("/auth")]
+[AllowAnonymous]
 public class AccountController(AuthService authService) : Controller
 {
   private readonly AuthService _authService = authService;
