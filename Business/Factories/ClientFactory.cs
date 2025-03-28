@@ -4,12 +4,10 @@ using Domain.Models;
 namespace Business.Factories;
 public static class ClientFactory
 {
-  public static Client Create(ClientEntity entity)
+  public static Client Create(ClientEntity entity) => new()
   {
-    return new Client
-    {
-      Name = entity.Name,
-    };
-  }
+    Name = entity.Name,
+  };
+
   public static IEnumerable<Client> CreateList(IEnumerable<ClientEntity> entities) => entities.Select(Create);
 }

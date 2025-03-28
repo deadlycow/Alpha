@@ -6,7 +6,7 @@ public class MemberViewModel
   [DataType(DataType.Upload)]
   public IFormFile? MemberImage { get; set; }
   public string Id { get; set; } = null!;
-  
+
   [Display(Name = "First Name", Prompt = "Your first name")]
   [DataType(DataType.Text)]
   [Required(ErrorMessage = "Required")]

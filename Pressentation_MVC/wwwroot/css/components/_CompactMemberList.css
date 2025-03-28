@@ -5,10 +5,7 @@
     border-radius: var(--border-radius-14);
     width: 100%;
     position: relative;
-}
-
-.compact-search-field { 
-    display: none;
+    min-height: 3rem;
 }
 
 .compact-search {
@@ -21,7 +18,7 @@
     cursor: pointer;
 }
 
-.compact-search.active {
+.compact-search {
     position: revert;
     display: flex;
     align-items: center;
@@ -31,7 +28,7 @@
     margin-bottom: .125rem;
 }
 
-.compact-search.active .compact-search-field {
+.compact-search .compact-search-field {
     width: 100%;
     border: none;
     outline: none;

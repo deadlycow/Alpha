@@ -15,29 +15,12 @@ namespace Pressentation_MVC.Controllers
     [Authorize(Roles ="Admin, User")]
     public IActionResult Project()
     {
-      List<ProjectViewModel> testProjects = [
-      new() {
-        Id = 1,
-        Name = "Project nr 1",
-        Client = "Client 1",
-      },
-      new() {
-        Id = 2,
-        Name = "Project nr 2",
-        Client = "Client 2",
-      },
-      new() {
-        Id = 3,
-        Name = "Project nr 3",
-        Client = "Client 3",
-      }
-        ];
-      return View(testProjects);
+      return View(new List<ProjectViewModel>());
     }
     [Route("team")]
     public async Task<IActionResult> Team()
     {
-      var members = await _memberService.GetAllMembers();
+      var members = await _memberService.GetAllAsync();
       return View(members);
     }
     [Route("clients")]

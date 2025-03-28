@@ -1,5 +1,5 @@
 ﻿.modal-overlay {
-    display:none;
+    display:flex;
     place-content: center;
     flex-wrap: wrap;
     position: absolute;

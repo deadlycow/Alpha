@@ -1,4 +1,5 @@
-﻿using Data.Entities;
+﻿using Business.Factories;
+using Data.Entities;
 using Domain.Models;
 using Microsoft.AspNetCore.Identity;
 
@@ -16,23 +17,16 @@ public class AuthService(SignInManager<MemberEntity> signInManager, UserManager<
     return result.Succeeded;
   }
 
-  public async Task<IdentityResult> SignUpAsync(MemberSignUpForm signupForm)
+  public async Task<IdentityResult> SignUpAsync(MemberSignUpForm form)
   {
-    var existingUser = await _userManager.FindByEmailAsync(signupForm.Email);
+    var existingUser = await _userManager.FindByEmailAsync(form.Email);
     if (existingUser != null)
       return IdentityResult.Failed(new IdentityError { Description = "Email is alredy in use" });
 
-    var memberEntity = new MemberEntity
-    {
-      UserName = signupForm.Email,
-      Email = signupForm.Email,
-      FirstName = signupForm.FirstName,
-      LastName = signupForm.LastName,
-    };
-
-    var result = await _userManager.CreateAsync(memberEntity, signupForm.Password);
+    var entity = AuthFactory.Create(form);
+    var result = await _userManager.CreateAsync(entity, form.Password);
     if (result.Succeeded)
-      await _userManager.AddToRoleAsync(memberEntity, "User");
+      await _userManager.AddToRoleAsync(entity, "User");
 
     return result;
   }
@@ -42,5 +36,3 @@ public class AuthService(SignInManager<MemberEntity> signInManager, UserManager<
     await _signInManager.SignOutAsync();
   }
 }
-
-//3.03.59
