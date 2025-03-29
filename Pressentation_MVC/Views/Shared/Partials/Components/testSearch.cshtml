@@ -14,12 +14,6 @@
             width: 300px;
         }
 
-        /* #searchInput { */
-        /*     width: 100%; */
-        /*     padding: 8px; */
-        /*     outline: none; */
-        /* } */
-
         .dropdown {
             position: absolute;
             width: 100%;
@@ -30,7 +24,6 @@
             display: none;
             top: 2.2rem;
             z-index: 3;
-           
         }
 
             .dropdown div {
@@ -61,69 +54,7 @@
 </head>
 <body>
 
-    @* <div class="search-container"> *@
-        @* <input type="text" id="searchInput" placeholder="Sök..." oninput="filterList()" onfocus="filterList()"> *@
-        @* <div id="dropdown" class="dropdown"></div> *@
-    @* </div> *@
 
-    @* <ul id="selectedList" class="selected-list"></ul> *@
-
-    @* <script> *@
-    @*     // Simulerad lista från databasen *@
-    @*     const allItems = ["Andreas Karlsson", "Anders Andersson", "Oskar Oskarsson", "Lina Linsson", "Karin Karlsson", "Erik Eriksson"]; *@
-    @*     let selectedItems = []; *@
-
-    @*     function filterList() { *@
-    @*         let input = document.getElementById("searchInput").value.toLowerCase(); *@
-    @*         let dropdown = document.getElementById("dropdown"); *@
-    @*         dropdown.innerHTML = "";  *@
-
-    @*         let filteredItems = allItems *@
-    @*             .filter(item => item.toLowerCase().includes(input)) *@
-    @*             .filter(item => !selectedItems.includes(item)); *@
-
-    @*         if (filteredItems.length === 0) { *@
-    @*             dropdown.style.display = "none"; *@
-    @*             return; *@
-    @*         } *@
-
-    @*         filteredItems.forEach(item => { *@
-    @*             let div = document.createElement("div"); *@
-    @*             div.textContent = item; *@
-    @*             div.onclick = () => addToList(item); *@
-    @*             dropdown.appendChild(div); *@
-    @*         }); *@
-
-    @*         dropdown.style.display = "block"; *@
-    @*     } *@
-
-    @*     function addToList(name) { *@
-    @*         selectedItems.push(name); *@
-    @*         let selectedList = document.getElementById("selectedList"); *@
-
-    @*         if ([...selectedList.children].some(li => li.dataset.name === name)) return; *@
-
-    @*         let li = document.createElement("li"); *@
-    @*         li.dataset.name = name; *@
-    @*         li.classList.add("selected-item"); *@
-    @*         li.innerHTML = `${name} <span class="remove-btn" onclick="removeFromList(this, '${name}')">❌</span>`; *@
-    @*         selectedList.appendChild(li); *@
-
-    @*         document.getElementById("searchInput").value = ""; *@
-    @*         document.getElementById("dropdown").style.display = "none"; *@
-    @*     } *@
-
-    @*     function removeFromList(element, name) { *@
-    @*         element.parentElement.remove(); *@
-    @*         selectedItems = selectedItems.filter(i => i !== name); *@
-    @*     } *@
-
-    @*     document.addEventListener("click", (event) => { *@
-    @*         if (!event.target.closest(".search-container")) { *@
-    @*             document.getElementById("dropdown").style.display = "none"; *@
-    @*         } *@
-    @*     }); *@
-    @* </script> *@
 
 </body>
 </html>
