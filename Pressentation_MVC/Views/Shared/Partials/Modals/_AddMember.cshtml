@@ -1,5 +1,5 @@
 ﻿<link rel="stylesheet" href="~/css/modals/_addMember.css" asp-append-version="true" />
-@model MemberViewModel
+@model MemberCreateForm
 
 <div id="addMemberModal" class="modal-overlay">
     <div class="bg-modal">
@@ -11,7 +11,7 @@
             <img class="image-preview" src=""/>
             <input accept="image/*" class="hide"/>
         </div>
-        <form novalidate>
+        <form novalidate asp-controller="Auth" asp-action="CreateMember" >
             <div class="form-group-flex">
                 <div class="form-group">
                     <label asp-for="FirstName"></label>
@@ -43,9 +43,9 @@
                 </div>
             </div>
             <div class="form-group">
-                <label asp-for="Title"></label>
+                <label asp-for="JobTitle"></label>
                 <div class="field-group">
-                    <input asp-for="Title" />
+                    <input asp-for="JobTitle" />
                     <span></span>
                 </div>
             </div>

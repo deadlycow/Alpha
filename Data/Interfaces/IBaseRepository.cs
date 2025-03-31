@@ -1,16 +1,20 @@
-﻿using System.Linq.Expressions;
+﻿using Data.Models;
+using System.Linq.Expressions;
 
-namespace Data.Interfaces;
-public interface IBaseRepository<TEntity> where TEntity : class
+namespace Data.Interfaces
 {
-  Task BeginTransactionAsync();
-  Task CommitTransactionAsync();
-  Task RollbackTransactionAsync();
-
-  Task<TEntity?> CreateAsync(TEntity entity);
-  Task<IEnumerable<TEntity>?> GetAllAsync(Func<IQueryable<TEntity>, IQueryable<TEntity>>? includeExpression = null);
-  Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>, IQueryable<TEntity>>? includeExpression = null);
-  public void Update(TEntity entity);
-  void Delete(TEntity entity);
-  Task<int> SaveAsync();
+  public interface IBaseRepository<TEntity, TModel> where TEntity : class
+  {
+    Task BeginTransactionAsync();
+    Task CommitTransactionAsync();
+    Task RollbackTransactionAsync();
+    Task<RepositoryResult<bool>> CreateAsync(TEntity entity);
+    Task<RepositoryResult<bool>> ExistsAsync(Expression<Func<TEntity, bool>> findBy);
+    Task<RepositoryResult<IEnumerable<TModel>>> GetAllAsync(bool orderByDescending = false, Expression<Func<TEntity, object>>? sortBy = null, Expression<Func<TEntity, bool>>? filterBy = null, params Expression<Func<TEntity, object>>[] includes);
+    Task<RepositoryResult<IEnumerable<TSelect>>> GetAllAsync<TSelect>(Expression<Func<TEntity, TSelect>> selector, bool orderByDescending = false, Expression<Func<TEntity, object>>? sortBy = null, Expression<Func<TEntity, bool>>? filterBy = null, params Expression<Func<TEntity, object>>[] includes);
+    Task<RepositoryResult<TModel>> GetAsync(Expression<Func<TEntity, bool>> filterBy, params Expression<Func<TEntity, object>>[] includes);
+    RepositoryResult<bool> Update(TEntity entity);
+    RepositoryResult<bool> Delete(TEntity entity);
+    Task<int> SaveAsync();
+  }
 }

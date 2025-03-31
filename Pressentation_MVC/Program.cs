@@ -31,8 +31,10 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<MemberService>();
-builder.Services.AddScoped<IClientRepository, ClientRepository>();
 builder.Services.AddScoped<ClientService>();
+builder.Services.AddScoped<IAddressRepository, AddressRepository>();
+builder.Services.AddScoped<IClientRepository, ClientRepository>();
+builder.Services.AddScoped<IMemberRepository, MemberRepository>();
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 
 var app = builder.Build();

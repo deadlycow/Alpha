@@ -12,6 +12,18 @@ public static class MemberFactory
     Phone = entity.PhoneNumber,
     JobTitle = entity.JobTitle,
   };
+  public static MemberEntity Create(MemberCreateForm form) => new()
+  {
+    FirstName = form.FirstName,
+    LastName = form.LastName,
+    PhoneNumber = form.Phone,
+    JobTitle = form.JobTitle,
+    UserName = form.Email,
+    Email = form.Email,
+  };
+  
+
+  
 
   public static IEnumerable<Member> CreateList(IEnumerable<MemberEntity> entities) => entities.Select(Create);
 }

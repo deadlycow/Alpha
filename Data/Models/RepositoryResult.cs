@@ -1,32 +1,18 @@
 ﻿namespace Data.Models;
-public abstract class RepositoryResult : IRepositoryResult
-{
-  public bool Success { get; protected set; }
-  public int StatusCode { get; protected set; }
-  public string? ErrorMessage { get; protected set; }
 
-  public static RepositoryResult Ok() => new SuccessResult(200);
-  public static RepositoryResult Created() => new SuccessResult(201);
-  public static RepositoryResult BadRequest(string message) => new ErrorResult(400, message);
-  public static RepositoryResult NotFound(string message) => new ErrorResult(404, message);
-  public static RepositoryResult AlreadyExists(string message) => new ErrorResult(409, message);
-  public static RepositoryResult InternalServerError(string message) => new ErrorResult(500, message);
-}
-
-public class RepositoryResult<T> : RepositoryResult , IRepositoryResult<T> where T : class
+public class RepositoryResult<T>
 {
-  public T? Data { get; private set; }
-  public static RepositoryResult<T> Ok(T? data) => new()
-  {
-    Success = true,
-    StatusCode = 200,
-    Data = data 
-  };
-  public static RepositoryResult<T> Created(T? data) => new()
-  {
-    Success = true,
-    StatusCode = 201,
-    Data = data
-  };
+  public bool Success { get; set; }
+  public int StatusCode { get; set; }
+  public string? ErrorMessage { get; set; }
+  public T? Data { get; set; }
+
+  public static RepositoryResult<T> Ok(T? data = default) => new() { Success = true, StatusCode = 200 , Data = data};
+  public static RepositoryResult<T> Created() => new() { Success = true, StatusCode = 201 };
+  public static RepositoryResult<T> BadRequest(string message) => new() { Success = false, StatusCode = 400, ErrorMessage = $"{message} can't be null." };
+  public static RepositoryResult<T> NotFound(string message) => new() { Success = false, StatusCode = 404, ErrorMessage = $"{message} not found" };
+  public static RepositoryResult<T> AlreadyExists() => new() { Success = false, StatusCode = 409, ErrorMessage = "Already exists" };
+  public static RepositoryResult<T> InternalServerError(string message) => new() { Success = false, StatusCode = 500, ErrorMessage = message };
+
 }
 

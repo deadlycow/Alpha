@@ -27,4 +27,4 @@ VALUES
     ('GitLab, Inc')
 
 --delete from AspNetUsers
---where JobTitle is null
+--where UserName = 'kajsa@domain.com'

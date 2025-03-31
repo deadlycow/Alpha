@@ -27,7 +27,7 @@ namespace Pressentation_MVC.Controllers
     public async Task<IActionResult> Clients()
     {
       var clients = await _clientService.GetAllAsync();
-      return View(clients);
+      return View(clients.Data);
     }
   }
 }

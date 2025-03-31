@@ -21,9 +21,6 @@ public class ProjectEntity
   public decimal Budget { get; set; }
   [Column(TypeName = "nvarchar(255)")]
   public string? ProjectImage { get; set; }
-  [Required]
-  [Column(TypeName = "bit")]
-  public bool Status { get; set; } = false;
 
   [Required]
   public int ClientId { get; set; }
