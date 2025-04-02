@@ -15,7 +15,7 @@ public class AuthController(AuthService authService) : Controller
   [Route("login")]
   public IActionResult Login()
   {
-   
+
     if (User.Identity!.IsAuthenticated)
       return LocalRedirect("~/");
 
@@ -27,6 +27,8 @@ public class AuthController(AuthService authService) : Controller
   [Route("login")]
   public async Task<IActionResult> Login(MemberLoginForm form)
   {
+    ViewBag.ErrorMessage = string.Empty;
+
     if (!ModelState.IsValid)
     {
       var errors = ModelState
@@ -38,14 +40,13 @@ public class AuthController(AuthService authService) : Controller
       return BadRequest(new { Success = false, errors });
     }
 
-    //ViewBag.ErrorMessage = string.Empty;
     //if (ModelState.IsValid)
     //{
     //  if (await _authService.LoginAsync(form))
     //    return LocalRedirect("~/");
     //}
 
-    //ViewBag.ErrorMessage = "Incorrect email or password";
+    ViewBag.ErrorMessage = "Incorrect email or password";
     await _authService.LoginAsync(form);
     return LocalRedirect("~/");
   }
@@ -69,6 +70,7 @@ public class AuthController(AuthService authService) : Controller
         kvp => kvp.Key,
         kvp => kvp.Value?.Errors.Select(x => x.ErrorMessage).ToList()
         );
+
       return BadRequest(new { Success = false, errors });
     }
 
@@ -76,7 +78,6 @@ public class AuthController(AuthService authService) : Controller
     if (!result.Succeeded)
       return View(form);
 
-    //return LocalRedirect("~/auth/login");
     return LocalRedirect("~/");
   }
 

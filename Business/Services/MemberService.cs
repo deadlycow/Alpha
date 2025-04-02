@@ -4,11 +4,10 @@ using Business.Models;
 using Data.Entities;
 using Data.Interfaces;
 using Domain.Models;
+using Domain.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
-using Domain.Extensions;
-
 namespace Business.Services;
 public class MemberService(UserManager<MemberEntity> userManager, IMemberRepository repository)
 {
@@ -19,6 +18,10 @@ public class MemberService(UserManager<MemberEntity> userManager, IMemberReposit
   {
     if (form == null)
       return Result.BadRequest("Form can't be null.");
+
+    var exists = await _userManager.FindByEmailAsync(form.Email);
+    if (exists != null)
+      return Result.AlreadyExists("Email is already registered.");
 
     await _repository.BeginTransactionAsync();
     try
@@ -31,12 +34,7 @@ public class MemberService(UserManager<MemberEntity> userManager, IMemberReposit
         await _repository.CommitTransactionAsync();
         return Result.Ok();
       }
-      //var affectedRows = await _userManager.save;
-      //if (affectedRows == 0)
-      //{
-      //  await _memberRepsitory.RollbackTransactionAsync();
-      //  return Result.InternalServerError("No changes saved to database.");
-      //}
+
       await _repository.RollbackTransactionAsync();
       return Result.BadRequest("Failed to create member.");
     }
@@ -47,20 +45,20 @@ public class MemberService(UserManager<MemberEntity> userManager, IMemberReposit
       return Result.InternalServerError("An unexpected error occurred while creating member.");
     }
   }
-  public async Task<IEnumerable<Member>> GetAllAsync()
+  public async Task<IResult> GetAllAsync()
   {
-    var list = await _userManager.Users.ToListAsync();
-    var test = MemberFactory.CreateList(list);
-    //var members = list.Select(x => new Member
-    //{
-    //  Id = x.Id,
-    //  FirstName = x.FirstName,
-    //  LastName = x.LastName,
-    //  Email = x.Email,
-    //  Phone = x.PhoneNumber,
-    //  JobTitle = x.JobTitle,
-    //});
-    return test;
+    try
+    {
+      var members = await _userManager.Users.ToListAsync();
+      return members.Count > 0
+        ? Result<IEnumerable<Member>>.Ok(MemberFactory.CreateList(members))
+        : new Result<IEnumerable<Member>>();
+    }
+    catch (Exception ex)
+    {
+      Debug.WriteLine(ex.Message);
+      return Result.InternalServerError("Error occurred while fetching members");
+    }
   }
   public async Task<IResult> GetAsync(string id)
   {
@@ -69,5 +67,33 @@ public class MemberService(UserManager<MemberEntity> userManager, IMemberReposit
       return Result.NotFound("Member not found.");
     var member = MappExtension.MapTo<Member>(entity);
     return Result<Member>.Ok(member);
+  }
+  public async Task<IResult> DeleteAsync(string id)
+  {
+    await _repository.BeginTransactionAsync();
+    try
+    {
+      var member = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == id);
+      if (member == null)
+      {
+        await _repository.RollbackTransactionAsync();
+        return Result.NotFound($"Member with id {id} not found");
+      }
+
+      var IsDeleted = await _userManager.DeleteAsync(member);
+      if (!IsDeleted.Succeeded)
+      {
+        await _repository.RollbackTransactionAsync();
+        return Result.BadRequest("No changes save to the database");
+      }
+      await _repository.CommitTransactionAsync();
+      return Result.Ok();
+    }
+    catch (Exception ex)
+    {
+      await _repository.RollbackTransactionAsync();
+      Debug.WriteLine($"Error deleting member: {id}: {ex.Message}");
+      return Result.InternalServerError("An error occurred while deleting member");
+    }
   }
 }

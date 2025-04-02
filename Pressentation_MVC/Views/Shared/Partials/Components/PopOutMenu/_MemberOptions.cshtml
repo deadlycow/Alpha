@@ -1,14 +1,18 @@
 ﻿<link rel="stylesheet" href="~/css/components/popOutMenu/_memberOptions.css" asp-append-version="true" />
 @model Member
 <div data-display="true" class="member-options-container">
-    <a data-modal="true" data-target="#editMemberModal" class="member-options-group" >
+    <a data-modal="true" data-target="#editMemberModal" class="member-options-group">
         <img src="~/images/edit-icon.svg" />
         <p>Edit</p>
     </a>
 
     <div class="member-options-group">
-        <img src="~/images/delete-icon.svg" />
-        <p>Delete</p>
+        <form asp-controller="Members" asp-action="Delete" asp-route-id="@Model.Id" method="post">
+            <button type="submit">
+                <img src="~/images/delete-icon.svg" />
+                Delete
+            </button>
+        </form>
     </div>
 </div>
 

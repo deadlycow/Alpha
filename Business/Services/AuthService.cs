@@ -21,7 +21,7 @@ public class AuthService(SignInManager<MemberEntity> signInManager, UserManager<
   {
     var existingUser = await _userManager.FindByEmailAsync(form.Email);
     if (existingUser != null)
-      return IdentityResult.Failed(new IdentityError { Description = "Email is alredy in use" });
+      return IdentityResult.Failed(new IdentityError { Description = "Email is already registered. Try logging in instead." });
 
     var entity = AuthFactory.Create(form);
     var result = await _userManager.CreateAsync(entity, form.Password);
