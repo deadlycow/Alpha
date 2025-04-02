@@ -1,8 +1,8 @@
-﻿<link rel="stylesheet" href="~/css/home/team.css" asp-append-version="true" />
+﻿<link rel="stylesheet" href="~/css/members/member.css" asp-append-version="true" />
 @model IEnumerable<Member> 
 
 <partial name="Partials/Modals/_AddMember" model="new MemberCreateForm()" />
-<partial name="Partials/Modals/_EditMember" model="new MemberViewModel()" />
+<partial name="Partials/Modals/_EditMember" model="new Member()" />
 
 <div class="team-header">
     <h2>Team Members</h2>
@@ -12,5 +12,6 @@
     @foreach (var member in Model)
     {
         <partial name="Partials/Components/_MemberCard" model="member" />
+        
     }
 </div>

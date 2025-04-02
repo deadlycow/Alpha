@@ -1,5 +1,5 @@
-﻿<link rel="stylesheet" href="~/css/home/project.css" asp-append-version="true" />
-@model List<ProjectViewModel>
+﻿<link rel="stylesheet" href="~/css/projects/project.css" asp-append-version="true" />
+
 
 <partial name="Partials/Modals/_AddProject" model="new ProjectViewModel()" />
 <div class="project-container">
@@ -9,16 +9,14 @@
     </div>
     <div class="sort-options">
         <ul class="options-list">
-            <li>ALL [@Model.Count]</li>
+            <li>ALL [0]</li>
             <li>STARTED [?]</li>
             <li>COMPLETED [?]</li>
         </ul>
     </div>
     <div class="project-grid">
-        @foreach (var project in Model)
-        {
-            <partial name="Partials/Components/_ProjectCard" model="project" />
-        }
+      
     </div>
     <partial name="Partials/Components/testSearch" />
 </div>
+<script src="~/js/compact-search.js" asp-append-version="true"></script>

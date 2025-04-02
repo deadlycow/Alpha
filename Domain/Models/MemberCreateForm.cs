@@ -6,7 +6,6 @@ public class MemberCreateForm
 {
   [DataType(DataType.Upload)]
   public IFormFile? MemberImage { get; set; }
-  public string Id { get; set; } = null!;
 
   [Display(Name = "First Name", Prompt = "Your first name")]
   [DataType(DataType.Text)]
@@ -21,6 +20,7 @@ public class MemberCreateForm
   [Display(Name = "Email", Prompt = "Your email address")]
   [DataType(DataType.EmailAddress)]
   [Required(ErrorMessage = "Required")]
+  [RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", ErrorMessage = "Invalid email")]
   public string Email { get; set; } = null!;
 
   [Display(Name = "Phone", Prompt = "Your phone number")]

@@ -1,10 +1,10 @@
 ﻿<link rel="stylesheet" href="~/css/components/popOutMenu/_memberOptions.css" asp-append-version="true" />
 @model Member
 <div data-display="true" class="member-options-container">
-    <div  class="member-options-group" asp-controller="Auth" asp-action="EditMember" asp-route-id="@Model.Id">
+    <a data-modal="true" data-target="#editMemberModal" class="member-options-group" >
         <img src="~/images/edit-icon.svg" />
         <p>Edit</p>
-    </div>
+    </a>
 
     <div class="member-options-group">
         <img src="~/images/delete-icon.svg" />
@@ -12,4 +12,4 @@
     </div>
 </div>
 
-@* data-modal="true" data-target="#editMemberModal" *@
+@* asp-controller="Auth" asp-action="EditMember" asp-route-id="@Model.Id" *@

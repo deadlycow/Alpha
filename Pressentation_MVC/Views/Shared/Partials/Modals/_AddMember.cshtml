@@ -11,20 +11,20 @@
             <img class="image-preview" src=""/>
             <input accept="image/*" class="hide"/>
         </div>
-        <form novalidate asp-controller="Auth" asp-action="CreateMember" >
+        <form novalidate asp-controller="Members" asp-action="Create" >
             <div class="form-group-flex">
                 <div class="form-group">
                     <label asp-for="FirstName"></label>
                     <div class="field-group">
                         <input asp-for="FirstName" />
-                        <span></span>
+                        <span asp-validation-for="FirstName"></span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label asp-for="LastName"></label>
                     <div class="field-group">
                         <input asp-for="LastName" />
-                        <span></span>
+                        <span asp-validation-for="LastName"></span>
                     </div>
                 </div>
             </div>
@@ -32,28 +32,28 @@
                 <label asp-for="Email"></label>
                 <div class="field-group">
                     <input asp-for="Email" />
-                    <span></span>
+                    <span asp-validation-for="Email"></span>
                 </div>
             </div>
             <div class="form-group">
                 <label asp-for="Phone"></label>
                 <div class="field-group">
                     <input asp-for="Phone" />
-                    <span></span>
+                    <span asp-validation-for="Phone"></span>
                 </div>
             </div>
             <div class="form-group">
                 <label asp-for="JobTitle"></label>
                 <div class="field-group">
                     <input asp-for="JobTitle" />
-                    <span></span>
+                    <span asp-validation-for="JobTitle"></span>
                 </div>
             </div>
             <div class="form-group">
                 <label asp-for="Address"></label>
                 <div class="field-group">
                     <input asp-for="Address" />
-                    <span></span>
+                    <span asp-validation-for="Address"></span>
                 </div>
             </div>
             <div class="form-group">

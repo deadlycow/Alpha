@@ -3,7 +3,7 @@
 <partial name="Partials/Components/_AlphaLogo" />
 <ul class="side-nav-list">
     <li>
-        <a class="side-nav-link @(Context.Request.Path == "/" ? "active" : "")" asp-controller="Home" asp-action="Project">
+        <a class="side-nav-link @(Context.Request.Path == "/" ? "active" : "")" asp-controller="Projects" asp-action="Project">
             <img class="nav-icon" src="~/images/projects-icon.svg" alt="portfolio icon" />
             Projects
         </a>
@@ -11,13 +11,13 @@
     @if (User.IsInRole("Admin"))
     {
         <li>
-            <a class="side-nav-link @(Context.Request.Path == "/team" ? "active" : "")" asp-controller="Home" asp-action="Team">
+            <a class="side-nav-link @(Context.Request.Path == "/team" ? "active" : "")" asp-controller="Members" asp-action="Member">
                 <img class="nav-icon" src="~/images/contacts-icon.svg" alt="portfolio icon" />
                 Team Members
             </a>
         </li>
         <li>
-            <a class="side-nav-link @(Context.Request.Path == "/clients" ? "active" : "")" asp-controller="Home" asp-action="Clients">
+            <a class="side-nav-link @(Context.Request.Path == "/clients" ? "active" : "")" asp-controller="Clients" asp-action="Client">
                 <img class="nav-icon" src="~/images/handshake-icon.svg" alt="portfolio icon" />
                 Clients
             </a>

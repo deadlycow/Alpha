@@ -7,6 +7,7 @@ using Domain.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using Domain.Extensions;
 
 namespace Business.Services;
 public class MemberService(UserManager<MemberEntity> userManager, IMemberRepository repository)
@@ -63,7 +64,10 @@ public class MemberService(UserManager<MemberEntity> userManager, IMemberReposit
   }
   public async Task<IResult> GetAsync(string id)
   {
-    var test = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == id);
-    return Result<Member>.Ok();
+    var entity = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == id);
+    if (entity == null)
+      return Result.NotFound("Member not found.");
+    var member = MappExtension.MapTo<Member>(entity);
+    return Result<Member>.Ok(member);
   }
 }

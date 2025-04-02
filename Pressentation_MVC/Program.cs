@@ -25,7 +25,7 @@ builder.Services.AddIdentity<MemberEntity, IdentityRole>(options =>
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
-  options.LoginPath = "/auth/login";
+  options.LoginPath = "/Auth/Login";
   options.SlidingExpiration = true;
 });
 
@@ -53,7 +53,7 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Project}/{id?}")
+    pattern: "{controller=Projects}/{action=Project}/{id?}")
     .WithStaticAssets();
 
 app.Run();

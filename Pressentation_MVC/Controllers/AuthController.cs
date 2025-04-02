@@ -1,25 +1,95 @@
-﻿using Business.Services;
+﻿using Business.Models;
+using Business.Services;
 using Domain.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Pressentation_MVC.Controllers;
 
-public class AuthController(MemberService memberService) : Controller
+[Route("/auth")]
+[AllowAnonymous]
+public class AuthController(AuthService authService) : Controller
 {
-  private readonly MemberService _memberService = memberService;
+  private readonly AuthService _authService = authService;
+
+  [Route("login")]
+  public IActionResult Login()
+  {
+   
+    if (User.Identity!.IsAuthenticated)
+      return LocalRedirect("~/");
+
+    //ViewBag.ErrorMessage = string.Empty;
+    return View();
+  }
 
   [HttpPost]
-  public async Task<IActionResult> CreateMember(MemberCreateForm form)
+  [Route("login")]
+  public async Task<IActionResult> Login(MemberLoginForm form)
   {
-    var result = await _memberService.Create(form);
-    if (!result.Success)
-      return BadRequest(result.ErrorMessage);
-    return RedirectToAction("team", "Home");
+    if (!ModelState.IsValid)
+    {
+      var errors = ModelState
+        .Where(x => x.Value?.Errors.Count > 0)
+        .ToDictionary(
+        kvp => kvp.Key,
+        kvp => kvp.Value?.Errors.Select(x => x.ErrorMessage).ToList()
+        );
+      return BadRequest(new { Success = false, errors });
+    }
+
+    //ViewBag.ErrorMessage = string.Empty;
+    //if (ModelState.IsValid)
+    //{
+    //  if (await _authService.LoginAsync(form))
+    //    return LocalRedirect("~/");
+    //}
+
+    //ViewBag.ErrorMessage = "Incorrect email or password";
+    await _authService.LoginAsync(form);
+    return LocalRedirect("~/");
   }
-  [HttpGet]
-  public async Task<IActionResult> EditMember(string id)
+
+  [Route("signup")]
+  public IActionResult Signup()
   {
-    var member = await _memberService.GetAsync(id);
-    return null;
+    return View();
   }
+
+  [HttpPost]
+  [Route("signup")]
+  public async Task<IActionResult> Signup([FromForm] MemberSignUpForm form)
+  {
+
+    if (!ModelState.IsValid)
+    {
+      var errors = ModelState
+        .Where(x => x.Value?.Errors.Count > 0)
+        .ToDictionary(
+        kvp => kvp.Key,
+        kvp => kvp.Value?.Errors.Select(x => x.ErrorMessage).ToList()
+        );
+      return BadRequest(new { Success = false, errors });
+    }
+
+    var result = await _authService.SignUpAsync(form);
+    if (!result.Succeeded)
+      return View(form);
+
+    //return LocalRedirect("~/auth/login");
+    return LocalRedirect("~/");
+  }
+
+  [Route("admin")]
+  public IActionResult Admin()
+  {
+    return View();
+  }
+  public async Task<IActionResult> Logout()
+  {
+    await _authService.LogoutAsync();
+    return LocalRedirect("~/");
+  }
+
+
 }

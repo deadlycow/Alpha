@@ -1,6 +1,6 @@
 ﻿@model MemberSignUpForm
 
-<form method="post" asp-controller="Account" asp-action="Signup" novalidate>
+<form method="post" asp-controller="Auth" asp-action="Signup" novalidate>
     <div class="form-input">
         <label asp-for="FirstName"></label>
         <input asp-for="FirstName" id="username" class="input-field" type="text" />
@@ -36,7 +36,7 @@
 
     </div>
     <div class="form-terms">
-        <input id="acceptTerms" type="checkbox" required />
+        <input asp-for="TermsConfirmed" id="acceptTerms" type="checkbox" required />
         <label for="acceptTerms">I accept</label>
         <a href="#">Terms and Conditions</a>
     </div>

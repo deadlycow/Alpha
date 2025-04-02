@@ -1,5 +1,5 @@
-﻿//const allItems = ["Andreas Karlsson", "Anders Andersson", "Oskar Oskarsson", "Lina Linsson", "Karin Karlsson", "Erik Eriksson"];
-//let selectedItems = [];
+﻿const allItems = ["Andreas Karlsson", "Anders Andersson", "Oskar Oskarsson", "Lina Linsson", "Karin Karlsson", "Erik Eriksson"];
+let selectedItems = [];
 
 function filterList() {
     let input = document.getElementById("searchInput").value.toLowerCase();
@@ -64,6 +64,10 @@ function removeFromList(element, name) {
 
 document.addEventListener("click", (event) => {
     if (!event.target.closest(".compact-search")) {
-        document.getElementById("dropdown").style.display = "none";
+        document.getElementById("dropdown")
+        if (dropdown)
+            dropdown.style.display = 'none';
+        
+        //document.getElementById("dropdown").style.display = "none";
     }
 });

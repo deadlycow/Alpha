@@ -89,6 +89,7 @@
 
 .field-group {
     margin-top: 9px;
+    position: relative;
 }
 
     .field-group input {
@@ -102,6 +103,18 @@
         .field-group input:focus {
             outline: none;
         }
+
+.field-validation-error {
+    position: absolute;
+    font-size: var(--font-12);
+    color: var(--validation-error-text);
+    border-top-right-radius: var(--border-radius-14);
+    border-bottom-right-radius: var(--border-radius-14);
+    background-color: var(--validation-error-bg);
+    top: .08rem;
+    right: 0;
+    padding: 1rem;
+}
 
 .custom-arrow {
     width: 100%;
