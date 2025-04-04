@@ -10,5 +10,5 @@
 }
 
 form .input-validation-error {
-  border: 1px solid var(--validation-error-text);
+  border: 3px solid var(--validation-error-text) !important;
 }

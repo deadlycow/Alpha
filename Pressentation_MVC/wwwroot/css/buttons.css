@@ -38,6 +38,14 @@
     content: url(../images/google-icon.svg);
 }
 
+.btn-github::before {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    width: 1rem;
+    content: url(../images/github-icon.svg);
+}
+
 .btn img {
     padding-right: .5rem;
 }

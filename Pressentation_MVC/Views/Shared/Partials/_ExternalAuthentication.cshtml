@@ -1,4 +1,8 @@
-﻿<form asp-controller="Auth" asp-action="ExternalSignIn" method="post" class="external-account" novalidate >
+﻿<form asp-controller="Auth" asp-action="ExternalSignIn" method="post" class="external-account" novalidate>
     <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
-    <button type="submit" name="provider" value="Google" class="btn btn-gray btn-google">@ViewData["ButtonText"]</button>
+    <button type="submit" name="provider" value="Google" class="btn btn-gray btn-google">@ViewData["ButtonText"] Google</button>
+</form>
+<form asp-controller="Auth" asp-action="ExternalSignIn" method="post" class="external-account" novalidate>
+    <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+    <button type="submit" name="provider" value="GitHub" class="btn btn-gray btn-github">@ViewData["ButtonText"] GitHub</button>
 </form>
