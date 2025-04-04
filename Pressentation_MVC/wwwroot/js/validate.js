@@ -8,7 +8,6 @@
     if (field.hasAttribute("data-val-required") && value === "") 
         errorMessage = field.getAttribute("data-val-required")
     
-
     if (field.hasAttribute("data-val-regex") && value !== "") {
         let pattern = new RegExp(field.getAttribute("data-val-regex-pattern"))
         if (!pattern.test(value)) {
@@ -27,12 +26,11 @@
         errorSpan.classList.add("field-validation-valid")
         errorSpan.textContent = ""
     }
-
 }
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    const form = document.querySelector("form")
+    const form = document.getElementById("form")
 
     if (!form) return;
 
@@ -42,6 +40,4 @@ document.addEventListener("DOMContentLoaded", function () {
             validateField(field)
         })
     })
-
-
 })

@@ -1,11 +1,9 @@
-﻿using Business.Models;
-using Business.Services;
+﻿using Business.Services;
 using Data.Entities;
 using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Razor.TagHelpers;
 using System.Security.Claims;
 
 namespace Pressentation_MVC.Controllers;
@@ -25,47 +23,29 @@ public class AuthController(AuthService authService, SignInManager<MemberEntity>
   }
 
 
-  #region Login
+  #region SignIn
 
-  [Route("login")]
-  public IActionResult Login()
+  [Route("signin")]
+  public IActionResult SignIn()
   {
     return View();
   }
 
   [HttpPost]
-  [Route("login")]
-  public async Task<IActionResult> Login([FromForm] MemberLoginForm form)
+  [Route("signin")]
+  public async Task<IActionResult> SignIn([FromForm] SignInForm form)
   {
     ViewBag.ErrorMessage = string.Empty;
 
     if (!ModelState.IsValid)
-    {
-      var errors = ModelState
-        .Where(x => x.Value?.Errors.Count > 0)
-        .ToDictionary(
-        kvp => kvp.Key,
-        kvp => kvp.Value?.Errors.Select(x => x.ErrorMessage).ToList()
-        );
-
-      return BadRequest(new { Success = false, errors });
-    }
-
-    //if (ModelState.IsValid)
-    //{
-
-    //}
-
-
-
-
-    var result = await _authService.LoginAsync(form);
-    if (!result)
-    {
-      ViewBag.ErrorMessage = "Incorrect email or password";
       return View(form);
-    }
-    return LocalRedirect("~/");
+
+    var result = await _authService.SignInAsync(form);
+    if (result)
+      return LocalRedirect("~/");
+
+    ViewBag.ErrorMessage = "Incorrect email or password";
+    return View(form);
   }
   #endregion
 
@@ -79,26 +59,17 @@ public class AuthController(AuthService authService, SignInManager<MemberEntity>
 
   [HttpPost]
   [Route("signup")]
-  public async Task<IActionResult> Signup([FromForm] MemberSignUpForm form)
+  public async Task<IActionResult> Signup([FromForm] SignUpForm form)
   {
 
     if (!ModelState.IsValid)
-    {
-      var errors = ModelState
-        .Where(x => x.Value?.Errors.Count > 0)
-        .ToDictionary(
-        kvp => kvp.Key,
-        kvp => kvp.Value?.Errors.Select(x => x.ErrorMessage).ToList()
-        );
-
-      return BadRequest(new { Success = false, errors });
-    }
-
-    var result = await _authService.SignUpAsync(form);
-    if (!result.Succeeded)
       return View(form);
 
-    return LocalRedirect("~/");
+    var result = await _authService.SignUpAsync(form);
+    if (result.Succeeded)
+      return RedirectToAction("SignIn");
+
+    return View(form);
   }
 
   #endregion
@@ -108,7 +79,7 @@ public class AuthController(AuthService authService, SignInManager<MemberEntity>
   public async Task<IActionResult> Logout()
   {
     await _authService.LogoutAsync();
-    return LocalRedirect("~/");
+    return RedirectToAction("SignIn");
   }
 
   #endregion
@@ -122,7 +93,7 @@ public class AuthController(AuthService authService, SignInManager<MemberEntity>
     if (string.IsNullOrEmpty(provider))
     {
       ModelState.AddModelError("", "Invalid provider");
-      return View("Login");
+      return View("SignIn");
     }
 
     var redirectUrl = Url.Action("ExternalSignInCallback", "Auth", new { returnUrl })!;
@@ -138,12 +109,12 @@ public class AuthController(AuthService authService, SignInManager<MemberEntity>
     if (!string.IsNullOrEmpty(remoteError))
     {
       ModelState.AddModelError("", $"Error from external provider: {remoteError}");
-      return View("Login");
+      return View("SignIn");
     }
 
     var info = await _signInManager.GetExternalLoginInfoAsync();
     if (info == null)
-      return RedirectToAction("Login");
+      return RedirectToAction("SignIn");
 
     var signInResult = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
     if (signInResult.Succeeded)
@@ -178,7 +149,7 @@ public class AuthController(AuthService authService, SignInManager<MemberEntity>
       foreach (var error in identityResult.Errors)
         ModelState.AddModelError("", error.Description);
 
-      return View("Login");
+      return View("SignIn");
     }
   }
   #endregion

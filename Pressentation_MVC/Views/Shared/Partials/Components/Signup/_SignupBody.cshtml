@@ -1,6 +1,6 @@
-﻿@model MemberSignUpForm
+﻿@model SignUpForm
 
-<form method="post" asp-controller="Auth" asp-action="Signup" novalidate>
+<form id="form" method="post" asp-controller="Auth" asp-action="SignUp" novalidate>
     <div class="form-input">
         <label asp-for="FirstName"></label>
         <input asp-for="FirstName" id="username" class="input-field" type="text" />
@@ -15,12 +15,6 @@
         <label asp-for="Email"></label>
         <input asp-for="Email" id="email" class="input-field" />
         <span asp-validation-for="Email"></span>
-        @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
-        {
-            <div class="error-message text-danger">
-                @ViewBag.ErrorMessage
-            </div>
-        }
     </div>
     <div class="form-input password-container">
         <label asp-for="Password"></label>
@@ -42,3 +36,6 @@
     </div>
     <button class="btn btn-primary" type="submit">Create Account</button>
 </form>
+
+@await Html.PartialAsync("_ValidationScript")
+@await Html.PartialAsync("_ShowPasswordScript")

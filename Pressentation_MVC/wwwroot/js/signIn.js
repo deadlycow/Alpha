@@ -2,12 +2,6 @@
 
     const forms = document.querySelectorAll('form');
 
-
-    document.querySelectorAll(".toggle-password").forEach(icon => {
-        icon.addEventListener("click", togglePassword);
-    });
-
-
     forms.forEach(form => {
         form.addEventListener('submit', async (e) => {
             e.preventDefault()
@@ -46,19 +40,6 @@
         })
     })
 })
-
-const togglePassword = (event) => {
-    const eyeIcon = event.currentTarget;
-    const passwordInput = eyeIcon.closest(".password-container").querySelector(".input-field");
-
-    if (passwordInput.type === "password") {
-        passwordInput.type = "text";
-        eyeIcon.src = "/images/eye-open.svg";
-    } else {
-        passwordInput.type = "password";
-        eyeIcon.src = "/images/eye-closed.svg";
-    }
-}
 
 function clearErrorMessages(form) {
     form.querySelectorAll('[data-val="true"]').forEach(input => {

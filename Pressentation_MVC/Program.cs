@@ -4,15 +4,14 @@ using Data.Entities;
 using Data.Interfaces;
 using Data.Repositories;
 using Data.Seeders;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<DataContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("dbAlpha")));
-
 
 builder.Services.AddIdentity<MemberEntity, IdentityRole>(options =>
 {
@@ -25,11 +24,19 @@ builder.Services.AddIdentity<MemberEntity, IdentityRole>(options =>
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
-  options.LoginPath = "/Auth/Login";
+  options.LoginPath = "/Auth/SignIn";
   options.Cookie.SameSite = SameSiteMode.None;
   options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-  options.SlidingExpiration = true;
+  //options.SlidingExpiration = true;
 });
+
+builder.Services.AddAuthentication(options => { options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme; })
+  .AddCookie()
+  .AddGoogle(options =>
+  {
+    options.ClientId = builder.Configuration["Authentication:Google:ClientId"]!;
+    options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"]!;
+  });
 
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<MemberService>();
