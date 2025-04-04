@@ -12,11 +12,11 @@ namespace Pressentation_MVC.Controllers;
 
 [Route("/auth")]
 [AllowAnonymous]
-public class AuthController(AuthService authService, SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager) : Controller
+public class AuthController(AuthService authService, SignInManager<MemberEntity> signInManager, UserManager<MemberEntity> userManager) : Controller
 {
   private readonly AuthService _authService = authService;
-  private readonly SignInManager<IdentityUser> _signInManager = signInManager;
-  private readonly UserManager<IdentityUser> _userManager = userManager;
+  private readonly SignInManager<MemberEntity> _signInManager = signInManager;
+  private readonly UserManager<MemberEntity> _userManager = userManager;
 
   [Route("admin")]
   public IActionResult Admin()
@@ -30,17 +30,12 @@ public class AuthController(AuthService authService, SignInManager<IdentityUser>
   [Route("login")]
   public IActionResult Login()
   {
-
-    if (User.Identity!.IsAuthenticated)
-      return LocalRedirect("~/");
-
-    //ViewBag.ErrorMessage = string.Empty;
     return View();
   }
 
   [HttpPost]
   [Route("login")]
-  public async Task<IActionResult> Login(MemberLoginForm form)
+  public async Task<IActionResult> Login([FromForm] MemberLoginForm form)
   {
     ViewBag.ErrorMessage = string.Empty;
 
@@ -52,17 +47,24 @@ public class AuthController(AuthService authService, SignInManager<IdentityUser>
         kvp => kvp.Key,
         kvp => kvp.Value?.Errors.Select(x => x.ErrorMessage).ToList()
         );
+
       return BadRequest(new { Success = false, errors });
     }
 
     //if (ModelState.IsValid)
     //{
-    //  if (await _authService.LoginAsync(form))
-    //    return LocalRedirect("~/");
+
     //}
 
-    ViewBag.ErrorMessage = "Incorrect email or password";
-    await _authService.LoginAsync(form);
+
+
+
+    var result = await _authService.LoginAsync(form);
+    if (!result)
+    {
+      ViewBag.ErrorMessage = "Incorrect email or password";
+      return View(form);
+    }
     return LocalRedirect("~/");
   }
   #endregion
@@ -106,7 +108,7 @@ public class AuthController(AuthService authService, SignInManager<IdentityUser>
   public async Task<IActionResult> Logout()
   {
     await _authService.LogoutAsync();
-    return LocalRedirect("/login");
+    return LocalRedirect("~/");
   }
 
   #endregion
@@ -114,6 +116,7 @@ public class AuthController(AuthService authService, SignInManager<IdentityUser>
   #region Extrenal Authentication
 
   [HttpPost]
+  [Route("externalSignIn")]
   public IActionResult ExternalSignIn(string provider, string returnUrl = null!)
   {
     if (string.IsNullOrEmpty(provider))
@@ -127,6 +130,7 @@ public class AuthController(AuthService authService, SignInManager<IdentityUser>
     return Challenge(properties, provider);
   }
 
+  [Route("externalSignInCallback")]
   public async Task<IActionResult> ExternalSignInCallback(string returnUrl = null!, string remoteError = null!)
   {
     returnUrl ??= Url.Content("~/");
