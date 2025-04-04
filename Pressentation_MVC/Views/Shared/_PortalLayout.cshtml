@@ -15,8 +15,8 @@
             @RenderBody()
         </div>
     </div>
-
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await Html.PartialAsync("_ValidationScript")
+    @await Html.PartialAsync("_ShowPasswordScript")
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

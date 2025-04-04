@@ -3,15 +3,15 @@
     margin: auto;
 }
 
-.login-container .login {
-    text-align: center;
-}
+    .login-container .login {
+        text-align: center;
+    }
 
-.login-container .btn-gray {
-    margin-top: 1.688rem;
-    margin-bottom: 2.313rem;
-    display: block;
-}
+    .login-container .btn-gray {
+        margin-top: 1.688rem;
+        margin-bottom: 2.313rem;
+        display: block;
+    }
 
 .form-me {
     display: flex;
@@ -26,10 +26,6 @@
         font-size: var(--font-15);
         color: var(--color-link);
     }
-
-.btn.btn-primary {
-    width: 100%
-}
 
 .noAccount {
     padding-top: 3.688rem;

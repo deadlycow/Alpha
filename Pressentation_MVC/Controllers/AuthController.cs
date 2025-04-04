@@ -1,22 +1,20 @@
-﻿using Business.Models;
-using Business.Services;
+﻿using Business.Services;
 using Data.Entities;
 using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Razor.TagHelpers;
 using System.Security.Claims;
 
 namespace Pressentation_MVC.Controllers;
 
 [Route("/auth")]
 [AllowAnonymous]
-public class AuthController(AuthService authService, SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager) : Controller
+public class AuthController(AuthService authService, SignInManager<MemberEntity> signInManager, UserManager<MemberEntity> userManager) : Controller
 {
   private readonly AuthService _authService = authService;
-  private readonly SignInManager<IdentityUser> _signInManager = signInManager;
-  private readonly UserManager<IdentityUser> _userManager = userManager;
+  private readonly SignInManager<MemberEntity> _signInManager = signInManager;
+  private readonly UserManager<MemberEntity> _userManager = userManager;
 
   [Route("admin")]
   public IActionResult Admin()
@@ -25,45 +23,29 @@ public class AuthController(AuthService authService, SignInManager<IdentityUser>
   }
 
 
-  #region Login
+  #region SignIn
 
-  [Route("login")]
-  public IActionResult Login()
+  [Route("signin")]
+  public IActionResult SignIn()
   {
-
-    if (User.Identity!.IsAuthenticated)
-      return LocalRedirect("~/");
-
-    //ViewBag.ErrorMessage = string.Empty;
     return View();
   }
 
   [HttpPost]
-  [Route("login")]
-  public async Task<IActionResult> Login(MemberLoginForm form)
+  [Route("signin")]
+  public async Task<IActionResult> SignIn([FromForm] SignInForm form)
   {
     ViewBag.ErrorMessage = string.Empty;
 
     if (!ModelState.IsValid)
-    {
-      var errors = ModelState
-        .Where(x => x.Value?.Errors.Count > 0)
-        .ToDictionary(
-        kvp => kvp.Key,
-        kvp => kvp.Value?.Errors.Select(x => x.ErrorMessage).ToList()
-        );
-      return BadRequest(new { Success = false, errors });
-    }
+      return View(form);
 
-    //if (ModelState.IsValid)
-    //{
-    //  if (await _authService.LoginAsync(form))
-    //    return LocalRedirect("~/");
-    //}
+    var result = await _authService.SignInAsync(form);
+    if (result)
+      return LocalRedirect("~/");
 
     ViewBag.ErrorMessage = "Incorrect email or password";
-    await _authService.LoginAsync(form);
-    return LocalRedirect("~/");
+    return View(form);
   }
   #endregion
 
@@ -77,26 +59,17 @@ public class AuthController(AuthService authService, SignInManager<IdentityUser>
 
   [HttpPost]
   [Route("signup")]
-  public async Task<IActionResult> Signup([FromForm] MemberSignUpForm form)
+  public async Task<IActionResult> Signup([FromForm] SignUpForm form)
   {
 
     if (!ModelState.IsValid)
-    {
-      var errors = ModelState
-        .Where(x => x.Value?.Errors.Count > 0)
-        .ToDictionary(
-        kvp => kvp.Key,
-        kvp => kvp.Value?.Errors.Select(x => x.ErrorMessage).ToList()
-        );
-
-      return BadRequest(new { Success = false, errors });
-    }
-
-    var result = await _authService.SignUpAsync(form);
-    if (!result.Succeeded)
       return View(form);
 
-    return LocalRedirect("~/");
+    var result = await _authService.SignUpAsync(form);
+    if (result.Succeeded)
+      return RedirectToAction("SignIn");
+
+    return View(form);
   }
 
   #endregion
@@ -106,7 +79,7 @@ public class AuthController(AuthService authService, SignInManager<IdentityUser>
   public async Task<IActionResult> Logout()
   {
     await _authService.LogoutAsync();
-    return LocalRedirect("/login");
+    return RedirectToAction("SignIn");
   }
 
   #endregion
@@ -114,12 +87,13 @@ public class AuthController(AuthService authService, SignInManager<IdentityUser>
   #region Extrenal Authentication
 
   [HttpPost]
+  [Route("externalSignIn")]
   public IActionResult ExternalSignIn(string provider, string returnUrl = null!)
   {
     if (string.IsNullOrEmpty(provider))
     {
       ModelState.AddModelError("", "Invalid provider");
-      return View("Login");
+      return View("SignIn");
     }
 
     var redirectUrl = Url.Action("ExternalSignInCallback", "Auth", new { returnUrl })!;
@@ -127,6 +101,7 @@ public class AuthController(AuthService authService, SignInManager<IdentityUser>
     return Challenge(properties, provider);
   }
 
+  [Route("externalSignInCallback")]
   public async Task<IActionResult> ExternalSignInCallback(string returnUrl = null!, string remoteError = null!)
   {
     returnUrl ??= Url.Content("~/");
@@ -134,12 +109,12 @@ public class AuthController(AuthService authService, SignInManager<IdentityUser>
     if (!string.IsNullOrEmpty(remoteError))
     {
       ModelState.AddModelError("", $"Error from external provider: {remoteError}");
-      return View("Login");
+      return View("SignIn");
     }
 
     var info = await _signInManager.GetExternalLoginInfoAsync();
     if (info == null)
-      return RedirectToAction("Login");
+      return RedirectToAction("SignIn");
 
     var signInResult = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
     if (signInResult.Succeeded)
@@ -174,7 +149,7 @@ public class AuthController(AuthService authService, SignInManager<IdentityUser>
       foreach (var error in identityResult.Errors)
         ModelState.AddModelError("", error.Description);
 
-      return View("Login");
+      return View("SignIn");
     }
   }
   #endregion

@@ -1,0 +1,14 @@
+﻿form .field-validation-error {
+  position: absolute;
+  font-size: var(--font-12);
+  color: var(--validation-error-text);
+  border-bottom-right-radius: var(--border-radius-14);
+  right: 0;
+  bottom: -1.7rem;
+  background-color: var(--validation-error-bg);
+  padding: 2rem .5rem .5rem .5rem;
+}
+
+form .input-validation-error {
+  border: 1px solid var(--validation-error-text);
+}
