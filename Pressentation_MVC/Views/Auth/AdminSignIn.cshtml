@@ -1,0 +1,36 @@
+﻿@model SignInForm
+
+@{
+    ViewData["ButtonText"] = "Login with";
+}
+
+<h1 class="login">Login</h1>
+<partial name="Partials/_ExternalAuthentication" />
+<div class="or-text">or</div>
+
+<form id="form" method="post" novalidate asp-controller="Auth" asp-action="Admin">
+    <div class="form-input">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="input-field" />
+        <span asp-validation-for="Email"></span>
+    </div>
+    <div class="form-input password-container">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" class="input-field" />
+        <span asp-validation-for="Password"></span>
+        <img class="toggle-password eye-icon" src="/images/eye-closed.svg" alt="Toggle Password">
+    </div>
+    <div class="form-me">
+        <div>
+            <input id="rememberMe" type="checkbox" />
+            <label for="rememberMe">Remember me</label>
+        </div>
+        <a href="#">Forgot Password?</a>
+    </div>
+    <button class="btn btn-primary" type="submit">Login</button>
+</form>
+
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <p>@ViewBag.ErrorMessage</p>
+}

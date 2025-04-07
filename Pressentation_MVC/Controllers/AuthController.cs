@@ -21,6 +21,22 @@ public class AuthController(AuthService authService, SignInManager<MemberEntity>
   {
     return View();
   }
+  [Route("admin")]
+  [HttpPost]
+  public async Task<IActionResult> Admin([FromForm] SignInForm form)
+  {
+    ViewBag.ErrorMessage = string.Empty;
+
+    if (!ModelState.IsValid)
+      return View(form);
+
+    var result = await _authService.SignInAsync(form);
+    if (result)
+      return LocalRedirect("~/");
+
+    ViewBag.ErrorMessage = "Incorrect email or password";
+    return View(form);
+  }
 
 
   #region SignIn

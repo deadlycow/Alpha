@@ -1,42 +1,40 @@
-﻿document.addEventListener('DOMContentLoaded', () => {
+﻿const loadImage = async (file) => {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+
+        reader.onerror = () => reject(new Error("Failed to load file."));
+        reader.onload = (e) => {
+            const img = new Image();
+            img.onerror = () => reject(new Error("Failed to load image "));
+            img.onload = () => resolve(img);
+            img.src = e.target.result;
+        }
+        reader.readAsDataURL(file);
+    })
+}
+
+const processImage = async (file, imagePreviewer, previewer, previewSize = 150) => {
+    try {
+        const img = await loadImage(file);
+        const canvas = document.createElement('canvas');
+        canvas.width = previewSize;
+        canvas.height = previewSize;
+
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, previewSize, previewSize);
+        imagePreviewer.src = canvas.toDataURL('image/jpeg');
+        previewer.classList.add('selected');
+    }
+    catch (error) {
+        console.error('Failed on image-processing:', error);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
     const previewSize = 150;
 
-    const menuButtons = document.querySelectorAll('[data-menu="true"]');
-    const modalButtons = document.querySelectorAll('[data-modal="true"]');
     const closeButtons = document.querySelectorAll('[data-close="true"]');
     const forms = document.querySelectorAll('form');
-
-    menuButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
-
-
-            const currentCard = event.currentTarget.closest('[data-menu]');
-            if (currentCard) {
-
-                const menu = currentCard.querySelector('[data-display]');
-
-                const isOpen = menu.style.display === 'grid';
-
-                document.querySelectorAll('[data-display]').forEach(menu => {
-                    menu.style.display = 'none';
-                });
-
-                if (!isOpen) {
-                    menu.style.display = 'grid';
-                }
-            }
-        });
-    });
-
-    modalButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const modalTarget = button.getAttribute('data-target');
-            const modal = document.querySelector(modalTarget);
-
-            if (modal)
-                modal.style.display = 'flex';
-        })
-    })
 
     closeButtons.forEach(button => {
         button.addEventListener('click', () => {
@@ -50,7 +48,7 @@
         form.addEventListener('submit', async (e) => {
             e.preventDefault()
 
-            clearErrorMessages(form)
+            //clearErrorMessages(form)
             const formData = new FormData(form)
 
             try {
@@ -63,13 +61,8 @@
                     const modal = form.closest('.modal')
                     if (modal)
                         modal.style.display = 'none'
-
-                    if (res.redirected) {
-                        window.location.href = res.url
-                    }
-                    else {
+                    else
                         window.location.reload()
-                    }
                 }
                 else if (res.status === 400) {
                     const data = await res.json()
@@ -96,10 +89,6 @@
         })
     })
 
-    document.querySelectorAll(".toggle-password").forEach(icon => {
-        icon.addEventListener("click", togglePassword);
-    });
-
     document.querySelectorAll(".image-previewer").forEach(previewer => {
         const fileInput = previewer.querySelector('input[type="file"]');
         const imagePreview = previewer.querySelector('.image-preview');
@@ -113,3 +102,17 @@
         })
     })
 })
+
+function clearErrorMessages(form) {
+    form.querySelectorAll('[data-val="true"]').forEach(input => {
+        input.classList.remove('input-validation-error')
+    })
+
+    form.querySelectorAll('[data-valmsg-for]').forEach(span => {
+        span.innerText = ''
+        span.classList.remove('field-validation-error')
+    })
+}
+
+
+

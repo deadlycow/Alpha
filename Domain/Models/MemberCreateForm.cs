@@ -24,7 +24,7 @@ public class MemberCreateForm
   public string Email { get; set; } = null!;
 
   [Display(Name = "Phone", Prompt = "Your phone number")]
-  public string? Phone { get; set; }
+  public string? PhoneNumber { get; set; }
 
   [Display(Name = "Job Title", Prompt = "Your job title")]
   [DataType(DataType.Text)]

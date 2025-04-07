@@ -4,6 +4,7 @@ using Business.Services;
 using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Pressentation_MVC.Controllers
 {
@@ -42,8 +43,8 @@ namespace Pressentation_MVC.Controllers
       return Ok();
     }
 
-    [HttpPut]
-    public async Task<IActionResult> Update(string id, [FromForm] Member? form)
+    [HttpPost]
+    public async Task<IActionResult> Update([FromForm] Member form)
     {
 
       if (!ModelState.IsValid)
@@ -57,11 +58,11 @@ namespace Pressentation_MVC.Controllers
         return BadRequest(new { Success = false, errors });
       }
 
-
-      //var member = await _memberService.GetAsync(id);
-      //if (member is Result<Member> user)
-      //  return View(user.Data);
-      return Ok();
+      var result = await _memberService.UpdateAsync(form);
+      
+      if (!result.Success)
+        return BadRequest(result.ErrorMessage);
+      return RedirectToAction("Member", "Members");
     }
 
     [HttpPost("{id}")]
@@ -76,6 +77,27 @@ namespace Pressentation_MVC.Controllers
         return Ok();
 
       return BadRequest(respons.ErrorMessage);
+    }
+
+    [HttpGet]
+    [Route("Member/GetMember/{id}")]
+    public async Task<IActionResult> GetMember(string id)
+    {
+      var member = await _memberService.GetAsync(id);
+      if (member is Result<Member> user)
+      {
+        return Json(new
+        {
+          user.Data.Id,
+          user.Data.FirstName,
+          user.Data.LastName,
+          user.Data.Email,
+          user.Data.PhoneNumber,
+          user.Data.JobTitle,
+          user.Data.Address,
+        });
+      }
+      return NotFound();
     }
   }
 }

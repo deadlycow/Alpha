@@ -8,6 +8,7 @@ using Domain.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using System.Xml.XPath;
 namespace Business.Services;
 public class MemberService(UserManager<MemberEntity> userManager, IMemberRepository repository)
 {
@@ -67,6 +68,34 @@ public class MemberService(UserManager<MemberEntity> userManager, IMemberReposit
       return Result.NotFound("Member not found.");
     var member = MappExtension.MapTo<Member>(entity);
     return Result<Member>.Ok(member);
+  }
+  public async Task<IResult> UpdateAsync(Member form)
+  {
+    if (form == null)
+      return Result.BadRequest("Form can't be null");
+    await _repository.BeginTransactionAsync();
+    try
+    {
+      var exists = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == form.Id);
+      if (exists == null)
+        return Result.NotFound("Member not found");
+
+      exists = MemberFactory.Update(form, exists);
+      var result = await _userManager.UpdateAsync(exists);
+      if (!result.Succeeded)
+      {
+        await _repository.RollbackTransactionAsync();
+        return Result.InternalServerError("No changes where made");
+      }
+      await _repository.CommitTransactionAsync();
+      return Result.Ok();
+    }
+    catch (Exception ex)
+    {
+      await _repository.RollbackTransactionAsync();
+      Debug.WriteLine($"Error updating member: {ex.Message}");
+      return Result.InternalServerError("An error occurred while updating member");
+    }
   }
   public async Task<IResult> DeleteAsync(string id)
   {

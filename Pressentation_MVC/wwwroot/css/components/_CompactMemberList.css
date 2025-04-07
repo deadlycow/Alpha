@@ -67,3 +67,24 @@
     aspect-ratio: 1/1;
     cursor: pointer;
 }
+
+.dropdown {
+    position: absolute;
+    width: 100%;
+    border: 1px solid #ccc;
+    background: white;
+    max-height: 150px;
+    overflow-y: auto;
+    display: none;
+    top: 2.2rem;
+    z-index: 3;
+}
+
+    .dropdown div {
+        padding: 8px;
+        cursor: pointer;
+    }
+
+        .dropdown div:hover {
+            background: #f0f0f0;
+        }

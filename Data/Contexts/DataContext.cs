@@ -10,8 +10,6 @@ public class DataContext(DbContextOptions<DataContext> options) : IdentityDbCont
   public DbSet<MemberProjectEntity> MemberProject { get; set; }
   public DbSet<ProjectEntity> Project { get; set; }
 
-
-
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
     base.OnModelCreating(modelBuilder);

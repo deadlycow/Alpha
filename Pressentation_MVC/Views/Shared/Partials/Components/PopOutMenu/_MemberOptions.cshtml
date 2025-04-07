@@ -1,7 +1,7 @@
 ﻿<link rel="stylesheet" href="~/css/components/popOutMenu/_memberOptions.css" asp-append-version="true" />
 @model Member
 <div data-display="true" class="member-options-container">
-    <a data-modal="true" data-target="#editMemberModal" class="member-options-group">
+    <a data-modal="true" data-target="#editMemberModal" data-id="@Model.Id" class="member-options-group">
         <img src="~/images/edit-icon.svg" />
         <p>Edit</p>
     </a>
@@ -15,5 +15,5 @@
         </form>
     </div>
 </div>
-
+<script src="~/js/fillEdit.js"></script>
 @* asp-controller="Auth" asp-action="EditMember" asp-route-id="@Model.Id" *@
