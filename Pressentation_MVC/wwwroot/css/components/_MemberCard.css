@@ -35,12 +35,18 @@
 }
 
 .member-card-image {
-    padding-block: 1.25rem 1rem;
+    margin: 1.125rem auto 1rem auto;
+    width: 9.375rem;
+    height: 9.375rem;
+    border-radius: 50%;
+    overflow: hidden;
 }
 
     .member-card-image img {
         height: 100%;
+        width: 100%;
         aspect-ratio: 1/1;
+        object-fit: cover;
     }
 
 .member-card-info h4 {

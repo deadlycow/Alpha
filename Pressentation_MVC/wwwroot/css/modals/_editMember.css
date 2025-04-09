@@ -26,17 +26,17 @@
 }
 
 .image-previewer {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  margin: 2rem auto 1.5rem auto;
-  border: 1px dashed var(--border-camera);
-  height: 9.375rem;
-  aspect-ratio: 1/1;
-  padding: 3.125rem;
-  cursor: pointer;
-  overflow: hidden;
-  position: relative;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin: 2rem auto 1.5rem auto;
+    border: 2px dashed var(--border-camera);
+    height: 9.375rem;
+/*    width: 9.375rem;*/
+    aspect-ratio: 1/1;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
 }
 
     .image-previewer.selected {
@@ -52,7 +52,8 @@
         padding: .8rem;
         border-radius: 50%;
         position: relative;
-        bottom: 0;
+        align-self: center;
+        /*        bottom: 0;*/
     }
 
     .image-previewer.selected::after {
@@ -72,7 +73,7 @@
   }
 
 .image-preview {
-  display: flex;
+    display: flex;
 }
 
 .hide {

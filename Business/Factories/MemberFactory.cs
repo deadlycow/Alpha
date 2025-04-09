@@ -11,6 +11,8 @@ public static class MemberFactory
     LastName = entity.LastName,
     PhoneNumber = entity.PhoneNumber,
     JobTitle = entity.JobTitle,
+    Email = entity.Email!,
+    ProfileImage = entity.ProfileImage,
   };
   public static MemberEntity Create(MemberCreateForm form) => new()
   {
@@ -20,9 +22,11 @@ public static class MemberFactory
     JobTitle = form.JobTitle,
     UserName = form.Email,
     Email = form.Email,
+    ProfileImage = form.ProfileImage,
   };
   public static MemberEntity Update(Member form, MemberEntity entity)
   {
+    entity.ProfileImage = form.ProfileImage;
     entity.FirstName = form.FirstName!;
     entity.LastName = form.LastName!;
     entity.PhoneNumber = form.PhoneNumber;

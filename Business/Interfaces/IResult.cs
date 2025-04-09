@@ -3,6 +3,7 @@ public interface IResult
 {
   bool Success { get; }
   int StatusCode { get; }
+  string? Message { get; }
   string? ErrorMessage { get; }
 }
 public interface IResult<T> : IResult

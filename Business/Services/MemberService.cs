@@ -8,7 +8,8 @@ using Domain.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
-using System.Xml.XPath;
+using Microsoft.AspNetCore.Http;
+
 namespace Business.Services;
 public class MemberService(UserManager<MemberEntity> userManager, IMemberRepository repository)
 {
@@ -123,6 +124,33 @@ public class MemberService(UserManager<MemberEntity> userManager, IMemberReposit
       await _repository.RollbackTransactionAsync();
       Debug.WriteLine($"Error deleting member: {id}: {ex.Message}");
       return Result.InternalServerError("An error occurred while deleting member");
+    }
+  }
+  public async Task<IResult> Upload(IFormFile file)
+  {
+    if (file == null || file.Length == 0)
+      return Result.BadRequest("File can't be null or empty");
+
+    var uploadsPath = Path.Combine("wwwroot", "images", "uploads");
+    var filePath = Path.Combine(Directory.GetCurrentDirectory(),uploadsPath);
+
+    if (!Directory.Exists(filePath))
+      Directory.CreateDirectory(filePath);
+
+    filePath = Path.Combine(filePath, file.FileName);
+    try
+    {
+      using (var stream = new FileStream(filePath, FileMode.Create))
+      {
+        await file.CopyToAsync(stream);
+      }
+      string webPath = Path.Combine("/","images", "uploads" , file.FileName).Replace("\\", "/");
+      return Result.Ok(webPath);
+    }
+    catch (Exception ex)
+    {
+      Debug.WriteLine($"Error uploading image: {ex.Message}");
+      return Result.InternalServerError("An error occurred while uploading image");
     }
   }
 }

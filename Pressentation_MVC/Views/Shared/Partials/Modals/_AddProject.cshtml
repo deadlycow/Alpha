@@ -7,7 +7,7 @@
             <h2>Add Project</h2>
             <img class="close-modal" data-close="true" src="~/images/close-icon.svg" />
         </div>
-        <form novalidate>
+        <form id="form" novalidate>
             <div class="image-previewer square">
                 <img class="image-preview" src="" />
                 <input asp-for="ProjectImage" type="file" accept="image/*" class="hide" />
@@ -17,7 +17,7 @@
                 <label asp-for="Name"></label>
                 <div class="field-group">
                     <input asp-for="Name" />
-                    <span></span>
+                    <span asp-validation-for="Name"></span>
                 </div>
             </div>
             <div class="form-group">

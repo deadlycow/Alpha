@@ -5,6 +5,7 @@ using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Pressentation_MVC.Controllers
 {
@@ -36,6 +37,16 @@ namespace Pressentation_MVC.Controllers
           );
         return BadRequest(new { Success = false, errors });
       }
+      
+      var imgUploaded = await _memberService.Upload(form.MemberImage!);
+      if (imgUploaded.Success)
+      {
+        form.ProfileImage = imgUploaded.Message;
+      }
+      //if (!imgUploaded.Success)
+      //  form.MemberImage = null;
+      //else 
+      //  form.ProfileImage = imgUploaded.Message;
 
       var result = await _memberService.Create(form);
       if (!result.Success)
@@ -56,6 +67,12 @@ namespace Pressentation_MVC.Controllers
           kvp => kvp.Value?.Errors.Select(x => x.ErrorMessage).ToList()
           );
         return BadRequest(new { Success = false, errors });
+      }
+     
+      var imgUploaded = await _memberService.Upload(form.MemberImage!);
+      if (imgUploaded.Success)
+      {
+        form.ProfileImage = imgUploaded.Message;
       }
 
       var result = await _memberService.UpdateAsync(form);
@@ -88,7 +105,8 @@ namespace Pressentation_MVC.Controllers
       {
         return Json(new
         {
-          user.Data.Id,
+          user.Data!.Id,
+          user.Data.ProfileImage,
           user.Data.FirstName,
           user.Data.LastName,
           user.Data.Email,

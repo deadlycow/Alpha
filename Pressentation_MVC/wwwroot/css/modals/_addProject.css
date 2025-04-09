@@ -1,5 +1,5 @@
 ﻿.modal-overlay {
-    display:flex;
+    display:none;
     place-content: center;
     flex-wrap: wrap;
     position: absolute;
@@ -32,7 +32,6 @@
     align-items: center;
     margin: 2rem auto 1.5rem auto;
     border: 2px dashed var(--border-camera);
-    border-spacing: 4rem;
     height: 9.375rem;
     aspect-ratio: 1/1;
     cursor: pointer;

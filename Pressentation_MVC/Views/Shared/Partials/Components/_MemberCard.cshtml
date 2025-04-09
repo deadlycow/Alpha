@@ -5,10 +5,17 @@
 <div class="member-card">
     <div data-menu="true" class="member-card-more">
         <img src="~/images/more-icon.svg" />
-        <partial name="Partials/Components/PopOutMenu/_MemberOptions" model="Model"/>
+        <partial name="Partials/Components/PopOutMenu/_MemberOptions" model="Model" />
     </div>
     <div class="member-card-image">
-        <img src="~/images/profiles/1.svg" />
+        @if (Model.ProfileImage != null)
+        {
+            <img src="@Model.ProfileImage" />
+        }
+        else
+        {
+            <img src="~/images/profiles/1.svg" alt="Default Profile Image" />
+        }
     </div>
     <div class="member-card-info">
         <h4>@Model.FirstName @Model.LastName</h4>

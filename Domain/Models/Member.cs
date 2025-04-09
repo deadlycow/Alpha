@@ -8,6 +8,7 @@ public class Member
 
   [DataType(DataType.Upload)]
   public IFormFile? MemberImage { get; set; }
+  public string? ProfileImage { get; set; }
 
   [Display(Name = "First Name", Prompt = "Your first name")]
   [DataType(DataType.Text)]
@@ -20,9 +21,8 @@ public class Member
   public string LastName { get; set; } = null!;
 
   [Display(Name = "Email", Prompt = "Your email address")]
-  [DataType(DataType.EmailAddress)]
   [Required(ErrorMessage = "Required")]
-  [RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", ErrorMessage = "Invalid email")]
+  [RegularExpression(@"^(?!\.)(?!.*\.\.)([a-zA-Z0-9._%+-]{1,64})@([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,}$", ErrorMessage = "Invalid email")]
   public string Email { get; set; } = null!;
   
   public string? PhoneNumber { get; set; }

@@ -5,8 +5,7 @@ public class SignInForm
 {
   [Display(Name = "Email", Prompt = "Your email address")]
   [Required(ErrorMessage = "Required")]
-  [DataType(DataType.EmailAddress)]
-  [RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", ErrorMessage = "Invalid email")]
+  [RegularExpression(@"^(?!\.)(?!.*\.\.)([a-zA-Z0-9._%+-]{1,64})@([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,}$", ErrorMessage = "Invalid email")]
   public string Email { get; set; } = null!;
 
   [Display(Name = "Password", Prompt = "Enter your password")]

@@ -6,6 +6,7 @@ public class MemberCreateForm
 {
   [DataType(DataType.Upload)]
   public IFormFile? MemberImage { get; set; }
+  public string? ProfileImage { get; set; }
 
   [Display(Name = "First Name", Prompt = "Your first name")]
   [DataType(DataType.Text)]

@@ -32,24 +32,33 @@ const processImage = async (file, imagePreviewer, previewer, previewSize = 150) 
 
 document.addEventListener('DOMContentLoaded', () => {
     const previewSize = 150;
-
-    const closeButtons = document.querySelectorAll('[data-close="true"]');
+    const closeButtons = document.querySelectorAll('[data-close="true"]')
     const forms = document.querySelectorAll('form');
 
     closeButtons.forEach(button => {
         button.addEventListener('click', () => {
-            const modal = button.closest('.modal-overlay');
+            const modal = button.closest('.modal-overlay')
+            const form = modal.querySelector('form')
+
+            if (form)
+                resetForm(form)
+
             if (modal)
-                modal.style.display = 'none';
+                modal.style.display = 'none'
         })
     })
 
     forms.forEach(form => {
         form.addEventListener('submit', async (e) => {
             e.preventDefault()
+            clearErrorMessages(form)
 
-            //clearErrorMessages(form)
             const formData = new FormData(form)
+
+            const fileInput = form.querySelector('input[type="file"]')
+            const prewImage = form.querySelector('.image-preview')
+            if (!fileInput.files.length && prewImage.src)
+                formData.append('ProfileImage', prewImage.src)
 
             try {
                 const res = await fetch(form.action, {
@@ -112,6 +121,15 @@ function clearErrorMessages(form) {
         span.innerText = ''
         span.classList.remove('field-validation-error')
     })
+}
+
+function resetForm(form) {
+    form.reset()
+    const imagePreview = form.querySelector('.image-preview')
+    if (imagePreview) {
+        imagePreview.src = ''
+        form.querySelector('.image-previewer').classList.remove('selected')
+    }
 }
 
 
