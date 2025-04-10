@@ -131,6 +131,11 @@ public class MemberService(UserManager<MemberEntity> userManager, IMemberReposit
     if (file == null || file.Length == 0)
       return Result.BadRequest("File can't be null or empty");
 
+    var allowedExtensions = new[] { ".svg", ".jpg", ".jpeg", ".png", ".gif", ".webp" };
+    var fileExtensions = Path.GetExtension(file.FileName).ToLower();
+    if (!allowedExtensions.Contains(fileExtensions))
+      return Result.BadRequest("Ivalid file type. Only images are allowed");
+
     var uploadsPath = Path.Combine("wwwroot", "images", "uploads");
     var filePath = Path.Combine(Directory.GetCurrentDirectory(),uploadsPath);
 

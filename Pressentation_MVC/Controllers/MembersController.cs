@@ -37,21 +37,18 @@ namespace Pressentation_MVC.Controllers
           );
         return BadRequest(new { Success = false, errors });
       }
-      
+
       var imgUploaded = await _memberService.Upload(form.MemberImage!);
+
       if (imgUploaded.Success)
-      {
         form.ProfileImage = imgUploaded.Message;
-      }
-      //if (!imgUploaded.Success)
-      //  form.MemberImage = null;
-      //else 
-      //  form.ProfileImage = imgUploaded.Message;
+      else
+        form.ProfileImage = null;
 
       var result = await _memberService.Create(form);
       if (!result.Success)
         return BadRequest(result.ErrorMessage);
-      return Ok();
+      return RedirectToAction("Member");
     }
 
     [HttpPost]
@@ -68,7 +65,7 @@ namespace Pressentation_MVC.Controllers
           );
         return BadRequest(new { Success = false, errors });
       }
-     
+
       var imgUploaded = await _memberService.Upload(form.MemberImage!);
       if (imgUploaded.Success)
       {
@@ -76,9 +73,9 @@ namespace Pressentation_MVC.Controllers
       }
 
       var result = await _memberService.UpdateAsync(form);
-      
       if (!result.Success)
         return BadRequest(result.ErrorMessage);
+
       return RedirectToAction("Member", "Members");
     }
 
@@ -91,7 +88,7 @@ namespace Pressentation_MVC.Controllers
       Console.WriteLine(id);
       var respons = await _memberService.DeleteAsync(id);
       if (respons.Success)
-        return Ok();
+        return RedirectToAction("Member");
 
       return BadRequest(respons.ErrorMessage);
     }

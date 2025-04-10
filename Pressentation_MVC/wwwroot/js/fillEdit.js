@@ -1,7 +1,7 @@
 ﻿document.querySelectorAll('[data-modal="true"]').forEach(button => {
     button.addEventListener('click', async function () {
         const modal = document.querySelector(this.getAttribute('data-target'))
-        const form = modal.querySelector('form')
+        const form = modal.querySelector('#form-reg')
         const memberId = this.getAttribute('data-id')
 
         if (modal)

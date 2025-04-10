@@ -32,8 +32,8 @@
 
 document.addEventListener("DOMContentLoaded", function () {
     const forms = document.querySelectorAll("form")
-
-    if (!form) return;
+    
+    if (!forms) return;
     forms.forEach(form => {
         const fields = form.querySelectorAll('input[data-val="true"]')
         fields.forEach(field => {

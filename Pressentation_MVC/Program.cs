@@ -28,6 +28,7 @@ builder.Services.ConfigureApplicationCookie(options =>
   options.LoginPath = "/Auth/SignIn";
   options.Cookie.SameSite = SameSiteMode.None;
   options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+  options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
   options.SlidingExpiration = true;
 });
 
