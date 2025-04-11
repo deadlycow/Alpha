@@ -29,7 +29,17 @@
             form.querySelector('[name="PhoneNumber"]').value = member.phoneNumber;
             form.querySelector('[name="Email"]').value = member.email;
             form.querySelector('[name="JobTitle"]').value = member.jobTitle;
-            form.querySelector('[name="Address"]').value = member.address;
+            if (member.address) {
+                form.querySelector('[name="Address.City"]').value = member.address.city;
+                form.querySelector('[name="Address.Street"]').value = member.address.street;
+                form.querySelector('[name="Address.PostalCode"]').value = member.address.postalCode;
+            }
+            if (member.birthDate) {
+                const date = new Date(member.birthDate)
+                form.querySelector('[name="Day"]').value = date.getDate()
+                form.querySelector('[name="Month"]').value = date.getMonth() + 1
+                form.querySelector('[name="Year"]').value = date.getFullYear()
+            }
 
             form.querySelectorAll('input').forEach(input => {
                 input.dispatchEvent(new Event('input'))

@@ -64,10 +64,12 @@ public class MemberService(UserManager<MemberEntity> userManager, IMemberReposit
   }
   public async Task<IResult> GetAsync(string id)
   {
-    var entity = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == id);
+    var entity = await _userManager.Users.Include(a => a.Address).FirstOrDefaultAsync(x => x.Id == id);
     if (entity == null)
       return Result.NotFound("Member not found.");
-    var member = MappExtension.MapTo<Member>(entity);
+    
+    var member = entity.MapTo<Member>();
+    member.Address = entity.Address?.MapTo<Address>();
     return Result<Member>.Ok(member);
   }
   public async Task<IResult> UpdateAsync(Member form)
@@ -77,7 +79,7 @@ public class MemberService(UserManager<MemberEntity> userManager, IMemberReposit
     await _repository.BeginTransactionAsync();
     try
     {
-      var exists = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == form.Id);
+      var exists = await _userManager.Users.Include(a => a.Address).FirstOrDefaultAsync(x => x.Id == form.Id);
       if (exists == null)
         return Result.NotFound("Member not found");
 
@@ -137,7 +139,7 @@ public class MemberService(UserManager<MemberEntity> userManager, IMemberReposit
       return Result.BadRequest("Ivalid file type. Only images are allowed");
 
     var uploadsPath = Path.Combine("wwwroot", "images", "uploads");
-    var filePath = Path.Combine(Directory.GetCurrentDirectory(),uploadsPath);
+    var filePath = Path.Combine(Directory.GetCurrentDirectory(), uploadsPath);
 
     if (!Directory.Exists(filePath))
       Directory.CreateDirectory(filePath);
@@ -149,7 +151,7 @@ public class MemberService(UserManager<MemberEntity> userManager, IMemberReposit
       {
         await file.CopyToAsync(stream);
       }
-      string webPath = Path.Combine("/","images", "uploads" , file.FileName).Replace("\\", "/");
+      string webPath = Path.Combine("/", "images", "uploads", file.FileName).Replace("\\", "/");
       return Result.Ok(webPath);
     }
     catch (Exception ex)

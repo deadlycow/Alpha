@@ -5,6 +5,7 @@ using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using System.IO;
 using System.Reflection.Metadata.Ecma335;
 
 namespace Pressentation_MVC.Controllers
@@ -68,9 +69,10 @@ namespace Pressentation_MVC.Controllers
 
       var imgUploaded = await _memberService.Upload(form.MemberImage!);
       if (imgUploaded.Success)
-      {
         form.ProfileImage = imgUploaded.Message;
-      }
+
+      if (form.Year.HasValue && form.Month.HasValue && form.Day.HasValue)
+        form.BirthDate = new DateOnly(form.Year.Value, form.Month.Value, form.Day.Value);
 
       var result = await _memberService.UpdateAsync(form);
       if (!result.Success)
@@ -110,6 +112,7 @@ namespace Pressentation_MVC.Controllers
           user.Data.PhoneNumber,
           user.Data.JobTitle,
           user.Data.Address,
+          user.Data.BirthDate,
         });
       }
       return NotFound();

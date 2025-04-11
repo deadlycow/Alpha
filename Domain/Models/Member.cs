@@ -26,7 +26,13 @@ public class Member
   public string Email { get; set; } = null!;
   
   public string? PhoneNumber { get; set; }
+  [Display(Name ="Job Title")]
   public string? JobTitle { get; set; }
-  public DateOnly? DateOfBirth { get; set; }
   public Address? Address { get; set; }
+
+  public int? Day { get; set; }
+  public int? Month { get; set; }
+  public int? Year { get; set; }
+  [Display(Name = "Date of Birth")]
+  public DateOnly? BirthDate { get; set; }
 }

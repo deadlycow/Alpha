@@ -13,6 +13,7 @@ public static class MemberFactory
     JobTitle = entity.JobTitle,
     Email = entity.Email!,
     ProfileImage = entity.ProfileImage,
+    BirthDate = entity.BirthDate,
   };
   public static MemberEntity Create(MemberCreateForm form) => new()
   {
@@ -22,7 +23,14 @@ public static class MemberFactory
     JobTitle = form.JobTitle,
     UserName = form.Email,
     Email = form.Email,
+    BirthDate = form.BirthDate,
     ProfileImage = form.ProfileImage,
+    Address = form.Address != null ? new AddressEntity
+    {
+      Street = form.Address.Street,
+      City = form.Address.City,
+      PostalCode = form.Address.PostalCode,
+    } : null
   };
   public static MemberEntity Update(Member form, MemberEntity entity)
   {
@@ -33,6 +41,13 @@ public static class MemberFactory
     entity.JobTitle = form.JobTitle;
     entity.UserName = form.Email;
     entity.Email = form.Email;
+    entity.BirthDate = form.BirthDate;
+    entity.Address = form.Address != null ? new AddressEntity
+    {
+      Street = form.Address.Street,
+      City = form.Address.City,
+      PostalCode = form.Address.PostalCode,
+    } : null;
     return entity;
   }
 

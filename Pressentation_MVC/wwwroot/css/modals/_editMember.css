@@ -81,12 +81,13 @@
 }
 
 .form-group-flex {
-  display: flex;
-  gap: 1.5rem;
+    display: flex;
+    gap: 1.5rem;
 }
 
 .form-group {
-  margin-bottom: 1.2rem;
+    margin-bottom: 1.2rem;
+    width: 100%;
 }
 
   .form-group label {
@@ -96,7 +97,7 @@
   }
 
 .field-group {
-  margin-top: 9px;
+    margin-top: 9px;
 }
 
   .field-group input {

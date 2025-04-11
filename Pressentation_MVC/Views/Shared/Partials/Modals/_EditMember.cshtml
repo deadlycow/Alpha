@@ -53,26 +53,42 @@
                 </div>
             </div>
             <div class="form-group">
-                <label asp-for="Address"></label>
+                <label asp-for="Address.Street"></label>
                 <div class="field-group">
-                    <input asp-for="Address" />
-                    <span asp-validation-for="Address"></span>
+                    <input asp-for="Address.Street" />
+                    <span asp-validation-for="Address.Street"></span>
                 </div>
             </div>
-    @*  <div class="form-group">
-                <label asp-for=""></label>
+            <div class="form-group-flex">
+                <div class="form-group">
+                    <label asp-for="Address.City"></label>
+                    <div class="field-group">
+                        <input asp-for="Address.City" />
+                        <span asp-validation-for="Address.City"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Address.PostalCode"></label>
+                    <div class="field-group">
+                        <input asp-for="Address.PostalCode" />
+                        <span asp-validation-for="Address.PostalCode"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="BirthDate"></label>
                 <div class="field-group form-group-flex">
                     <div class="custom-arrow">
-                        <select id="day" name="day">
-                            <option value="" disabled selected>Day</option>
-                            @for (int i = 1; i <= 31; i++)
+                        <select id="year" asp-for="Year">
+                            <option value="" disabled selected>Year</option>
+                            @for (int i = DateTime.Now.Year; i >= 1900; i--)
                             {
                                 <option value="@i">@i</option>
                             }
                         </select>
                     </div>
                     <div class="custom-arrow">
-                        <select id="month" name="month">
+                        <select id="month" asp-for="Month">
                             <option value="" disabled selected>Month</option>
                             @for (int i = 1; i <= 12; i++)
                             {
@@ -81,16 +97,16 @@
                         </select>
                     </div>
                     <div class="custom-arrow">
-                        <select id="year" name="year">
-                            <option value="" disabled selected>Year</option>
-                            @for (int i = DateTime.Now.Year; i >= 1900; i--)
+                        <select id="day" asp-for="Day">
+                            <option value="" disabled selected>Day</option>
+                            @for (int i = 1; i <= 31; i++)
                             {
                                 <option value="@i">@i</option>
                             }
                         </select>
                     </div>
                 </div>
-            </div> *@
+            </div>
             <button type="submit" class="btn btn-primary">Save</button>
         </form>
     </div>

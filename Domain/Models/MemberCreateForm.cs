@@ -32,11 +32,11 @@ public class MemberCreateForm
   [Required(ErrorMessage = "Required")]
   public string? JobTitle { get; set; }
 
-  [Display(Name = "Address", Prompt = "Your address")]
-  [DataType(DataType.Text)]
-  public string? Address { get; set; }
+  public Address? Address { get; set; }
 
-  [Display(Name = "Date of birth")]
-  [DataType(DataType.Text)]
-  public DateOnly? DateOfBirth { get; set; }
+  public int? Day { get; set; }
+  public int? Month { get; set; }
+  public int? Year { get; set; }
+  [Display(Name = "Date of Birth")]
+  public DateOnly? BirthDate { get; set; }
 }
