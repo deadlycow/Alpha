@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Domain.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace Pressentation_MVC.ViewModels;
 public class ProjectViewModel
@@ -16,7 +17,7 @@ public class ProjectViewModel
   [Display(Name = "Client Name", Prompt = "Client Name")]
   [DataType(DataType.Text)]
   [Required(ErrorMessage = "Required")]
-  public string Client { get; set; } = null!;
+  public Client Client { get; set; } = null!;
 
   [Display(Name = "Description", Prompt = "Type somthing")]
   [DataType(DataType.MultilineText)]
@@ -32,7 +33,7 @@ public class ProjectViewModel
   public DateOnly? EndDate { get; set; }
 
   [Display(Name = "Members", Prompt = "Select member/s")]
-  public List<MemberViewModel> Members { get; set; } = [];
+  public IEnumerable<MemberViewModel> Members { get; set; } = [];
 
   [Display(Name = "Budget", Prompt = "0")]
   [DataType(DataType.Currency)]

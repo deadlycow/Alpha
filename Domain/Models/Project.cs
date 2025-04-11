@@ -13,5 +13,5 @@ public class Project
   public bool Status { get; set; } = false;
   public int ClientId { get; set; }
   public Client? Client { get; set; }
-  public ICollection<Member>? Member{ get; set; }
+  public ICollection<Member>? Members{ get; set; }
 }

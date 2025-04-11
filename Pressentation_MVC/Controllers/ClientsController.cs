@@ -1,4 +1,6 @@
-﻿using Business.Services;
+﻿using Business.Models;
+using Business.Services;
+using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,10 +15,11 @@ namespace Pressentation_MVC.Controllers
     public async Task<IActionResult> Client()
     {
       var result = await _clientService.GetAllAsync();
-      if (!result.Success)
-        return View(result.ErrorMessage);
+      if (result.Success)
+        if (result is Result<IEnumerable<Client>> clients)
+          return View(clients);
 
-      return View(result.Data);
+      return View(result.ErrorMessage);
     }
   }
 }

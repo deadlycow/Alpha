@@ -1,7 +1,7 @@
-﻿using Domain.Models;
-namespace Pressentation_MVC.ViewModels;
+﻿namespace Pressentation_MVC.ViewModels;
 public class MemberViewModel
 {
-  public Member Member { get; set; } = null!;
-  public Address Address { get; set; } = null!;
+  public string Id { get; set; } = null!;
+  public string ProfileImage { get; set; } = null!;
+  public string Name { get; set; } = null!;
 }
