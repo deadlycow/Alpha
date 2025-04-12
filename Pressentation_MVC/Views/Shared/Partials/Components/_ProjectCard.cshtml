@@ -5,13 +5,13 @@
     <img src="~/images/projectIcons/1.svg" />
     <div class="project-card-header">
         <h6>@Model.Name</h6>
-        <p class="card-company">@Model.Client</p>
+        <p class="card-company">@Model.Client.Name</p>
     </div>
     <div data-menu="true" class="project-more">
         <img src="~/images/more-icon.svg" />
         <partial name="Partials/Components/PopOutMenu/_ProjectOptions" />
     </div>
-    <p class="project-description">Description - simply dummy text of the printing and been the industry's standard d </p>
+    <p class="project-description">@Model.Description</p>
     <div class="project-time-summary">
         <div class="time-container">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -19,7 +19,7 @@
                 <path class="clock-hands" d="M12.8578 13.0514C12.753 13.0514 12.6474 13.0242 12.5506 12.9674L9.4098 11.0938C9.229 10.985 9.1178 10.789 9.1178 10.5778V6.54019C9.1178 6.20899 9.3866 5.94019 9.7178 5.94019C10.049 5.94019 10.3178 6.20899 10.3178 6.54019V10.237L13.1658 11.9354C13.4498 12.1058 13.5434 12.4738 13.3738 12.7586C13.261 12.9466 13.0618 13.0514 12.8578 13.0514Z" />
             </svg>
 
-            <p>5 days left</p>
+            <p>@Model.TimeLeft</p>
         </div>
         <div class="users-container">
             <img src="~/images/profiles/5.svg" />

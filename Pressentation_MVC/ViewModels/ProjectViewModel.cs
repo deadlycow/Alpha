@@ -1,41 +1,50 @@
 ﻿using Domain.Models;
-using System.ComponentModel.DataAnnotations;
 
 namespace Pressentation_MVC.ViewModels;
 public class ProjectViewModel
 {
-  [DataType(DataType.Upload)]
-  public IFormFile? ProjectImage { get; set; }
-
+  public string? ProjectImage { get; set; }
   public int Id { get; set; }
-
-  [Display(Name = "Project Name", Prompt = "Project Name")]
-  [DataType(DataType.Text)]
-  [Required(ErrorMessage = "Required")]
   public string Name { get; set; } = null!;
-
-  [Display(Name = "Client Name", Prompt = "Client Name")]
-  [DataType(DataType.Text)]
-  [Required(ErrorMessage = "Required")]
   public Client Client { get; set; } = null!;
-
-  [Display(Name = "Description", Prompt = "Type somthing")]
-  [DataType(DataType.MultilineText)]
   public string? Description { get; set; }
-
-  [Display(Name = "Start Date")]
-  [DataType(DataType.Date)]
-  [Required(ErrorMessage = "Required")]
   public DateOnly StartDate { get; set; } = new DateOnly();
-
-  [Display(Name = "End Date")]
-  [DataType(DataType.Date)]
   public DateOnly? EndDate { get; set; }
-
-  [Display(Name = "Members", Prompt = "Select member/s")]
   public IEnumerable<MemberViewModel> Members { get; set; } = [];
+  public decimal Budget { get; set; }
 
-  [Display(Name = "Budget", Prompt = "0")]
-  [DataType(DataType.Currency)]
-  public int Budget { get; set; }
+  public string TimeLeft
+  {
+    get
+    {
+      if (EndDate == null)
+        return "End date not set";
+
+      var endDate = EndDate!.Value.ToDateTime(TimeOnly.MinValue);
+      var daysLeft = (endDate - DateTime.Now).Days;
+
+      return daysLeft switch
+      {
+        > 6 => $"{(daysLeft / 7)} week{(daysLeft / 7 > 1 ? "s" : "")} left",
+        > 0 => $"{daysLeft} day{(daysLeft > 1 ? "s" : "")} left",
+        0 => "Last day",
+        _ => "Expired"
+      };
+      //var daysLeft = (EndDate.Date - DateTime.Now.Date).Days;
+
+      //if (daysLeft > 7)
+      //{
+      //  var weeks = daysLeft / 7;
+      //  return $"{weeks} week{(weeks > 1 ? "s" : "")} left";
+      //}
+      //else if (daysLeft > 0)
+      //{
+      //  return $"{daysLeft} day{(daysLeft > 1 ? "s" : "")} left";
+      //}
+      //else
+      //{
+      //  return "Expired";
+      //}
+    }
+  }
 }

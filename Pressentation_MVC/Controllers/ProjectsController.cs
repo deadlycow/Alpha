@@ -8,34 +8,33 @@ using Pressentation_MVC.ViewModels;
 namespace Pressentation_MVC.Controllers
 {
   [Authorize]
-  public class ProjectsController(ClientService clientService, MemberService memberService) : Controller
+  public class ProjectsController(ProjectService projectService) : Controller
   {
-    //private readonly ProjectService _projectService = projectService;
-    private readonly ClientService _clientService = clientService;
-    private readonly MemberService _memberService = memberService;
+    private readonly ProjectService _projectService = projectService;
 
     [Route("/")]
     public async Task<IActionResult> Project()
     {
-      List<MemberViewModel> member = [];
-      var cResult = await _clientService.GetAllAsync();
-      var mResult = await _memberService.GetAllAsync();
-      //var pResult = await _projectService.GetAllAsync();
 
-      if (mResult is Result<IEnumerable<Member>> members)
+      var result = await _projectService.GetAllAsync();
+      if (result is Result<IEnumerable<Project>> projects)
       {
-        foreach (var user in members.Data!)
+        var projectViewModels = projects.Data!.Select(project => new ProjectViewModel
         {
-          member.Add(new() { Id = user.Id, Name = $"{user.FirstName} {user.LastName}", ProfileImage = user.ProfileImage! });
-        }
+          ProjectImage = project.ProjectImage,
+          Id = project.Id,
+          Name = project.Name,
+          Client = project.Client!,
+          Description = project.Description,
+          StartDate = project.StartDate,
+          EndDate = project.EndDate,
+          Members = project.Members!.Select(member => new MemberViewModel { Id = member.Id, Name = $"{member.FirstName} {member.LastName}", ProfileImage = member.ProfileImage! }),
+          Budget = project.Budget,
+        }).ToList();
+        return View(projectViewModels);
       }
 
-      var AddProject = new AddProjectViewModel
-      {
-        Clients = cResult is Result<IEnumerable<Client>> clients && clients.Data != null ? clients.Data : [],
-        Members = member
-      };
-      return View(AddProject);
+      return View();
     }
   }
 }

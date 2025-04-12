@@ -78,6 +78,7 @@ builder.Services.AddAuthentication(options => { options.DefaultScheme = CookieAu
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<MemberService>();
 builder.Services.AddScoped<ClientService>();
+builder.Services.AddScoped<ProjectService>();
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
 builder.Services.AddScoped<IMemberRepository, MemberRepository>();
