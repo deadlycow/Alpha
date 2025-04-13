@@ -78,7 +78,7 @@
     gap: .5rem;
     align-items: center;
 }
-/* for time left - easy to change to red*/
+/* for time left - easy to change to red add class short-time*/
 .time-container {
     background-color: var(--time-container-bg-color);
     display: flex;
@@ -96,4 +96,11 @@
 .time-container.short-time {
     fill: var(--red);
     background-color: var(--red-10);
+}
+
+/* tiny image */
+.tiny-image {
+    width: 1.875rem;
+    height: 1.875rem;
+    border-radius: 50%;
 }

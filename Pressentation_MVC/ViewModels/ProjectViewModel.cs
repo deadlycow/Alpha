@@ -30,21 +30,6 @@ public class ProjectViewModel
         0 => "Last day",
         _ => "Expired"
       };
-      //var daysLeft = (EndDate.Date - DateTime.Now.Date).Days;
-
-      //if (daysLeft > 7)
-      //{
-      //  var weeks = daysLeft / 7;
-      //  return $"{weeks} week{(weeks > 1 ? "s" : "")} left";
-      //}
-      //else if (daysLeft > 0)
-      //{
-      //  return $"{daysLeft} day{(daysLeft > 1 ? "s" : "")} left";
-      //}
-      //else
-      //{
-      //  return "Expired";
-      //}
     }
   }
 }

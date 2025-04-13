@@ -18,8 +18,6 @@ public class ProjectService(IProjectRepository repository)
     {
       var result = await _repository.GetAllAsync();
         
-
-
       return result.Success
         ? Result<IEnumerable<Project>>.Ok(result.Data)
         : new Result<IEnumerable<Member>>();

@@ -1,5 +1,5 @@
 ﻿<link rel="stylesheet" href="~/css/modals/_addProject.css" asp-append-version="true" />
-@model Project
+@model ProjectCreateForm
 
 <div id="addProjectModal" class="modal-overlay">
     <div class="bg-modal">
@@ -21,17 +21,13 @@
                 </div>
             </div>
             <div class="form-group">
-                <label asp-for="Client"></label>
+                <label ></label>
                 <div class="field-group">
                     <div class="custom-arrow">
-                        <select asp-for="Client">
+                        <select id="members" >
                             <option value="" disabled selected>...</option>
-                            
-                                
-                                    @* <option value="@Model.Client.Id">@Model.Client.Name</option> *@
-                             
                         </select>
-                        <span asp-validation-for="@Model.Client"></span>
+                        <span ></span>
                     </div>
                 </div>
             </div>
@@ -58,7 +54,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label asp-for="Members"></label>
+                <label asp-for="MembersId"></label>
                 <partial name="Partials/Components/_CompactMemberList" />
             </div>
             <div class="form-group">
@@ -69,10 +65,11 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary">Add Contact</button>
+            <button type="submit" class="btn btn-primary">Add Project</button>
         </form>
     </div>
 </div>
 
+<script src="~/js/formDataLoaderClients.js" asp-append-version="true"></script>
 @await Html.PartialAsync("_ValidationScript")
 @await Html.PartialAsync("~/Views/Shared/Partials/Modals/_CloseModalScript.cshtml")

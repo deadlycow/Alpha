@@ -1,9 +1,11 @@
 ﻿<link rel="stylesheet" href="~/css/components/popOutMenu/_projectOptions.css" asp-append-version="true" />
-
+@model ProjectViewModel
 <div data-display="true" class="project-options-container">
     <div class="options-group">
-        <img src="~/images/edit-icon.svg" />
-        Edit
+        <a data-modal="true" data-id="@Model.Id">
+            <img src="~/images/edit-icon.svg" />
+            Edit
+        </a>
     </div>
     <div class="options-group">
         <img src="~/images/add-user-icon.svg" />

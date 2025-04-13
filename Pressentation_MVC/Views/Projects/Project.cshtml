@@ -1,7 +1,7 @@
 ﻿<link rel="stylesheet" href="~/css/projects/project.css" asp-append-version="true" />
 @model IEnumerable<ProjectViewModel>
 
-<partial name="Partials/Modals/_AddProject" model="@new Project()" />
+<partial name="Partials/Modals/_AddProject" model="@new ProjectCreateForm()" />
 <div class="project-container">
     <div class="project-header">
         <h2>Project</h2>
@@ -21,4 +21,3 @@
         }
     </div>
 </div>
-<script src="~/js/compact-search.js" asp-append-version="true"></script>
