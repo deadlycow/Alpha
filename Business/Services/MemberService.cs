@@ -128,36 +128,4 @@ public class MemberService(UserManager<MemberEntity> userManager, IMemberReposit
       return Result.InternalServerError("An error occurred while deleting member");
     }
   }
-  public async Task<IResult> Upload(IFormFile file)
-  {
-    if (file == null || file.Length == 0)
-      return Result.BadRequest("File can't be null or empty");
-
-    var allowedExtensions = new[] { ".svg", ".jpg", ".jpeg", ".png", ".gif", ".webp" };
-    var fileExtensions = Path.GetExtension(file.FileName).ToLower();
-    if (!allowedExtensions.Contains(fileExtensions))
-      return Result.BadRequest("Ivalid file type. Only images are allowed");
-
-    var uploadsPath = Path.Combine("wwwroot", "images", "uploads");
-    var filePath = Path.Combine(Directory.GetCurrentDirectory(), uploadsPath);
-
-    if (!Directory.Exists(filePath))
-      Directory.CreateDirectory(filePath);
-
-    filePath = Path.Combine(filePath, file.FileName);
-    try
-    {
-      using (var stream = new FileStream(filePath, FileMode.Create))
-      {
-        await file.CopyToAsync(stream);
-      }
-      string webPath = Path.Combine("/", "images", "uploads", file.FileName).Replace("\\", "/");
-      return Result.Ok(webPath);
-    }
-    catch (Exception ex)
-    {
-      Debug.WriteLine($"Error uploading image: {ex.Message}");
-      return Result.InternalServerError("An error occurred while uploading image");
-    }
-  }
 }

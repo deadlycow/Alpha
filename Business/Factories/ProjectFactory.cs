@@ -16,5 +16,20 @@ public static class ProjectFactory
     ClientId = entity.ClientId
   };
 
+  public static ProjectEntity Create(ProjectCreateForm form) => new()
+  {
+    ProjectImage = form.ProjectUrl,
+    Name = form.Name,
+    Description = form.Description!,
+    StartDate = form.StartDate,
+    EndDate = form.EndDate,
+    Budget = form.Budget,
+    ClientId = form.ClientId,
+    MemberProject = form.MembersId?.Select(memberId => new MemberProjectEntity
+    {
+      MemberId = memberId,
+    }).ToList()
+  };
+
   public static IEnumerable<Project> CreateList(IEnumerable<ProjectEntity> entities) => entities.Select(Create);
 }

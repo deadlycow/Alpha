@@ -12,7 +12,11 @@
         Add Member
     </div>
     <div class="options-group">
-        <img src="~/images/delete-icon.svg" />
-        Delete Project
+        <form asp-controller="Projects" asp-action="Delete" asp-route-id="@Model.Id" method="post">
+            <button type="submit">
+                <img src="~/images/delete-icon.svg" />
+                Delete Project
+            </button>
+        </form>
     </div>
 </div>

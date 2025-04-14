@@ -8,11 +8,12 @@ using Pressentation_MVC.ViewModels;
 namespace Pressentation_MVC.Controllers
 {
   [Authorize]
-  public class ProjectsController(ProjectService projectService, ClientService clientServce, MemberService memberService) : Controller
+  public class ProjectsController(ProjectService projectService, ClientService clientServce, MemberService memberService, ImageService imageService) : Controller
   {
     private readonly ProjectService _projectService = projectService;
     private readonly ClientService _clientServce = clientServce;
     private readonly MemberService _memberService = memberService;
+    private readonly ImageService _imageService = imageService;
 
     [Route("/")]
     public async Task<IActionResult> Project()
@@ -35,7 +36,6 @@ namespace Pressentation_MVC.Controllers
         }).ToList();
         return View(projectViewModels);
       }
-
       return View();
     }
 
@@ -50,6 +50,7 @@ namespace Pressentation_MVC.Controllers
         members = members is Result<IEnumerable<Member>> memberResult ? memberResult.Data : null
       });
     }
+
     [HttpGet]
     [Route("Project/FormDataLoader/Clients")]
     public async Task<IActionResult> FormDataLoaderClients()
@@ -62,29 +63,43 @@ namespace Pressentation_MVC.Controllers
       });
     }
 
-    //[HttpPost]
-    //public async Task<IActionResult> Create([FromForm] ProjectCreateForm form)
-    //{
-    //  if (!ModelState.IsValid)
-    //  {
-    //    var errors = ModelState
-    //      .Where(x => x.Value?.Errors.Count > 0)
-    //      .ToDictionary(
-    //      kvp => kvp.Key,
-    //      kvp => kvp.Value?.Errors.Select(x => x.ErrorMessage).ToList()
-    //      );
-    //    return BadRequest(new { Success = false, errors });
-    //  }
+    [HttpPost]
+    public async Task<IActionResult> Create([FromForm] ProjectCreateForm form)
+    {
+      if (!ModelState.IsValid)
+      {
+        var errors = ModelState
+          .Where(x => x.Value?.Errors.Count > 0)
+          .ToDictionary(
+          kvp => kvp.Key,
+          kvp => kvp.Value?.Errors.Select(x => x.ErrorMessage).ToList()
+          );
+        return BadRequest(new { Success = false, errors });
+      }
 
-    //  var imgUploaded = await _projectService.Upload(form.ProjectImage!);
-    //  if (imgUploaded.Success)
-    //    form.ProjectImage = imgUploaded.Message;
-    //  else
-    //    form.ProjectImage = null;
-    //  var result = await _projectService.Create(form);
-    //  if (!result.Success)
-    //    return BadRequest(result.ErrorMessage);
-    //  return RedirectToAction("Project");
-    //}
+      var imgUploaded = await _imageService.Upload(form.ProjectImage!);
+      if (imgUploaded.Success)
+        form.ProjectUrl = imgUploaded.Message;
+      else
+        form.ProjectImage = null;
+
+      var result = await _projectService.Create(form);
+      if (!result.Success)
+        return BadRequest(result.ErrorMessage);
+      return RedirectToAction("Project");
+    }
+
+    [HttpPost("projects/delete/{id}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+      if (id < 1)
+        return BadRequest("ID is null.");
+
+      var respons = await _projectService.DeleteAsync(id);
+      if (respons.Success)
+        return RedirectToAction("Project");
+
+      return BadRequest(respons.ErrorMessage);
+    }
   }
 }

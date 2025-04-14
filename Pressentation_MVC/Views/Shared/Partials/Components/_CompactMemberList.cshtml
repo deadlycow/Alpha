@@ -2,7 +2,7 @@
 
 <div class="compact-container">
     <div id="compact-search" class="compact-search">
-        <input class="compact-search-field" id="searchInput" oninput="filterList()" onfocus="filterList()" type="text" placeholder="Search.." />
+        <input class="compact-search-field" id="searchInput" type="text" placeholder="Search.." />
         <img data-compact-search="true" class="compact-search-icon" src="~/images/search-icon.svg" />
     </div>
         <div id="dropdown" class="dropdown"></div>
@@ -10,4 +10,4 @@
     </ul>
 </div>
 
-<script src="~/js/compact-search.js" asp-append-version="true" ></script>
+<script type="module" src="~/js/compact-search.js" asp-append-version="true" ></script>

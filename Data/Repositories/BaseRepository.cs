@@ -114,6 +114,28 @@ namespace Data.Repositories
         return RepositoryResult<TModel>.InternalServerError(ex.Message);
       }
     }
+    public async Task<RepositoryResult<TEntity>> GetAsync(object id)
+    {
+      if (id == null)
+        return RepositoryResult<TEntity>.BadRequest("Id cannot be null");
+
+      try
+      {
+        TEntity? entity = null;
+        if (id is int)
+          entity = await _dbSet.FindAsync(id);
+        else if (id is string)
+          entity = await _dbSet.FindAsync(id);
+        return entity == null
+          ? RepositoryResult<TEntity>.NotFound("Entity not found")
+          : RepositoryResult<TEntity>.Ok(entity);
+      }
+      catch (Exception ex)
+      {
+        Debug.WriteLine($"Error fetching entity: {ex.Message}");
+        return RepositoryResult<TEntity>.InternalServerError(ex.Message);
+      }
+    }
     public async Task<RepositoryResult<bool>> ExistsAsync(Expression<Func<TEntity, bool>> findBy)
     {
       var exists = await _dbSet.AnyAsync(findBy);
@@ -155,5 +177,6 @@ namespace Data.Repositories
     {
       return await _context.SaveChangesAsync();
     }
+   
   }
 }

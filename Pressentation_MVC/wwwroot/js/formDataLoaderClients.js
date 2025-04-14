@@ -5,7 +5,7 @@
         const response = await fetch(`/Project/FormDataLoader/Clients`);
         const data = await response.json();
 
-        const memberSelect = form.querySelector('#members')
+        const memberSelect = form.querySelector('#clients')
         
         data.clients.forEach(client => {
             const opton = document.createElement('option');

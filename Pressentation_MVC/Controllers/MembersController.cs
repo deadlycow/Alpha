@@ -1,19 +1,16 @@
-﻿using Azure.Core;
-using Business.Models;
+﻿using Business.Models;
 using Business.Services;
 using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
-using System.IO;
-using System.Reflection.Metadata.Ecma335;
 
 namespace Pressentation_MVC.Controllers
 {
   [Authorize(Roles = "Admin")]
-  public class MembersController(MemberService memberService) : Controller
+  public class MembersController(MemberService memberService, ImageService imageService) : Controller
   {
     private readonly MemberService _memberService = memberService;
+    private readonly ImageService _imageService = imageService;
 
     [Route("team")]
     public async Task<IActionResult> Member()
@@ -39,7 +36,7 @@ namespace Pressentation_MVC.Controllers
         return BadRequest(new { Success = false, errors });
       }
 
-      var imgUploaded = await _memberService.Upload(form.MemberImage!);
+      var imgUploaded = await _imageService.Upload(form.MemberImage!);
 
       if (imgUploaded.Success)
         form.ProfileImage = imgUploaded.Message;
@@ -67,7 +64,7 @@ namespace Pressentation_MVC.Controllers
         return BadRequest(new { Success = false, errors });
       }
 
-      var imgUploaded = await _memberService.Upload(form.MemberImage!);
+      var imgUploaded = await _imageService.Upload(form.MemberImage!);
       if (imgUploaded.Success)
         form.ProfileImage = imgUploaded.Message;
 
