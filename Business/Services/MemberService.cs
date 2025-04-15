@@ -8,7 +8,6 @@ using Domain.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
-using Microsoft.AspNetCore.Http;
 
 namespace Business.Services;
 public class MemberService(UserManager<MemberEntity> userManager, IMemberRepository repository)

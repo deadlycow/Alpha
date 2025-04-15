@@ -2,6 +2,7 @@
 @model IEnumerable<ProjectViewModel>
 
 <partial name="Partials/Modals/_AddProject" model="@new ProjectCreateForm()" />
+<partial name="Partials/Modals/_EditProject" model="@new Project()" />
 <div class="project-container">
     <div class="project-header">
         <h2>Project</h2>

@@ -1,0 +1,72 @@
+﻿<link rel="stylesheet" href="~/css/modals/_addProject.css" asp-append-version="true" />
+@model Project
+
+<div id="editProjectModal" class="modal-overlay">
+    <div class="bg-modal">
+        <div class="member-header">
+            <h2>Edit Project</h2>
+            <img class="close-modal" data-close="true" src="~/images/close-icon.svg" />
+        </div>
+        <form id="form-reg-project" novalidate asp-action="Update" asp-controller="Projects">
+            <input disabled type="hidden" asp-for="Id" />
+            <div class="image-previewer square">
+                <img class="image-preview" src="" />
+                <input asp-for="ProjectImage" type="file" accept="image/*" class="hide" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <div class="field-group">
+                    <input asp-for="Name" />
+                    <span asp-validation-for="Name"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClientId"></label>
+                <div class="field-group">
+                    <div class="custom-arrow">
+                        <select id="clients" asp-for="ClientId">
+                            <option value="" disabled selected></option>
+                        </select>
+                        <span asp-validation-for="ClientId"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group-flex">
+                <div class="form-group">
+                    <label asp-for="StartDate"></label>
+                    <div class="field-group">
+                        <input type="date" asp-for="StartDate" />
+                        <span asp-validation-for="StartDate"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EndDate"></label>
+                    <div class="field-group">
+                        <input type="date" asp-for="EndDate" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <div class="field-group">
+                    <textarea asp-for="Description"></textarea>
+                    <span></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Members"></label>
+                <partial name="Partials/Components/_CompactMemberList" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Budget"></label>
+                <div class="field-group">
+                    <input asp-for="Budget" />
+                    <span></span>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</div>

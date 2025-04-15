@@ -101,5 +101,13 @@ namespace Pressentation_MVC.Controllers
 
       return BadRequest(respons.ErrorMessage);
     }
+
+    [HttpGet("Project/GetProject/{id}")]
+    public async Task<IActionResult> GetProject(int id)
+    {
+      var project = await _projectService.GetAsync(id);
+
+      return NotFound();
+    }
   }
 }

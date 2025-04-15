@@ -42,4 +42,8 @@ public class ProjectRepository(DataContext context) : BaseRepository<ProjectEnti
 
     return RepositoryResult<IEnumerable<Project>>.Ok(projectModels);
   }
+  //public override async Task<RepositoryResult<ProjectEntity>> GetAsync(Expression<Func<ProjectEntity, bool>> filterBy, params Expression<Func<ProjectEntity, object>>[] includes)
+  //{
+
+  //}
 }

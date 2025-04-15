@@ -2,6 +2,7 @@
 using Business.Interfaces;
 using Business.Models;
 using Data.Interfaces;
+using Domain.Extensions;
 using Domain.Models;
 using System.Diagnostics;
 
@@ -56,6 +57,18 @@ public class ProjectService(IProjectRepository repository)
       Debug.WriteLine(ex.Message);
       return Result.InternalServerError("Error occurred while fetching members");
     }
+  }
+  public async Task<IResult> GetAsync(int id)
+  {
+    if (id < 1)
+      return Result.BadRequest("ID is null.");
+
+    var result = await _repository.GetAllAsync(false,null,x => x.Id == id);
+    if (result.Data == null)
+      return Result.NotFound("Project not found.");
+
+    return Result<Project>.Ok();
+
   }
   public async Task<IResult> DeleteAsync(int id)
   {
