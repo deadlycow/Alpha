@@ -1,5 +1,7 @@
 ﻿
 
+using Microsoft.AspNetCore.Http;
+
 namespace Domain.Models;
 public class Project
 {
@@ -9,9 +11,11 @@ public class Project
   public DateOnly StartDate { get; set; }
   public DateOnly? EndDate { get; set; }
   public decimal Budget { get; set; }
+  public IFormFile? FormFile { get; set; }
   public string? ProjectImage { get; set; }
   public bool Status { get; set; } = false;
   public int ClientId { get; set; }
   public Client? Client { get; set; }
-  public ICollection<Member>? Members{ get; set; }
+  public ICollection<Member>? Members { get; set; }
+  public List<string>? MembersId { get; set; } 
 }

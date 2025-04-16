@@ -9,8 +9,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     setupImagePreviewer()
 
-    allItems = data.members.map(member => ({ name: `${member.firstName} ${member.lastName}`, id: member.id, img: member.profileImage }))
-
+    allItems = data.members.map(member => ({ name: member.name , id: member.id, img: member.profileImage }))
     document.addEventListener("click", (event) => {
         const isInsideSearch = event.target.closest(".compact-search");
         const isInsideDropdown = event.target.closest(".dropdown");
@@ -44,7 +43,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             selectedItems.forEach(item => {
                 formData.append(`MembersId`, item.id)
             })
-
+           
             try {
                 const res = await fetch(form.action, {
                     method: 'post',
@@ -108,7 +107,7 @@ function filterList(form) {
 
     dropdown.style.display = "block";
 }
-function addToList(form, item) {
+export function addToList(form, item) {
     selectedItems.push(item);
     let selectedList = form.querySelector("#selectedList");
 

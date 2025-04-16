@@ -31,5 +31,17 @@ public static class ProjectFactory
     }).ToList()
   };
 
+  public static ProjectEntity Update(Project form, Project entity)
+  {
+    entity.ProjectImage = form.ProjectImage;
+    entity.Name = form.Name;
+    entity.Description = form.Description!;
+    entity.StartDate = form.StartDate;
+    entity.EndDate = form.EndDate;
+    entity.Budget = form.Budget;
+    entity.ClientId = form.ClientId;
+    return entity;
+  }
+
   public static IEnumerable<Project> CreateList(IEnumerable<ProjectEntity> entities) => entities.Select(Create);
 }

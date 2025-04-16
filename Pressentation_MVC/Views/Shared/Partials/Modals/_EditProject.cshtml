@@ -8,10 +8,10 @@
             <img class="close-modal" data-close="true" src="~/images/close-icon.svg" />
         </div>
         <form id="form-reg-project" novalidate asp-action="Update" asp-controller="Projects">
-            <input disabled type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Id" />
             <div class="image-previewer square">
                 <img class="image-preview" src="" />
-                <input asp-for="ProjectImage" type="file" accept="image/*" class="hide" />
+                <input asp-for="FormFile" type="file" accept="image/*" class="hide" />
             </div>
 
             <div class="form-group">
@@ -70,3 +70,6 @@
         </form>
     </div>
 </div>
+
+@* @await Html.PartialAsync("_ValidationScript") *@
+@* @await Html.PartialAsync("~/Views/Shared/Partials/Modals/_CloseModalScript.cshtml") *@

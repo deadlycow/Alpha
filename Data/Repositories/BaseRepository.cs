@@ -91,7 +91,7 @@ namespace Data.Repositories
       var result = entities.Select(entity => entity!.MapTo<TSelect>());
       return RepositoryResult<IEnumerable<TSelect>>.Ok(result);
     }
-    public async Task<RepositoryResult<TModel>> GetAsync(Expression<Func<TEntity, bool>> filterBy, params Expression<Func<TEntity, object>>[] includes)
+    public virtual async Task<RepositoryResult<TModel>> GetAsync(Expression<Func<TEntity, bool>> filterBy, params Expression<Func<TEntity, object>>[] includes)
     {
       try
       {

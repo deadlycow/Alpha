@@ -107,7 +107,58 @@ namespace Pressentation_MVC.Controllers
     {
       var project = await _projectService.GetAsync(id);
 
+      if (project == null)
+        return NotFound(id);
+
+      if (project is Result<Project> projectResult)
+        return Json(new
+        {
+          projectResult.Data!.Id,
+          projectResult.Data.ProjectImage,
+          projectResult.Data.Name,
+          projectResult.Data.Description,
+          projectResult.Data.StartDate,
+          projectResult.Data.EndDate,
+          projectResult.Data.Budget,
+          projectResult.Data.ClientId,
+          Members = projectResult.Data.Members!.Select(member => new
+          {
+            member.Id,
+            //Name = $"{member.FirstName} {member.LastName}",
+            member.Name,
+            member.ProfileImage
+          }),
+          Client = new
+          {
+            projectResult.Data.Client!.Id,
+            projectResult.Data.Client.Name,
+          }
+        });
       return NotFound();
+    }
+    [HttpPost("Project/Update")]
+    public async Task<IActionResult> Update([FromForm] Project form)
+    {
+      if (!ModelState.IsValid)
+      {
+        var errors = ModelState
+          .Where(x => x.Value?.Errors.Count > 0)
+          .ToDictionary(
+          kvp => kvp.Key,
+          kvp => kvp.Value?.Errors.Select(x => x.ErrorMessage).ToList()
+          );
+        return BadRequest(new { Success = false, errors });
+      }
+      
+      var imgUploaded = await _imageService.Upload(form.FormFile!);
+      if (imgUploaded.Success)
+        form.ProjectImage = imgUploaded.Message;
+
+      var result = await _projectService.UpdateAsync(form);
+      if (!result.Success)
+        return BadRequest(result.ErrorMessage);
+
+      return RedirectToAction("Project");
     }
   }
 }

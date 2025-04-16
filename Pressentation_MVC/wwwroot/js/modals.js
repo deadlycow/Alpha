@@ -35,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     formData.append('ProfileImage', imagePath)
                 }
             }
-
             try {
                 const res = await fetch(form.action, {
                     method: 'post',

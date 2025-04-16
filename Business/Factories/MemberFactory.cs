@@ -51,8 +51,5 @@ public static class MemberFactory
     return entity;
   }
 
-
-
-
   public static IEnumerable<Member> CreateList(IEnumerable<MemberEntity> entities) => entities.Select(Create);
 }

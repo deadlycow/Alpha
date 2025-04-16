@@ -35,4 +35,6 @@ public class Member
   public int? Year { get; set; }
   [Display(Name = "Date of Birth")]
   public DateOnly? BirthDate { get; set; }
+
+  public string Name => $"{FirstName} {LastName}";
 }

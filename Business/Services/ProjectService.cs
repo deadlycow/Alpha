@@ -63,11 +63,11 @@ public class ProjectService(IProjectRepository repository)
     if (id < 1)
       return Result.BadRequest("ID is null.");
 
-    var result = await _repository.GetAllAsync(false,null,x => x.Id == id);
+    var result = await _repository.GetAsync(x => x.Id == id);
     if (result.Data == null)
       return Result.NotFound("Project not found.");
 
-    return Result<Project>.Ok();
+    return Result<Project>.Ok(result.Data);
 
   }
   public async Task<IResult> DeleteAsync(int id)
@@ -97,6 +97,36 @@ public class ProjectService(IProjectRepository repository)
       await _repository.RollbackTransactionAsync();
       Debug.WriteLine($"Error deleting project: {id}: {ex.Message}");
       return Result.InternalServerError("An error occurred while deleting project");
+    }
+  }
+  public async Task<IResult> UpdateAsync(Project form)
+  {
+    if (form == null)
+      return Result.BadRequest("Form can't be null.");
+    
+    var exists = await _repository.GetAsync(p => p.Id == form.Id, p => p.MemberProject!);
+    if (!exists.Success)
+      return Result.NotFound("Project not found.");
+
+    await _repository.BeginTransactionAsync();
+    try
+    {
+      var entity = ProjectFactory.Update(form, exists.Data!);
+      var respons = _repository.Update(entity);
+      if (respons.Success)
+      {
+        await _repository.SaveAsync();
+        await _repository.CommitTransactionAsync();
+        return Result.Ok();
+      }
+      await _repository.RollbackTransactionAsync();
+      return Result.BadRequest("Failed to update project.");
+    }
+    catch (Exception ex)
+    {
+      await _repository.RollbackTransactionAsync();
+      Debug.WriteLine($"Error updating project: {ex.Message}");
+      return Result.InternalServerError("An unexpected error occurred while updating project.");
     }
   }
 }
