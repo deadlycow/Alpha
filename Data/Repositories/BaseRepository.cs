@@ -91,7 +91,7 @@ namespace Data.Repositories
       var result = entities.Select(entity => entity!.MapTo<TSelect>());
       return RepositoryResult<IEnumerable<TSelect>>.Ok(result);
     }
-    public virtual async Task<RepositoryResult<TModel>> GetAsync(Expression<Func<TEntity, bool>> filterBy, params Expression<Func<TEntity, object>>[] includes)
+    public virtual async Task<RepositoryResult<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filterBy, params Expression<Func<TEntity, object>>[] includes)
     {
       try
       {
@@ -103,15 +103,15 @@ namespace Data.Repositories
 
         var entity = await query.FirstOrDefaultAsync(filterBy);
         if (entity == null)
-          return RepositoryResult<TModel>.NotFound("Entity");
+          return RepositoryResult<TEntity>.NotFound("Entity");
 
-        var result = entity.MapTo<TModel>();
-        return RepositoryResult<TModel>.Ok(result);
+        //var result = entity.MapTo<TModel>();
+        return RepositoryResult<TEntity>.Ok(entity);
       }
       catch (Exception ex)
       {
         Debug.WriteLine($"Error fetching entity: {ex.Message}");
-        return RepositoryResult<TModel>.InternalServerError(ex.Message);
+        return RepositoryResult<TEntity>.InternalServerError(ex.Message);
       }
     }
     public async Task<RepositoryResult<TEntity>> GetAsync(object id)

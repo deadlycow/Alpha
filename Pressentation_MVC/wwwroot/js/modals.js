@@ -4,13 +4,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeButtons = document.querySelectorAll('[data-close="true"]')
     const forms = document.querySelectorAll('#form-reg');
 
-    setupImagePreviewer()
+    
 
     closeButtons.forEach(button => {
         button.addEventListener('click', () => {
             const modal = button.closest('.modal-overlay')
             const form = modal.querySelector('form')
-
+          
             if (form) {
                 resetImagePreview(form)
                 form.reset()
@@ -25,7 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
         form.addEventListener('submit', async (e) => {
             e.preventDefault()
             clearErrorMessages(form)
-
+            //if (e.target !== form) return
+            setupImagePreviewer()
             const formData = new FormData(form)
 
             const fileInput = form.querySelector('input[type="file"]')

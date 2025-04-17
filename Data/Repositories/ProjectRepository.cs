@@ -42,19 +42,19 @@ public class ProjectRepository(DataContext context) : BaseRepository<ProjectEnti
 
     return RepositoryResult<IEnumerable<Project>>.Ok(projectModels);
   }
-  public override async Task<RepositoryResult<Project>> GetAsync(Expression<Func<ProjectEntity, bool>> filterBy, params Expression<Func<ProjectEntity, object>>[] includes)
+  public override async Task<RepositoryResult<ProjectEntity>> GetAsync(Expression<Func<ProjectEntity, bool>> filterBy, params Expression<Func<ProjectEntity, object>>[] includes)
   {
     try
     {
-      var result = await _dbSet.Include(project => project.Client)
+      var result = await _dbSet.AsNoTracking().Include(project => project.Client)
         .Include(project => project.MemberProject!)
         .ThenInclude(mp => mp.Member)
         .FirstOrDefaultAsync(filterBy);
 
       if (result == null)
-        return RepositoryResult<Project>.NotFound("Entity");
+        return RepositoryResult<ProjectEntity>.NotFound("Entity");
 
-      var entity = new Project
+      var entity = new ProjectEntity
       {
         Id = result.Id,
         Name = result.Name,
@@ -64,25 +64,31 @@ public class ProjectRepository(DataContext context) : BaseRepository<ProjectEnti
         EndDate = result.EndDate,
         Budget = result.Budget,
         ClientId = result.ClientId,
-        Client = new Client
+        Client = new ClientEntity
         {
           Id = result.Client!.Id,
           Name = result.Client.Name
         },
-        Members = result.MemberProject?.Select(mp => new Member
+        MemberProject = result.MemberProject?.Select(mp => new MemberProjectEntity
         {
-          ProfileImage = mp.Member.ProfileImage,
-          Id = mp.Member.Id,
-          FirstName = mp.Member.FirstName,
-          LastName = mp.Member.LastName,
+          MemberId = mp.MemberId,
+          ProjectId = mp.ProjectId,
+          Member = new MemberEntity
+          {
+            ProfileImage = mp.Member.ProfileImage,
+            Id = mp.Member.Id,
+            FirstName = mp.Member.FirstName,
+            LastName = mp.Member.LastName,
+          }
         }).ToList()
+
       };
 
-      return RepositoryResult<Project>.Ok(entity);
+      return RepositoryResult<ProjectEntity>.Ok(entity);
     }
     catch (Exception ex)
     {
-      return RepositoryResult<Project>.InternalServerError(ex.Message);
+      return RepositoryResult<ProjectEntity>.InternalServerError(ex.Message);
     }
   }
 }

@@ -13,7 +13,14 @@ public static class ProjectFactory
     EndDate = entity.EndDate,
     Budget = entity.Budget,
     ProjectImage = entity.ProjectImage,
-    ClientId = entity.ClientId
+    ClientId = entity.ClientId,
+    Members = entity.MemberProject?.Select(mp => new Member
+    {
+      ProfileImage = mp.Member.ProfileImage,
+      Id = mp.Member.Id,
+      FirstName = mp.Member.FirstName,
+      LastName = mp.Member.LastName,
+    }).ToList(),
   };
 
   public static ProjectEntity Create(ProjectCreateForm form) => new()
@@ -31,7 +38,7 @@ public static class ProjectFactory
     }).ToList()
   };
 
-  public static ProjectEntity Update(Project form, Project entity)
+  public static ProjectEntity Update(Project form, ProjectEntity entity)
   {
     entity.ProjectImage = form.ProjectImage;
     entity.Name = form.Name;
@@ -40,6 +47,11 @@ public static class ProjectFactory
     entity.EndDate = form.EndDate;
     entity.Budget = form.Budget;
     entity.ClientId = form.ClientId;
+    entity.MemberProject = form.MembersId?.Select(memberId => new MemberProjectEntity
+    {
+      ProjectId = entity.Id,
+      MemberId = memberId,
+    }).ToList();
     return entity;
   }
 

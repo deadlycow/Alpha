@@ -66,8 +66,9 @@ public class ProjectService(IProjectRepository repository)
     var result = await _repository.GetAsync(x => x.Id == id);
     if (result.Data == null)
       return Result.NotFound("Project not found.");
-
-    return Result<Project>.Ok(result.Data);
+    
+    var project = ProjectFactory.Create(result.Data);
+    return Result<Project>.Ok(project);
 
   }
   public async Task<IResult> DeleteAsync(int id)
@@ -103,7 +104,7 @@ public class ProjectService(IProjectRepository repository)
   {
     if (form == null)
       return Result.BadRequest("Form can't be null.");
-    
+
     var exists = await _repository.GetAsync(p => p.Id == form.Id, p => p.MemberProject!);
     if (!exists.Success)
       return Result.NotFound("Project not found.");
@@ -111,11 +112,12 @@ public class ProjectService(IProjectRepository repository)
     await _repository.BeginTransactionAsync();
     try
     {
+      exists.Data.MemberProject?.Clear();
       var entity = ProjectFactory.Update(form, exists.Data!);
       var respons = _repository.Update(entity);
       if (respons.Success)
       {
-        await _repository.SaveAsync();
+       var test = await _repository.SaveAsync();
         await _repository.CommitTransactionAsync();
         return Result.Ok();
       }

@@ -124,16 +124,11 @@ namespace Pressentation_MVC.Controllers
           Members = projectResult.Data.Members!.Select(member => new
           {
             member.Id,
-            //Name = $"{member.FirstName} {member.LastName}",
             member.Name,
             member.ProfileImage
           }),
-          Client = new
-          {
-            projectResult.Data.Client!.Id,
-            projectResult.Data.Client.Name,
-          }
         });
+
       return NotFound();
     }
     [HttpPost("Project/Update")]

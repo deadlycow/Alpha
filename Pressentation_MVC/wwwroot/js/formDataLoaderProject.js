@@ -43,6 +43,5 @@ document.querySelectorAll('[data-modal="true"').forEach(button => {
             form.innerHTML = `<p>Error loading project data</p>`
             console.log(error)
         }
-
     })
 })
