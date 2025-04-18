@@ -1,25 +1,25 @@
 ﻿import { setupImagePreviewer, resetImagePreview, getPreviewImagePath } from './imageHandler.js'
 
 document.addEventListener('DOMContentLoaded', () => {
-    const closeButtons = document.querySelectorAll('[data-close="true"]')
     const forms = document.querySelectorAll('#form-reg');
 
     
+    //const closeButtons = document.querySelectorAll('[data-close="true"]')
 
-    closeButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const modal = button.closest('.modal-overlay')
-            const form = modal.querySelector('form')
+    //closeButtons.forEach(button => {
+    //    button.addEventListener('click', () => {
+    //        const modal = button.closest('.modal-overlay')
+    //        const form = modal.querySelector('form')
           
-            if (form) {
-                resetImagePreview(form)
-                form.reset()
-            }
+    //        if (form) {
+    //            resetImagePreview(form)
+    //            form.reset()
+    //        }
 
-            if (modal)
-                modal.style.display = 'none'
-        })
-    })
+    //        if (modal)
+    //            modal.style.display = 'none'
+    //    })
+    //})
 
     forms.forEach(form => {
         form.addEventListener('submit', async (e) => {

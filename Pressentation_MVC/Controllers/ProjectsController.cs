@@ -8,12 +8,13 @@ using Pressentation_MVC.ViewModels;
 namespace Pressentation_MVC.Controllers
 {
   [Authorize]
-  public class ProjectsController(ProjectService projectService, ClientService clientServce, MemberService memberService, ImageService imageService) : Controller
+  public class ProjectsController(ProjectService projectService, ClientService clientServce, MemberService memberService, ImageService imageService, MpService mpService) : Controller
   {
     private readonly ProjectService _projectService = projectService;
     private readonly ClientService _clientServce = clientServce;
     private readonly MemberService _memberService = memberService;
     private readonly ImageService _imageService = imageService;
+    private readonly MpService _mpService = mpService;
 
     [Route("/")]
     public async Task<IActionResult> Project()
@@ -144,14 +145,21 @@ namespace Pressentation_MVC.Controllers
           );
         return BadRequest(new { Success = false, errors });
       }
-      
-      var imgUploaded = await _imageService.Upload(form.FormFile!);
-      if (imgUploaded.Success)
-        form.ProjectImage = imgUploaded.Message;
 
-      var result = await _projectService.UpdateAsync(form);
-      if (!result.Success)
-        return BadRequest(result.ErrorMessage);
+      if (form.FormFile != null)
+      {
+        var imgUploaded = await _imageService.Upload(form.FormFile!);
+        if (imgUploaded.Success)
+          form.ProjectImage = imgUploaded.Message;
+      }
+
+      var projectResult = await _projectService.UpdateAsync(form);
+      if (projectResult.Success)
+      {
+        var mpResult = await _mpService.Update(form.Id, form.MembersId!);
+        if (!mpResult.Success)
+          return BadRequest("Faild to update members.");
+      }
 
       return RedirectToAction("Project");
     }

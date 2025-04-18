@@ -2,7 +2,6 @@
 using Business.Interfaces;
 using Business.Models;
 using Data.Interfaces;
-using Domain.Extensions;
 using Domain.Models;
 using System.Diagnostics;
 
@@ -112,8 +111,8 @@ public class ProjectService(IProjectRepository repository)
     await _repository.BeginTransactionAsync();
     try
     {
-      exists.Data.MemberProject?.Clear();
-      var entity = ProjectFactory.Update(form, exists.Data!);
+      exists.Data!.MemberProject?.Clear();
+      var entity = ProjectFactory.Update(form, exists.Data);
       var respons = _repository.Update(entity);
       if (respons.Success)
       {

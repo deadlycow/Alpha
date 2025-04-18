@@ -24,7 +24,7 @@
                 <label asp-for="ClientId"></label>
                 <div class="field-group">
                     <div class="custom-arrow">
-                        <select id="clients" asp-for="ClientId" >
+                        <select id="clients" asp-for="ClientId">
                             <option value="" disabled selected></option>
                         </select>
                         <span asp-validation-for="ClientId"></span>
@@ -35,7 +35,7 @@
                 <div class="form-group">
                     <label asp-for="StartDate"></label>
                     <div class="field-group">
-                        <input type="date" asp-for="StartDate" value="@DateTime.Today"/>
+                        <input type="date" asp-for="StartDate" value="@DateTime.Today" />
                         <span asp-validation-for="StartDate"></span>
                     </div>
                 </div>
@@ -70,6 +70,5 @@
     </div>
 </div>
 
-@* <script src="~/js/formDataLoaderClients.js" asp-append-version="true"></script> *@
-@* @await Html.PartialAsync("_ValidationScript") *@
-@await Html.PartialAsync("~/Views/Shared/Partials/Modals/_CloseModalScript.cshtml")
+<script src="~/js/formCreateProject.js" type="module" asp-append-version="true"></script>
+@await Html.PartialAsync("Scripts/_ValidationScript")

@@ -55,7 +55,7 @@ namespace Data.Repositories
     }
     public virtual async Task<RepositoryResult<IEnumerable<TModel>>> GetAllAsync(bool orderByDescending = false, Expression<Func<TEntity, object>>? sortBy = null, Expression<Func<TEntity, bool>>? filterBy = null, params Expression<Func<TEntity, object>>[] includes)
     {
-      IQueryable<TEntity> query = _dbSet;
+      IQueryable<TEntity> query = _dbSet.AsNoTracking();
       if (filterBy != null)
         query = query.Where(filterBy);
 
@@ -91,11 +91,26 @@ namespace Data.Repositories
       var result = entities.Select(entity => entity!.MapTo<TSelect>());
       return RepositoryResult<IEnumerable<TSelect>>.Ok(result);
     }
+    public async Task<RepositoryResult<IEnumerable<TEntity>>> GetAllAsync(Expression<Func<TEntity, bool>> predicate)
+    {
+      try
+      {
+        var result = await _dbSet.Where(predicate).AsNoTracking().ToListAsync();
+        return result != null 
+          ? RepositoryResult<IEnumerable<TEntity>>.Ok(result)
+          : RepositoryResult<IEnumerable<TEntity>>.NotFound("No members");
+      }
+      catch (Exception ex)
+      {
+        Debug.WriteLine($"Error fetching entities: {ex.Message}");
+        return RepositoryResult<IEnumerable<TEntity>>.InternalServerError(ex.Message);
+      }
+    }
     public virtual async Task<RepositoryResult<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filterBy, params Expression<Func<TEntity, object>>[] includes)
     {
       try
       {
-        IQueryable<TEntity> query = _dbSet;
+        IQueryable<TEntity> query = _dbSet.AsNoTracking();
 
         if (includes != null && includes.Length != 0)
           foreach (var include in includes)
@@ -105,7 +120,6 @@ namespace Data.Repositories
         if (entity == null)
           return RepositoryResult<TEntity>.NotFound("Entity");
 
-        //var result = entity.MapTo<TModel>();
         return RepositoryResult<TEntity>.Ok(entity);
       }
       catch (Exception ex)

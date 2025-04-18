@@ -31,7 +31,7 @@ const processImage = async (file, imagePreviewer, previewer, previewSize = 150) 
     }
 }
 
-export const setupImagePreviewer = (previewSize = 150) => {
+ const setupImagePreviewer = (previewSize = 150) => {
     document.querySelectorAll(".image-previewer").forEach(previewer => {
         const fileInput = previewer.querySelector('input[type="file"]');
         const imagePreview = previewer.querySelector('.image-preview');
@@ -45,6 +45,10 @@ export const setupImagePreviewer = (previewSize = 150) => {
         })
     })
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    setupImagePreviewer()
+})
 
 export const resetImagePreview = (form) => {
     const imagePreview = form.querySelector('.image-preview')

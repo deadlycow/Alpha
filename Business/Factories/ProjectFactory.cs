@@ -47,11 +47,11 @@ public static class ProjectFactory
     entity.EndDate = form.EndDate;
     entity.Budget = form.Budget;
     entity.ClientId = form.ClientId;
-    entity.MemberProject = form.MembersId?.Select(memberId => new MemberProjectEntity
-    {
-      ProjectId = entity.Id,
-      MemberId = memberId,
-    }).ToList();
+    //entity.MemberProject = form.MembersId?.Select(memberId => new MemberProjectEntity
+    //{
+    //  ProjectId = entity.Id,
+    //  MemberId = memberId,
+    //}).ToList();
     return entity;
   }
 

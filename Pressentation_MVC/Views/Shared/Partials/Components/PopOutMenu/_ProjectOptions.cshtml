@@ -2,21 +2,21 @@
 @model ProjectViewModel
 <div data-display="true" class="project-options-container">
     @* <div class="options-group"> *@
-        <a data-modal="true" data-target="#editProjectModal" data-id="@Model.Id">
-            <img src="~/images/edit-icon.svg" />
-            Edit
-        </a>
+    <a data-modal="true" data-target="#editProjectModal" data-id="@Model.Id">
+        <img src="~/images/edit-icon.svg" />
+        Edit
+    </a>
     @* </div> *@
     <div class="options-group">
         <img src="~/images/add-user-icon.svg" />
         Add Member
     </div>
     <div class="options-group">
-        <form asp-controller="Projects" asp-action="Delete" asp-route-id="@Model.Id" method="post">
-            <button type="submit">
-                <img src="~/images/delete-icon.svg" />
-                Delete Project
-            </button>
-        </form>
+
+        <a data-delete="true" data-id="@Model.Id">
+            <img src="~/images/delete-icon.svg" />
+            Delete Project
+        </a>
     </div>
 </div>
+

@@ -1,8 +1,13 @@
-﻿document.addEventListener('DOMContentLoaded', () => {
+﻿import { resetImagePreview } from './imageHandler.js'
+import { clearList } from './compact-search.js'
+
+document.addEventListener('DOMContentLoaded', () => {
 
     const cardMenuBtns = document.querySelectorAll('[data-card-menu="true"]');
-    const modalButtons = document.querySelectorAll('[data-modal="true"]');
+    const openModalBtns = document.querySelectorAll('[data-modal="true"]');
+    const closeModalBtns = document.querySelectorAll('[data-close="true"]');
     const utilBtns = document.querySelectorAll('[data-util="true"]');
+    const deleteBtns = document.querySelectorAll('[data-delete="true"]');
 
     cardMenuBtns.forEach(button => {
         button.addEventListener('click', (event) => {
@@ -44,7 +49,7 @@
         });
     });
 
-    modalButtons.forEach(button => {
+    openModalBtns.forEach(button => {
         button.addEventListener('click', () => {
             const modalTarget = button.getAttribute('data-target');
             const modal = document.querySelector(modalTarget);
@@ -53,6 +58,46 @@
                 modal.style.display = 'flex';
         })
     })
+
+    closeModalBtns.forEach(button => {
+        button.addEventListener('click', () => {
+            const modal = button.closest('.modal-overlay');
+            const form = modal.querySelector('form');
+            if (form) {
+                resetImagePreview(form)
+                clearList(form)
+                form.reset();
+            }
+            if (modal)
+                modal.style.display = 'none';
+        })
+    })
+
+    deleteBtns.forEach(button => {
+        button.addEventListener('click', async (event) => {
+            event.stopPropagation();
+
+            const id = event.currentTarget.getAttribute('data-id');
+            try {
+                const res = await fetch(`/projects/delete/${id}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ id })
+                })
+                if (res.ok) {
+                    window.location.reload();
+                }
+            }
+            catch (error) {
+                console.error('Error deleting project:', error);
+            }
+
+        })
+    })
+
+    
 })
 
 
