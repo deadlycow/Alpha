@@ -12,12 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
         clearErrorMessages(form)
 
         const formData = new FormData(form)
-
         const fileInput = form.querySelector('input[type="file"]')
         if (!fileInput.files.length) {
             const imagePath = getPreviewImagePath(form)
             if (imagePath) {
-                formData.append('ProfileImage', imagePath)
+                formData.append('ProjectImage', imagePath)
             }
         }
         selectedItems.forEach(item => {

@@ -84,5 +84,6 @@ function removeFromList(element, name) {
 export const clearList = (form) => {
     selectedItems.length = 0
     const selectedList = form.querySelector('#selectedList')
-    selectedList.innerHTML = ''
+    if (selectedList)
+        selectedList.innerHTML = ''
 }

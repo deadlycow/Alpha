@@ -1,32 +1,14 @@
-﻿import { setupImagePreviewer, resetImagePreview, getPreviewImagePath } from './imageHandler.js'
+﻿import { getPreviewImagePath } from './imageHandler.js'
+import { clearErrorMessages } from './utils.js'
 
 document.addEventListener('DOMContentLoaded', () => {
     const forms = document.querySelectorAll('#form-reg');
-
-    
-    //const closeButtons = document.querySelectorAll('[data-close="true"]')
-
-    //closeButtons.forEach(button => {
-    //    button.addEventListener('click', () => {
-    //        const modal = button.closest('.modal-overlay')
-    //        const form = modal.querySelector('form')
-          
-    //        if (form) {
-    //            resetImagePreview(form)
-    //            form.reset()
-    //        }
-
-    //        if (modal)
-    //            modal.style.display = 'none'
-    //    })
-    //})
 
     forms.forEach(form => {
         form.addEventListener('submit', async (e) => {
             e.preventDefault()
             clearErrorMessages(form)
-            //if (e.target !== form) return
-            setupImagePreviewer()
+           
             const formData = new FormData(form)
 
             const fileInput = form.querySelector('input[type="file"]')
@@ -74,14 +56,3 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     })
 })
-
-function clearErrorMessages(form) {
-    form.querySelectorAll('[data-val="true"]').forEach(input => {
-        input.classList.remove('input-validation-error')
-    })
-
-    form.querySelectorAll('[data-valmsg-for]').forEach(span => {
-        span.innerText = ''
-        span.classList.remove('field-validation-error')
-    })
-}

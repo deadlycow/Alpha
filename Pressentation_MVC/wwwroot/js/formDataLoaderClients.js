@@ -6,14 +6,13 @@
         const data = await response.json();
 
         forms.forEach(form => {
-        const memberSelect = form.querySelector('#clients')
+            const memberSelect = form.querySelector('#clients')
 
             data.clients.forEach(client => {
-                const opton = document.createElement('option');
-                opton.value = client.id
-                opton.textContent = `${client.name}`
-                memberSelect.appendChild(opton)
-
+                const option = document.createElement('option');
+                option.value = client.id
+                option.textContent = `${client.name}`
+                memberSelect.appendChild(option)
             })
         })
     }

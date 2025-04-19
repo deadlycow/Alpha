@@ -47,6 +47,7 @@ public static class ProjectFactory
     entity.EndDate = form.EndDate;
     entity.Budget = form.Budget;
     entity.ClientId = form.ClientId;
+    entity.Client = null;
     //entity.MemberProject = form.MembersId?.Select(memberId => new MemberProjectEntity
     //{
     //  ProjectId = entity.Id,

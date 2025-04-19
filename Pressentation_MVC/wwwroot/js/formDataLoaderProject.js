@@ -3,7 +3,7 @@
 document.querySelectorAll('[data-modal="true"').forEach(button => {
     button.addEventListener('click', async function () {
         const modal = document.querySelector(this.getAttribute('data-target'))
-        const form = modal.querySelector('#form-reg-project')
+        const form = modal.querySelector('form')
         const projectId = this.getAttribute('data-id')
 
         if (!projectId) return
@@ -29,6 +29,7 @@ document.querySelectorAll('[data-modal="true"').forEach(button => {
             form.querySelector('[name="StartDate"]').value = project.startDate
             form.querySelector('[name="EndDate"]').value = project.endDate
             form.querySelector('[name="ClientId"]').value = project.clientId
+            console.log('Setting clientId on:', form.querySelector('[name="ClientId"]'), 'to', project.clientId)
             form.querySelector('[name="Budget"]').value = project.budget
 
             project.members.forEach(member => {

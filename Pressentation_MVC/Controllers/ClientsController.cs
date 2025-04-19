@@ -17,7 +17,7 @@ namespace Pressentation_MVC.Controllers
       var result = await _clientService.GetAllAsync();
       if (result.Success)
         if (result is Result<IEnumerable<Client>> clients)
-          return View(clients);
+          return View(clients.Data);
 
       return View(result.ErrorMessage);
     }
