@@ -18,7 +18,7 @@
 }
 
 .side-nav-link {
-    color: var(--color-header);
+    color: var(--color-heading);
     font-size: var(--font-15);
     font-weight: var(--font-weight-semibold);
     border-radius: var(--radius-nav-link);

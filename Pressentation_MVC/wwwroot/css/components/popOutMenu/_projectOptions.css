@@ -10,6 +10,10 @@
     box-shadow: var(--popup-80);
 }
 
+.project-options-container a {
+    color: var(--color-link-menu);
+}
+
 .options-group {
     padding: 0.875rem;
     display: flex;
@@ -23,7 +27,7 @@
         cursor: pointer;
     }
 
-    .options-group:last-child {
-        border-top: 1px solid var(--layout-border-menu);
-        color: var(--red);
-    }
+.project-options-container a:last-child {
+    border-top: 1px solid var(--layout-border);
+    color: var(--red);
+}

@@ -25,7 +25,7 @@
                 <div class="field-group">
                     <div class="custom-arrow">
                         <select id="clients" asp-for="ClientId">
-                            <option value="" disabled selected></option>
+                            <option value="" hidden disabled selected>Select Client</option>
                         </select>
                         <span asp-validation-for="ClientId"></span>
                     </div>
@@ -60,7 +60,9 @@
             <div class="form-group">
                 <label asp-for="Budget"></label>
                 <div class="field-group">
-                    <input asp-for="Budget" />
+                    <div class="budget-wrap">
+                        <input class="budget" asp-for="Budget" />
+                    </div>
                     <span asp-validation-for="Budget"></span>
                 </div>
             </div>

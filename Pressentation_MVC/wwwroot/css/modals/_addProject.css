@@ -1,5 +1,5 @@
 ﻿.modal-overlay {
-    display:none;
+    display: none;
     place-content: center;
     flex-wrap: wrap;
     position: absolute;
@@ -14,7 +14,7 @@
     display: grid;
     padding: 1.875rem;
     border-radius: var(--border-radius-16);
-    max-width: 34.375rem; 
+    width: 34.375rem;
 }
 
 .member-header {
@@ -100,6 +100,7 @@
     margin-top: 9px;
 }
 
+    .field-group select,
     .field-group input {
         font-size: var(--font-15);
         padding: .875rem 1rem;
@@ -112,3 +113,46 @@
             outline: none;
         }
 
+.custom-arrow {
+    width: 100%;
+    position: relative;
+}
+
+    .custom-arrow::after {
+        content: url(/images/arrow-down-icon.svg);
+        filter: grayscale(100%) brightness(0);
+        position: absolute;
+        right: .875rem;
+        top: 1rem;
+    }
+
+    .custom-arrow select {
+        appearance: none;
+        font-size: var(--font-15);
+        padding: .875rem 1rem;
+        cursor: pointer;
+        border: 1px solid var(--layout-border-menu);
+        border-radius: var(--border-radius-14);
+        width: 100%;
+    }
+
+        .custom-arrow select:focus {
+            outline: none;
+        }
+
+.budget {
+    padding-left: 2rem !important;
+}
+
+.budget-wrap {
+    position: relative;
+}
+
+    .budget-wrap::before {
+        content: 'Kr';
+        font-size: var(--font-15);
+        position: absolute;
+        left: .8rem;
+        top: 50%;
+        transform: translateY(-50%);
+    }

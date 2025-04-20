@@ -3,11 +3,11 @@ import { clearList } from './compact-search.js'
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    const cardMenuBtns = document.querySelectorAll('[data-card-menu="true"]');
-    const openModalBtns = document.querySelectorAll('[data-modal="true"]');
-    const closeModalBtns = document.querySelectorAll('[data-close="true"]');
-    const utilBtns = document.querySelectorAll('[data-util="true"]');
-    const deleteBtns = document.querySelectorAll('[data-delete="true"]');
+    const cardMenuBtns = document.querySelectorAll('[data-card-menu="true"]')
+    const openModalBtns = document.querySelectorAll('[data-modal="true"]')
+    const closeModalBtns = document.querySelectorAll('[data-close="true"]')
+    const utilBtns = document.querySelectorAll('[data-util="true"]')
+    const deleteBtns = document.querySelectorAll('[data-delete="true"]')
 
     cardMenuBtns.forEach(button => {
         button.addEventListener('click', (event) => {
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
-    });
+    })
 
     utilBtns.forEach(button => {
         button.addEventListener('click', (event) => {
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
-    });
+    })
 
     openModalBtns.forEach(button => {
         button.addEventListener('click', () => {
@@ -97,7 +97,22 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     })
 
-    
+    const themeSwitch = document.getElementById('theme-switch')
+    if (localStorage.getItem('theme') === 'dark') {
+        document.body.setAttribute('data-theme', 'dark')
+        themeSwitch.checked = true
+    }
+
+    themeSwitch.addEventListener('change', () => {
+        if (themeSwitch.checked) {
+            document.body.setAttribute('data-theme', 'dark')
+            localStorage.setItem('theme', 'dark')
+        }
+        else {
+            document.body.removeAttribute('data-theme')
+            localStorage.removeItem('theme')
+        }
+    })
 })
 
 

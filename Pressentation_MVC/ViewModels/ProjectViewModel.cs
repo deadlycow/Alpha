@@ -32,4 +32,17 @@ public class ProjectViewModel
       };
     }
   }
+  public bool IsShortTimeLeft
+  {
+    get
+    {
+      if (EndDate == null)
+        return true;
+
+      var endDate = EndDate.Value.ToDateTime(TimeOnly.MinValue);
+      var daysLeft = (endDate - DateTime.Now).Days;
+
+      return daysLeft < 7 && daysLeft >= 0;
+    }
+  }
 }

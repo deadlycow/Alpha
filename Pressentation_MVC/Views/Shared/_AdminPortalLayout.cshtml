@@ -18,9 +18,8 @@
             <partial name="AdminSignIn" />
         </div>
     </main>
-    @* @await Html.PartialAsync("Scripts/_ValidationScript") *@
+    @await Html.PartialAsync("Scripts/_ValidationScript")
     @await Html.PartialAsync("Scripts/_ShowPasswordScript")
-    @* @await Html.PartialAsync("Scripts/_AccountHandlerScript") *@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

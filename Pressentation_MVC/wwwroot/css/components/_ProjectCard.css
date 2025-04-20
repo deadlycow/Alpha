@@ -14,7 +14,7 @@
 
     .project-card::after {
         content: "";
-        background-color: var(--bg-card-color);
+        background-color: var(--bg-card-color-drop);
         position: absolute;
         bottom: -4px;
         width: 96%;
@@ -87,8 +87,12 @@
     gap: 0.375rem;
 }
 
-.clock-bg-opacity, .clock-hands {
-    fill: var(--heading);
+.clock-bg-opacity {
+    fill: var(--clock-bg);
+}
+
+.clock-hands {
+    fill: var(--clock-hands);
 }
 
 .time-container.short-time .clock-bg-opacity,
@@ -97,6 +101,10 @@
     fill: var(--red);
     background-color: var(--red-10);
 }
+
+    .time-container.short-time p {
+        color: var(--red);
+    }
 
 /* tiny image */
 .tiny-image {

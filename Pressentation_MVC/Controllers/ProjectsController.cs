@@ -2,6 +2,7 @@
 using Business.Services;
 using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Pressentation_MVC.ViewModels;
 
@@ -19,7 +20,6 @@ namespace Pressentation_MVC.Controllers
     [Route("/")]
     public async Task<IActionResult> Project()
     {
-
       var result = await _projectService.GetAllAsync();
       if (result is Result<IEnumerable<Project>> projects)
       {

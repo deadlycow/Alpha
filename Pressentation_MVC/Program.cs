@@ -4,6 +4,7 @@ using Data.Entities;
 using Data.Interfaces;
 using Data.Repositories;
 using Data.Seeders;
+using Domain.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -81,6 +82,7 @@ builder.Services.AddScoped<ClientService>();
 builder.Services.AddScoped<ProjectService>();
 builder.Services.AddScoped<ImageService>();
 builder.Services.AddScoped<MpService>();
+
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
 builder.Services.AddScoped<IMemberRepository, MemberRepository>();

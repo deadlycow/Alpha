@@ -8,6 +8,7 @@ using Domain.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace Business.Services;
 public class MemberService(UserManager<MemberEntity> userManager, IMemberRepository repository)
@@ -15,6 +16,17 @@ public class MemberService(UserManager<MemberEntity> userManager, IMemberReposit
   private readonly IMemberRepository _repository = repository;
   private readonly UserManager<MemberEntity> _userManager = userManager;
 
+  public async Task<IResult> GetUserAsync(ClaimsPrincipal user)
+  {
+    var userId = user.FindFirstValue(ClaimTypes.NameIdentifier);
+    if (userId == null)
+      return Result.NotFound("User not found");
+    var entity = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == userId);
+    if (entity == null)
+      return Result.NotFound("User not found");
+    var member = entity.MapTo<Member>();
+    return Result<Member>.Ok(member);
+  }
   public async Task<IResult> Create(MemberCreateForm form)
   {
     if (form == null)

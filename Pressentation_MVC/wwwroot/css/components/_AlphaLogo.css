@@ -11,4 +11,5 @@
     font-family: "Comfortaa", sans-serif;
     font-weight: var(--font-weight-bold);
     padding-left: 0.625rem;
+    color: var(--color-logo-text);
 }

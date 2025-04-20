@@ -13,7 +13,6 @@
                 <img class="image-preview" src="" />
                 <input asp-for="MemberImage" type="file" accept="image/*" class="hide" />
             </div>
-            @* @(!string.IsNullOrEmpty(Model.ProfileImage) ? "selected" : "") *@
             <input asp-for="Id" hidden />
             <div class="form-group-flex">
                 <div class="form-group">
@@ -113,4 +112,4 @@
 </div>
 
 @await Html.PartialAsync("Scripts/_ValidationScript")
-@await Html.PartialAsync("~/Views/Shared/Partials/Modals/_CloseModalScript.cshtml")
+<script src="~/js/modals.js" type="module" asp-append-version="true"></script>

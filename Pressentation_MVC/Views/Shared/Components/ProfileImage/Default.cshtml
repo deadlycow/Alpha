@@ -1,0 +1,10 @@
+﻿@model string
+
+@if (Model != null)
+{
+    <img class="profile-avatar" src="@Model" alt="avatar" />
+}
+else
+{
+    <img src="~/images/profiles/1.svg" alt="Default Profile Image" class="profile-avatar" />
+}

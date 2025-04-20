@@ -2,8 +2,10 @@
 
 <div data-display="true" class="user-options-container">
     <div class="user-container">
-        <img src="~/images/profiles/5.svg" />
-        <p>Current User </p>
+        <div>
+            @await Component.InvokeAsync("ProfileImage")
+        </div>
+        @await Component.InvokeAsync("UserName")
     </div>
     <div class="switch-container">
         <div class="switch-header">
@@ -11,7 +13,7 @@
             <p>Dark Mode</p>
         </div>
         <label class="switch">
-            <input type="checkbox" />
+            <input type="checkbox" id="theme-switch" />
             <span class="slider"></span>
         </label>
     </div>
