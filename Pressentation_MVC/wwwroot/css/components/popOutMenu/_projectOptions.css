@@ -14,6 +14,22 @@
     color: var(--color-link-menu);
 }
 
+.relative-container {
+    display: flex;
+    position: relative;
+}
+
+.member-list {
+    position: absolute;
+    right: 105%;
+    bottom: 100%;
+    z-index: 10;
+    background-color: orange;
+    width: 10rem;
+    max-width: 12rem;
+    max-height: 20rem;
+}
+
 .options-group {
     padding: 0.875rem;
     display: flex;
@@ -27,7 +43,11 @@
         cursor: pointer;
     }
 
-.project-options-container a:last-child {
+.delete-link {
     border-top: 1px solid var(--layout-border);
     color: var(--red);
+}
+
+.hidden {
+    display: none;
 }

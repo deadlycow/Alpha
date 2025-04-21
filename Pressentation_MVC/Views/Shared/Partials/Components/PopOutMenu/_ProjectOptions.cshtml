@@ -5,13 +5,22 @@
         <img src="~/images/edit-icon.svg" />
         Edit
     </a>
-    <a class="options-group">
-        <img src="~/images/add-user-icon.svg" />
-        Add Member
-    </a>
-    <a data-delete="true" data-controller="projects" data-id="@Model.Id" class="options-group">
+    <div class="relative-container">
+        <a data-menu-modal="true" data-target="#memberMenuList" data-id="@Model.Id" class="options-group">
+            <img src="~/images/add-user-icon.svg" />
+            Add Member
+        </a>
+        <div id="memberMenuList" class="member-list hidden">
+            <select multiple class="member-select">
+            </select>
+        </div>
+    </div>
+    <a data-delete="true" data-controller="projects" data-id="@Model.Id" class="options-group delete-link">
         <img src="~/images/delete-icon.svg" />
         Delete Project
     </a>
 </div>
+
+<script src="~/js/formDataLoaderMenuMember.js" type="module" asp-append-version="true"></script>
+<script src="~/js/updateProjectMembers.js" type="module" asp-append-version="true"></script>
 

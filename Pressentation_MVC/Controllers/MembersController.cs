@@ -7,10 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace Pressentation_MVC.Controllers
 {
   [Authorize(Roles = "Admin")]
-  public class MembersController(MemberService memberService, ImageService imageService) : Controller
+  public class MembersController(MemberService memberService, ImageService imageService, MpService mpService) : Controller
   {
     private readonly MemberService _memberService = memberService;
     private readonly ImageService _imageService = imageService;
+    private readonly MpService _mpService = mpService;
 
     [Route("team")]
     public async Task<IActionResult> Member()
@@ -112,6 +113,37 @@ namespace Pressentation_MVC.Controllers
         });
       }
       return NotFound();
+    }
+
+    [HttpGet]
+    [Route("Members/GetAll")]
+    public async Task<IActionResult> GetAll()
+    {
+      var respons = await _memberService.GetAllAsync();
+      if (respons is Result<IEnumerable<Member>> members)
+      {
+        var result = members.Data!.Select(m => new
+        {
+          m.Id,
+          m.Name,
+        });
+
+        return Json(result);
+      }
+      return NotFound();
+    }
+
+    [HttpPost]
+    [Route("Members/Update/Project/")]
+    public async Task<IActionResult> UpdateProjectMembers([FromBody] AddMemberToProject dto)
+    {
+      if (dto == null)
+        return BadRequest("It's empty");
+      var result = await _mpService.Update(dto.ProjectId, dto.MemberIds);
+      if (result.Success)
+        return Ok(result.Message);
+
+      return BadRequest("Failed to update project members");
     }
   }
 }

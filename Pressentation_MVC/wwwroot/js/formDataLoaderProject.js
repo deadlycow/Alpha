@@ -29,7 +29,6 @@ document.querySelectorAll('[data-modal="true"').forEach(button => {
             form.querySelector('[name="StartDate"]').value = project.startDate
             form.querySelector('[name="EndDate"]').value = project.endDate
             form.querySelector('[name="ClientId"]').value = project.clientId
-            console.log('Setting clientId on:', form.querySelector('[name="ClientId"]'), 'to', project.clientId)
             form.querySelector('[name="Budget"]').value = project.budget
 
             project.members.forEach(member => {

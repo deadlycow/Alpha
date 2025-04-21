@@ -34,19 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', (event) => {
 
             const currentCard = event.currentTarget.closest('[data-util]');
-            if (currentCard) {
-
-                const menu = currentCard.querySelector('[data-display]');
-                const isOpen = menu.style.display === 'grid';
-
-                document.querySelectorAll('[data-display]').forEach(menu => {
-                    menu.style.display = 'none';
-                });
-
-                if (!isOpen) {
-                    menu.style.display = 'grid';
-                }
-            }
+            const menu = currentCard.querySelector('[data-util-display]');
+            menu.style.display = 'grid';
         });
     })
 
@@ -84,10 +73,10 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const res = await fetch(`/${target}/delete/${id}`, {
                     method: 'POST',
-                    //headers: {
-                    //    'Content-Type': 'application/json'
-                    //},
-                    //body: JSON.stringify({ id })
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ id })
                 })
                 if (res.ok) {
                     window.location.reload();
@@ -114,6 +103,24 @@ document.addEventListener('DOMContentLoaded', () => {
         else {
             document.body.removeAttribute('data-theme')
             localStorage.removeItem('theme')
+        }
+    })
+
+    document.addEventListener('click', (event) => {
+        const isMenuClick = event.target.closest('[data-card-menu]')
+        const isUtilClick = event.target.closest('[data-util]')
+        if (!isMenuClick) {
+            document.querySelectorAll('[data-display]').forEach(menu => {
+                menu.style.display = 'none'
+            })
+            document.querySelectorAll('.member-list').forEach(menu => {
+                menu.style.display = 'none'
+            })
+        }
+        if (!isUtilClick) {
+            document.querySelectorAll('[data-util-display]').forEach(menu => {
+                menu.style.display = 'none'
+            })
         }
     })
 })
