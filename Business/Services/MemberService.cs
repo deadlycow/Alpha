@@ -122,7 +122,7 @@ public class MemberService(UserManager<MemberEntity> userManager, IMemberReposit
         await _repository.RollbackTransactionAsync();
         return Result.NotFound($"Member with id {id} not found");
       }
-
+      
       var IsDeleted = await _userManager.DeleteAsync(member);
       if (!IsDeleted.Succeeded)
       {

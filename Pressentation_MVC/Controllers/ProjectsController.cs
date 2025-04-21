@@ -33,7 +33,7 @@ namespace Pressentation_MVC.Controllers
           StartDate = project.StartDate,
           EndDate = project.EndDate,
           Members = project.Members!.Select(member => new MemberViewModel { Id = member.Id, Name = $"{member.FirstName} {member.LastName}", ProfileImage = member.ProfileImage! }),
-          Budget = project.Budget,
+          Budget = project.Budget ?? 0m,
         }).ToList();
         return View(projectViewModels);
       }

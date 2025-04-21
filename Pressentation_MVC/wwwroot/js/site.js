@@ -1,5 +1,6 @@
 ﻿import { resetImagePreview } from './imageHandler.js'
 import { clearList } from './compact-search.js'
+import { clearErrorMessages } from './utils.js'
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -65,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const form = modal.querySelector('form');
             if (form) {
                 resetImagePreview(form)
+                clearErrorMessages(form)
                 clearList(form)
                 form.reset();
             }
@@ -78,20 +80,21 @@ document.addEventListener('DOMContentLoaded', () => {
             event.stopPropagation();
 
             const id = event.currentTarget.getAttribute('data-id');
+            const target = event.currentTarget.getAttribute('data-controller');
             try {
-                const res = await fetch(`/projects/delete/${id}`, {
+                const res = await fetch(`/${target}/delete/${id}`, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ id })
+                    //headers: {
+                    //    'Content-Type': 'application/json'
+                    //},
+                    //body: JSON.stringify({ id })
                 })
                 if (res.ok) {
                     window.location.reload();
                 }
             }
             catch (error) {
-                console.error('Error deleting project:', error);
+                console.error(`Error deleting ${target}:`, error);
             }
 
         })

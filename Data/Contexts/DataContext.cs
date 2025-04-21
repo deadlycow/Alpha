@@ -18,7 +18,7 @@ public class DataContext(DbContextOptions<DataContext> options) : IdentityDbCont
       .HasOne(a => a.Member)
       .WithOne(m => m.Address)
       .HasForeignKey<AddressEntity>(a => a.MemberId)
-      .OnDelete(DeleteBehavior.Restrict);
+      .OnDelete(DeleteBehavior.Cascade);
 
     modelBuilder.Entity<ClientEntity>()
       .HasMany(c => c.Projects)

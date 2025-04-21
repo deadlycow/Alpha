@@ -26,19 +26,19 @@ public class ProjectService(IProjectRepository repository)
       var respons = await _repository.CreateAsync(entity);
       if (respons.Success)
       {
-        await _repository.SaveAsync();
+        var test = await _repository.SaveAsync();
         await _repository.CommitTransactionAsync();
         return Result.Ok();
       }
 
       await _repository.RollbackTransactionAsync();
-      return Result.BadRequest("Failed to create member.");
+      return Result.BadRequest("Failed to create project.");
     }
     catch (Exception ex)
     {
       await _repository.RollbackTransactionAsync();
       Debug.WriteLine($"Error creating member: {ex.Message}");
-      return Result.InternalServerError("An unexpected error occurred while creating member.");
+      return Result.InternalServerError("An unexpected error occurred while creating project.");
     }
   }
   public async Task<IResult> GetAllAsync()

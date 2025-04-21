@@ -7,12 +7,17 @@
     </a>
 
     <div class="member-options-group">
-        <form asp-controller="Members" asp-action="Delete" asp-route-id="@Model.Id" method="post">
-            <button type="submit">
-                <img src="~/images/delete-icon.svg" />
-                Delete
-            </button>
-        </form>
+
+        <a data-delete="true" data-controller="members" data-id="@Model.Id" class="options-group">
+            <img src="~/images/delete-icon.svg" />
+            Delete
+        </a>
+        @* <form asp-controller="Members" asp-action="Delete" asp-route-id="@Model.Id" method="post"> *@
+        @*     <button type="submit"> *@
+        @*         <img src="~/images/delete-icon.svg" /> *@
+        @*         Delete *@
+        @*     </button> *@
+        @* </form> *@
     </div>
 </div>
-<script src="~/js/fillEdit.js"></script>
+<script src="~/js/formDataLoaderMember.js"></script>

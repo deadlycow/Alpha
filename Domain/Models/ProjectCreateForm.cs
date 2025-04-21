@@ -15,6 +15,7 @@ public class ProjectCreateForm
 
   [Display(Name = "Description", Prompt = "Type somthing")]
   [DataType(DataType.Text)]
+  [Required(ErrorMessage = "Required")]
   public string? Description { get; set; }
 
   [Display(Name = "Start Date")]
@@ -25,10 +26,14 @@ public class ProjectCreateForm
   [Display(Name = "End Date")]
   [DataType(DataType.Date)]
   public DateOnly? EndDate { get; set; }
-  public decimal Budget { get; set; }
+
+  [Display(Name = "Budget")]
+  [DataType(DataType.Currency)]
+  [Required(ErrorMessage = "Required")]
+  public decimal? Budget { get; set; }
 
   [Display(Name = "Client")]
-  [Required(ErrorMessage = "Required")]
+  [Range(1, int.MaxValue, ErrorMessage = "Required")]
   public int ClientId { get; set; }
 
   [Display(Name = "Members")]

@@ -4,12 +4,9 @@
         const form = modal.querySelector('#form-reg')
         const memberId = this.getAttribute('data-id')
 
-        if (modal)
-            modal.style.display = 'flex';
-
         if (!memberId) return;
-        try {
 
+        try {
             const response = await fetch(`/Member/GetMember/${memberId}`)
             if (!response.ok)
                 throw new Error('Failed to fetch member data');

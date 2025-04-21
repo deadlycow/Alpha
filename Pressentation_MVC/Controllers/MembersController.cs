@@ -78,13 +78,12 @@ namespace Pressentation_MVC.Controllers
       return RedirectToAction("Member", "Members");
     }
 
-    [HttpPost("{id}")]
+    [HttpPost("members/delete/{id}")]
     public async Task<IActionResult> Delete(string id)
     {
       if (id == null)
         return BadRequest("ID is null.");
 
-      Console.WriteLine(id);
       var respons = await _memberService.DeleteAsync(id);
       if (respons.Success)
         return RedirectToAction("Member");

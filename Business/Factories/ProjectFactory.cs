@@ -30,7 +30,7 @@ public static class ProjectFactory
     Description = form.Description!,
     StartDate = form.StartDate,
     EndDate = form.EndDate,
-    Budget = form.Budget,
+    Budget = form.Budget ?? 0m,
     ClientId = form.ClientId,
     MemberProject = form.MembersId?.Select(memberId => new MemberProjectEntity
     {
@@ -45,14 +45,9 @@ public static class ProjectFactory
     entity.Description = form.Description!;
     entity.StartDate = form.StartDate;
     entity.EndDate = form.EndDate;
-    entity.Budget = form.Budget;
+    entity.Budget = form.Budget ?? 0m;
     entity.ClientId = form.ClientId;
     entity.Client = null;
-    //entity.MemberProject = form.MembersId?.Select(memberId => new MemberProjectEntity
-    //{
-    //  ProjectId = entity.Id,
-    //  MemberId = memberId,
-    //}).ToList();
     return entity;
   }
 

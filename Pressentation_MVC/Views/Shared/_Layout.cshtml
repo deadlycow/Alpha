@@ -22,6 +22,7 @@
         @RenderBody()
     </main>
     @await Html.PartialAsync("Scripts/_SiteScript")
+    @await Html.PartialAsync("Scripts/_ValidationScript")
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
     if (!forms) return;
     forms.forEach(form => {
-        const fields = form.querySelectorAll('input[data-val="true"]')
+        const fields = form.querySelectorAll('input[data-val="true"], select[data-val="true"], textarea[data-val="true"]')
         fields.forEach(field => {
             field.addEventListener("input", function () {
                 validateField(field)

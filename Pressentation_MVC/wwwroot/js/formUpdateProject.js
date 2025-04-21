@@ -12,10 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         clearErrorMessages(form)
 
         const formData = new FormData(form)
-        for (let pair of formData.entries()) {
-            console.log(pair[0] + ': ' + pair[1]);
-        }
-
+        
         const fileInput = form.querySelector('input[type="file"]')
         if (!fileInput.files.length) {
             const imagePath = getPreviewImagePath(form)
@@ -24,7 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         var test = form.querySelector('#clients')
-        console.log(test)
         selectedItems.forEach(item => {
             formData.append(`MembersId`, item.id)
         })
