@@ -9,6 +9,10 @@ public class DataContext(DbContextOptions<DataContext> options) : IdentityDbCont
   public DbSet<ClientEntity> Client { get; set; }
   public DbSet<MemberProjectEntity> MemberProject { get; set; }
   public DbSet<ProjectEntity> Project { get; set; }
+  public DbSet<NotificationDismissedEntity> DismissedNotifications { get; set; }
+  public DbSet<NotificationEntity> Notifications { get; set; }
+  public DbSet<NotificationTypeEntity> NotificationTypes { get; set; }
+  public DbSet<NotificationTargetGroupEntity> NotificationTargetGroups { get; set; }
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {

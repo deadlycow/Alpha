@@ -32,6 +32,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     utilBtns.forEach(button => {
         button.addEventListener('click', (event) => {
+            event.stopPropagation();
+
+            document.querySelectorAll('[data-util-display]').forEach(menu => {
+                menu.style.display = 'none';
+            });
 
             const currentCard = event.currentTarget.closest('[data-util]');
             const menu = currentCard.querySelector('[data-util-display]');

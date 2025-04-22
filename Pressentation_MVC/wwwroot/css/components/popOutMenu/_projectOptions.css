@@ -15,8 +15,8 @@
 }
 
 .relative-container {
-    display: flex;
     position: relative;
+    margin-bottom: .5rem;
 }
 
 .member-list {

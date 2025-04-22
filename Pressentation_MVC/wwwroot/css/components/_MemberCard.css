@@ -6,6 +6,7 @@
     text-align: center;
     border-radius: var(--radius-card);
     box-shadow: var(--surface2);
+    height: 28.75rem;
 }
 
     .member-card::after {

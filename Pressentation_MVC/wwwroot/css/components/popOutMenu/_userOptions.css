@@ -10,6 +10,7 @@
     z-index: 1;
     min-width: 18.75rem;
     gap: .5rem;
+    cursor: default;
 }
 
 .switch-container,

@@ -1,9 +1,10 @@
 ﻿<link rel="stylesheet" href="~/css/components/_TopNav.css" />
 
 <partial name="Partials/Components/_Search" />
-<ul class="top-nav-list">
+<ul data-util="true" class="top-nav-list">
     <li class="notification">
         <img src="~/images/bell-icon.svg" />
+        <partial name="Partials/Notification/_Notification" />
     </li>
     <li data-util="true" class="settings">
         <img src="~/images/setting-icon.svg" />

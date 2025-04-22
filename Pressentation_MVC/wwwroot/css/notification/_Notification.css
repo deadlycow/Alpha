@@ -1,0 +1,99 @@
+﻿.notification-container {
+    display: grid;
+    position: absolute;
+    top: 2.7rem;
+    right: 0;
+    padding: .5rem;
+    background-color: var(--bg-popout-menu);
+    border-radius: var(--border-radius-14);
+    box-shadow: var(--popup-80);
+    z-index: 1;
+    min-width: 23.75rem;
+    gap: .5rem;
+    cursor: default;
+}
+
+.not-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1.5rem;
+    background-color: var(--bg-popout-menu);
+    border-radius: var(--border-radius-14);
+}
+
+.not-header-text {
+    color: var(--notification-header);
+    font-size: var(--font-20);
+    font-weight: var(--font-weight-semibold);
+    font-family: 'Nunito';
+}
+
+.dot {
+    height: 1.25rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dot-red {
+    background-color: var(--red);
+}
+
+.not-count {
+    color: var(--surface);
+    font-size: var(--font-11);
+    font-weight: var(--font-weight-bold);
+    font-family: 'Nunito';
+}
+
+.divider {
+    border-top: 1px solid var(--layout-border-menu);
+}
+
+.notification-list {
+    display: grid;
+    padding: 0 .5rem 1rem .5rem;
+}
+
+.notification-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    padding: 0.7rem;
+    border-radius: var(--border-radius-14);
+    gap: .7rem;
+    justify-content: center;
+    align-items: center;
+}
+
+    .notification-item:hover {
+        background-color: var(--notification-item-bg);
+    }
+
+        .notification-item:hover .remove {
+            display: block;
+        }
+
+.notification-img {
+    height: 3.5rem;
+    aspect-ratio: 1;
+}
+
+.time {
+    color: var(--notification-time-text);
+    font-size: var(--font-14);
+    font-weight: var(--font-weight-normal);
+    font-family: 'Nunito';
+}
+
+.remove {
+    display: none;
+    height: 1.125rem;
+    aspect-ratio: 1;
+    margin-right: .5rem;
+}
+    .remove:hover {
+        cursor: pointer;
+    }
