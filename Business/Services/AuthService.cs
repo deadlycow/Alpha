@@ -9,7 +9,6 @@ public class AuthService(SignInManager<MemberEntity> signInManager, UserManager<
   private readonly SignInManager<MemberEntity> _signInManager = signInManager;
   private readonly UserManager<MemberEntity> _userManager = userManager;
 
-
   public async Task<bool> SignInAsync(SignInForm form)
   {
     var result = await _signInManager.PasswordSignInAsync(form.Email, form.Password, false, false);

@@ -1,17 +1,19 @@
+using Business.Interfaces;
 using Business.Services;
 using Data.Contexts;
 using Data.Entities;
 using Data.Interfaces;
 using Data.Repositories;
 using Data.Seeders;
-using Domain.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Pressentation_MVC.Hubs;
 using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
+builder.Services.AddSignalR();
 
 builder.Services.AddDbContext<DataContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("dbAlpha")));
 
@@ -82,7 +84,7 @@ builder.Services.AddScoped<ClientService>();
 builder.Services.AddScoped<ProjectService>();
 builder.Services.AddScoped<ImageService>();
 builder.Services.AddScoped<MpService>();
-
+builder.Services.AddScoped<INotificationService, NotificationService>();
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
 builder.Services.AddScoped<IMemberRepository, MemberRepository>();
@@ -107,5 +109,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Projects}/{action=Project}/{id?}")
     .WithStaticAssets();
+app.MapHub<NotificationHub>("/notificationHub");
 
 app.Run();

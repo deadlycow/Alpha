@@ -1,23 +1,105 @@
 ﻿<link rel="stylesheet" href="~/css/notification/_Notification.css" asp-append-version="true" />
+@{
+    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "anonymous";
+    var notifications = await notificationService.GetNotificationsAsync(userId, 5);
+    notifications = notifications.OrderByDescending(n => n.CreatedAt);
+}
 
 <div data-util-display="true" class="notification-container">
     <div class="not-head">
         <span class="not-header-text">Notification</span>
         <div class="dot dot-red">
-            <span class="not-count">1</span>
+            <span class="not-count">@notifications.Count()</span>
         </div>
-
     </div>
     <div class="divider"></div>
     <div class="notification-list">
-        <div class="notification-item">
-            <img class="notification-img" src="~/images/projectIcons/1.svg" />
-            <div>
-                <p>New message from John Doe</p>
-                <span class="time">2 minutes ago</span>
+        @foreach (var notification in notifications){
+            <div class="notification-item" data-id="">
+
+                <img class="notification-img" src="@notification.Icon" />
+                <div>
+                    <p>@notification.Message</p>
+                    <span class="time" data-created="@notification.CreatedAt.ToString("s")">@notification.CreatedAt</span>
+                </div>
+                <img class="remove" src="~/images/close-icon.svg" onclick="dismissNotification(@notification.Id)" />
             </div>
-            <img class="remove" src="~/images/close-icon.svg" />
-        </div>
+        }
 
     </div>
 </div>
+
+<script>
+
+    const connection = new signalR.HubConnectionBuilder()
+    .withUrl("/notificationHub")
+    .build()
+
+    connection.on("ReceiveNotification", function(notification) {
+            const notificationContainer = document.querySelector('.notification-container');
+            const notificationList = notificationContainer.querySelector('.notification-list');
+            const newNotification = document.createElement('div');
+            newNotification.classList.add('notification-item');
+            newNotification.setAttribute('data-id', notification.id)
+            newNotification.innerHTML =
+            `
+                <img class="notification-img" src="${notification.icon}" />
+                <div>
+                    <p>${notification.message}</p>
+                    <span class="time" data-created="${new Date(notification.createdAt).toISOString}">${notification.createdAt}</span>
+                </div>
+                <img class="remove" src="~/images/close-icon.svg" onclick="dismissNotification('${notification.id}')" />
+            `
+            notificationList.insertBefore(newNotification, notificationList.firstChild)
+            updateRelativeTimes()
+            updateNotificationCount()
+        });
+
+        connection.on("NotificationDismissed", function(notificationId) {
+           removeNotification(notificationId)
+        })
+
+        connection.start().catch(error => console.log(error));
+
+        async function dismissNotification(notificationId) {
+            try {
+                const res = await fetch(`/api/notifications/dismiss/${notificationId}`, {method: 'POST'})
+                if (res.ok){
+                 removeNotification(notificationId)
+                }
+                else {
+                    console.error('Failed to dismiss notification')
+                }
+            }
+            catch (error) {
+                console.log('Error removing notification: ', error)
+            }
+        }
+
+        function removeNotification(notificationId) {
+            const element = document.querySelector(`.notification-item[data-id="${notificationId}"]`)
+                    if (element) {
+                        element.remove()
+                        updateNotificationCount()
+                      }
+        }
+
+        function updateNotificationCount() {
+            const notifications = document.querySelector('.notification-container')
+            const notificationNumber = document.querySelector('.not-count')
+            const notificationIcon = document.querySelector('#notification')
+            const count = notifications.querySelectorAll('.notification-item').length
+
+            if (notificationNumber){
+                notificationNumber.textContent = count
+            }
+
+            if (count > 0 && !notificationIcon.classList.contains('new-dot')) {
+                notificationIcon.classList.add('new-not')
+            }
+            else if (count === 0 && notificationIcon.classList.contains('new-not')) {
+                notificationIcon.classList.remove('new-not')
+            }
+        }
+</script>
+@* flytta ut till egen script fil sen *@

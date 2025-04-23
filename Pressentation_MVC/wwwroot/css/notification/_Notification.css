@@ -1,5 +1,5 @@
 ﻿.notification-container {
-    display: grid;
+    display: none;
     position: absolute;
     top: 2.7rem;
     right: 0;

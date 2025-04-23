@@ -1,20 +1,26 @@
-﻿using Business.Services;
+﻿using Business.Interfaces;
+using Business.Services;
 using Data.Entities;
 using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
+using Pressentation_MVC.Hubs;
 using System.Security.Claims;
 
 namespace Pressentation_MVC.Controllers;
 
 [Route("/auth")]
 [AllowAnonymous]
-public class AuthController(AuthService authService, SignInManager<MemberEntity> signInManager, UserManager<MemberEntity> userManager) : Controller
+public class AuthController(AuthService authService, SignInManager<MemberEntity> signInManager, UserManager<MemberEntity> userManager, INotificationService notificationService, IHubContext<NotificationHub> notificationHub) : Controller
 {
   private readonly AuthService _authService = authService;
   private readonly SignInManager<MemberEntity> _signInManager = signInManager;
   private readonly UserManager<MemberEntity> _userManager = userManager;
+  private readonly INotificationService _notificationService = notificationService;
+  private readonly IHubContext<NotificationHub> _notificationHub = notificationHub;
+
 
   [Route("admin")]
   public IActionResult Admin()
@@ -58,7 +64,19 @@ public class AuthController(AuthService authService, SignInManager<MemberEntity>
 
     var result = await _authService.SignInAsync(form);
     if (result)
-      return LocalRedirect("~/");
+    {
+      //var user = await _userManager.FindByEmailAsync(form.Email);
+      //if (user != null)
+      //{
+      //  var notifications = await _notificationService.GetNotificationsAsync(user.Id);
+      //  var newNotification = notifications.OrderByDescending(n => n.CreatedAt).FirstOrDefault();
+      //  if (newNotification != null)
+      //  {
+      //    await _notificationHub.Clients.User(user.Id).SendAsync("ReceiveNotification", newNotification);
+      //  }
+      //}
+        return LocalRedirect("~/");
+    }
 
     ViewBag.ErrorMessage = "Incorrect email or password";
     return View(form);
