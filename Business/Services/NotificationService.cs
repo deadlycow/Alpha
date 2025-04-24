@@ -14,10 +14,10 @@ public class NotificationService(DataContext context) : INotificationService
       switch (notificationEntity.NotificationTypeId)
       {
         case 1:
-          notificationEntity.Icon = "~/images/profiles/1.svg";
+          notificationEntity.Icon = "images/profiles/1.svg";
           break;
         case 2:
-          notificationEntity.Icon = "~/images/projectIcons/1.svg";
+          notificationEntity.Icon = "images/projectIcons/1.svg";
           break;
       }
     
@@ -25,7 +25,7 @@ public class NotificationService(DataContext context) : INotificationService
     await _context.SaveChangesAsync();
   }
 
-  public async Task<IEnumerable<NotificationEntity>> GetNotificationsAsync(string userId, int take = 5)
+  public async Task<IEnumerable<NotificationEntity>> GetNotificationsAsync(string userId, int take = 10)
   {
     var dismissedIds = await _context.DismissedNotifications
       .Where(d => d.UserId == userId)

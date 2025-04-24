@@ -65,17 +65,7 @@ public class AuthController(AuthService authService, SignInManager<MemberEntity>
     var result = await _authService.SignInAsync(form);
     if (result)
     {
-      //var user = await _userManager.FindByEmailAsync(form.Email);
-      //if (user != null)
-      //{
-      //  var notifications = await _notificationService.GetNotificationsAsync(user.Id);
-      //  var newNotification = notifications.OrderByDescending(n => n.CreatedAt).FirstOrDefault();
-      //  if (newNotification != null)
-      //  {
-      //    await _notificationHub.Clients.User(user.Id).SendAsync("ReceiveNotification", newNotification);
-      //  }
-      //}
-        return LocalRedirect("~/");
+      return LocalRedirect("~/");
     }
 
     ViewBag.ErrorMessage = "Incorrect email or password";

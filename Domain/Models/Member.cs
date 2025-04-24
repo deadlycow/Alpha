@@ -37,4 +37,6 @@ public class Member
   public DateOnly? BirthDate { get; set; }
 
   public string Name => $"{FirstName} {LastName}";
+
+  public List<string> Roles { get; set; } = [];
 }

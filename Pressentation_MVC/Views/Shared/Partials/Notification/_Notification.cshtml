@@ -14,92 +14,17 @@
     </div>
     <div class="divider"></div>
     <div class="notification-list">
-        @foreach (var notification in notifications){
-            <div class="notification-item" data-id="">
+        @foreach (var notification in notifications)
+        {
+            <div class="notification-item" data-id="@notification.Id">
 
                 <img class="notification-img" src="@notification.Icon" />
                 <div>
                     <p>@notification.Message</p>
                     <span class="time" data-created="@notification.CreatedAt.ToString("s")">@notification.CreatedAt</span>
                 </div>
-                <img class="remove" src="~/images/close-icon.svg" onclick="dismissNotification(@notification.Id)" />
+                <img class="remove" src="~/images/close-icon.svg" onclick="dismissNotification('@notification.Id')" />
             </div>
         }
-
     </div>
 </div>
-
-<script>
-
-    const connection = new signalR.HubConnectionBuilder()
-    .withUrl("/notificationHub")
-    .build()
-
-    connection.on("ReceiveNotification", function(notification) {
-            const notificationContainer = document.querySelector('.notification-container');
-            const notificationList = notificationContainer.querySelector('.notification-list');
-            const newNotification = document.createElement('div');
-            newNotification.classList.add('notification-item');
-            newNotification.setAttribute('data-id', notification.id)
-            newNotification.innerHTML =
-            `
-                <img class="notification-img" src="${notification.icon}" />
-                <div>
-                    <p>${notification.message}</p>
-                    <span class="time" data-created="${new Date(notification.createdAt).toISOString}">${notification.createdAt}</span>
-                </div>
-                <img class="remove" src="~/images/close-icon.svg" onclick="dismissNotification('${notification.id}')" />
-            `
-            notificationList.insertBefore(newNotification, notificationList.firstChild)
-            updateRelativeTimes()
-            updateNotificationCount()
-        });
-
-        connection.on("NotificationDismissed", function(notificationId) {
-           removeNotification(notificationId)
-        })
-
-        connection.start().catch(error => console.log(error));
-
-        async function dismissNotification(notificationId) {
-            try {
-                const res = await fetch(`/api/notifications/dismiss/${notificationId}`, {method: 'POST'})
-                if (res.ok){
-                 removeNotification(notificationId)
-                }
-                else {
-                    console.error('Failed to dismiss notification')
-                }
-            }
-            catch (error) {
-                console.log('Error removing notification: ', error)
-            }
-        }
-
-        function removeNotification(notificationId) {
-            const element = document.querySelector(`.notification-item[data-id="${notificationId}"]`)
-                    if (element) {
-                        element.remove()
-                        updateNotificationCount()
-                      }
-        }
-
-        function updateNotificationCount() {
-            const notifications = document.querySelector('.notification-container')
-            const notificationNumber = document.querySelector('.not-count')
-            const notificationIcon = document.querySelector('#notification')
-            const count = notifications.querySelectorAll('.notification-item').length
-
-            if (notificationNumber){
-                notificationNumber.textContent = count
-            }
-
-            if (count > 0 && !notificationIcon.classList.contains('new-dot')) {
-                notificationIcon.classList.add('new-not')
-            }
-            else if (count === 0 && notificationIcon.classList.contains('new-not')) {
-                notificationIcon.classList.remove('new-not')
-            }
-        }
-</script>
-@* flytta ut till egen script fil sen *@

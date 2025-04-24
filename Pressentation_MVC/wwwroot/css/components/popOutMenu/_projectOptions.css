@@ -10,9 +10,9 @@
     box-shadow: var(--popup-80);
 }
 
-.project-options-container a {
-    color: var(--color-link-menu);
-}
+    .project-options-container a {
+        color: var(--color-link-menu);
+    }
 
 .relative-container {
     position: relative;
@@ -22,13 +22,32 @@
 .member-list {
     position: absolute;
     right: 105%;
-    bottom: 100%;
+    top: 0;
     z-index: 10;
-    background-color: orange;
-    width: 10rem;
+    background-color: var(--bg-popout-menu);
     max-width: 12rem;
     max-height: 20rem;
+    padding: 0.5rem;
+    border-radius: var(--border-radius-14);
+    box-shadow: var(--popup-80);
 }
+
+.member-select {
+    border: none;
+}
+
+    .member-select option {
+        font-size: var(--font-15);
+        font-weight: var(--font-weight-semibold);
+        font-family: 'Nunito';
+        cursor: pointer;
+        padding: .2rem;
+    }
+        .member-select option:hover {
+            background-color: var(--bg-more-hover);
+            color: var(--color-link-menu);
+            border-radius: var(--border-radius-8);
+        }
 
 .options-group {
     padding: 0.875rem;

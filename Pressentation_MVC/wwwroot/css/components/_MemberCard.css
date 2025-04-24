@@ -22,6 +22,33 @@
         margin: auto;
     }
 
+.member-card-role {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    cursor: pointer;
+}
+
+.dropdown-roles {
+    position: absolute;
+    display: none;
+    left: 0;
+    top: 0;
+    background-color: var(--bg-popout-menu);
+    z-index: 10;
+}
+
+.dropdown-roles-ul {
+    text-align: left;
+}
+
+    .dropdown-roles-ul li:hover {
+        background-color: var(--bg-card-color-span);
+        border-radius: var(--border-radius-8);
+        padding: .5rem;
+        cursor: pointer;
+    }
+
 .member-card-more {
     position: absolute;
     top: 1.25rem;
@@ -29,11 +56,12 @@
     display: flex;
     padding: .5rem;
 }
-.member-card-more:hover {
-    cursor: pointer;
-    background-color: var(--bg-more-hover);
-    border-radius: var(--border-radius-12);
-}
+
+    .member-card-more:hover {
+        cursor: pointer;
+        background-color: var(--bg-more-hover);
+        border-radius: var(--border-radius-12);
+    }
 
 .member-card-image {
     margin: 1.125rem auto 1rem auto;

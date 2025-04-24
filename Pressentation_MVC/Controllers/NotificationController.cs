@@ -1,5 +1,6 @@
 ﻿using Business.Interfaces;
 using Data.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
@@ -8,6 +9,7 @@ using System.Security.Claims;
 
 namespace Pressentation_MVC.Controllers
 {
+  [Authorize(Roles ="Admin, User")]
   [Route("api/[controller]")]
   [ApiController]
   public class NotificationController(IHubContext<NotificationHub> notificationHub, INotificationService notificationService) : ControllerBase

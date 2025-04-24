@@ -62,9 +62,19 @@ public class MemberService(UserManager<MemberEntity> userManager, IMemberReposit
   {
     try
     {
-      var members = await _userManager.Users.ToListAsync();
+      var users = await _userManager.Users.ToListAsync();
+      List<Member> members = [];
+      foreach (var user in users)
+      {
+        var roles = await _userManager.GetRolesAsync(user);
+
+        var member = MemberFactory.Create(user);
+        member.Roles = [.. roles];
+        members.Add(member);
+      }
+
       return members.Count > 0
-        ? Result<IEnumerable<Member>>.Ok(MemberFactory.CreateList(members))
+        ? Result<IEnumerable<Member>>.Ok(members)
         : new Result<IEnumerable<Member>>();
     }
     catch (Exception ex)
@@ -78,7 +88,7 @@ public class MemberService(UserManager<MemberEntity> userManager, IMemberReposit
     var entity = await _userManager.Users.Include(a => a.Address).FirstOrDefaultAsync(x => x.Id == id);
     if (entity == null)
       return Result.NotFound("Member not found.");
-    
+
     var member = entity.MapTo<Member>();
     member.Address = entity.Address?.MapTo<Address>();
     return Result<Member>.Ok(member);
@@ -111,6 +121,46 @@ public class MemberService(UserManager<MemberEntity> userManager, IMemberReposit
       return Result.InternalServerError("An error occurred while updating member");
     }
   }
+  public async Task<IResult> UpdateRoleAsync(string id, string role)
+  {
+    if (string.IsNullOrEmpty(id) || string.IsNullOrEmpty(role))
+      return Result.BadRequest("ID or role is null.");
+
+    await _repository.BeginTransactionAsync();
+    try
+    {
+      var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == id);
+      if (user == null)
+      {
+        await _repository.RollbackTransactionAsync();
+        return Result.NotFound("Member not found");
+      }
+
+      var currentRoles = await _userManager.GetRolesAsync(user);
+
+      var removeResult = await _userManager.RemoveFromRolesAsync(user, currentRoles);
+      if (!removeResult.Succeeded)
+      {
+        await _repository.RollbackTransactionAsync();
+        return Result.BadRequest("Could not remove existing roles");
+      }
+
+      var addResult = await _userManager.AddToRoleAsync(user, role);
+      if (!addResult.Succeeded)
+      {
+        await _repository.RollbackTransactionAsync();
+        return Result.BadRequest("Could not assign new role");
+      }
+      await _repository.CommitTransactionAsync();
+      return Result.Ok();
+    }
+    catch (Exception ex)
+    {
+      await _repository.RollbackTransactionAsync();
+      Debug.WriteLine($"Error updating role for member: {id}: {ex.Message}");
+      return Result.InternalServerError("An error occurred while updating member role");
+    }
+  }
   public async Task<IResult> DeleteAsync(string id)
   {
     await _repository.BeginTransactionAsync();
@@ -122,7 +172,7 @@ public class MemberService(UserManager<MemberEntity> userManager, IMemberReposit
         await _repository.RollbackTransactionAsync();
         return Result.NotFound($"Member with id {id} not found");
       }
-      
+
       var IsDeleted = await _userManager.DeleteAsync(member);
       if (!IsDeleted.Succeeded)
       {

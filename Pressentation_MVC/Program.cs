@@ -84,6 +84,7 @@ builder.Services.AddScoped<ClientService>();
 builder.Services.AddScoped<ProjectService>();
 builder.Services.AddScoped<ImageService>();
 builder.Services.AddScoped<MpService>();
+
 builder.Services.AddScoped<INotificationService, NotificationService>();
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 builder.Services.AddScoped<IClientRepository, ClientRepository>();

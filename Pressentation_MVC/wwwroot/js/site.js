@@ -73,15 +73,23 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', async (event) => {
             event.stopPropagation();
 
+            let title = ""
             const id = event.currentTarget.getAttribute('data-id');
             const target = event.currentTarget.getAttribute('data-controller');
+            if (target === 'project') {
+                title = event.currentTarget.closest('.project-card').querySelector('h6').innerText;
+            }
+            else if (target === 'members') {
+                title = event.currentTarget.closest('.member-card').querySelector('h4').innerText;
+            }
+
             try {
-                const res = await fetch(`/${target}/delete/${id}`, {
+                const res = await fetch(`/${target}/delete/${id}/${title}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ id })
+                    body: JSON.stringify({ id, title })
                 })
                 if (res.ok) {
                     window.location.reload();
@@ -129,40 +137,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
-    function updateRelativeTimes() {
-        const elements = document.querySelectorAll('._time');
-        const now = new Date();
 
-        elements.forEach(el => {
-            const created = new Date(el.getAttribute('data-created'));
-            const diff = now - created;
-            const diffSeconds = Math.floor(diff / 1000);
-            const diffMinutes = Math.floor(diffSeconds / 60);
-            const diffHours = Math.floor(diffMinutes / 60);
-            const diffDays = Math.floor(diffHours / 24);
-            const diffWeeks = Math.floor(diffDays / 7);
-
-            let relativeTime = '';
-
-            if (diffMinutes < 1) {
-                relativeTime = '0 min ago';
-            } else if (diffMinutes < 60) {
-                relativeTime = diffMinutes + ' min ago';
-            } else if (diffHours < 2) {
-                relativeTime = diffHours + ' hour ago';
-            } else if (diffHours < 24) {
-                relativeTime = diffHours + ' hours ago';
-            } else if (diffDays < 2) {
-                relativeTime = diffDays + ' day ago';
-            } else if (diffDays < 7) {
-                relativeTime = diffDays + ' days ago';
-            } else {
-                relativeTime = diffWeeks + ' weeks ago';
-            }
-
-            el.textContent = relativeTime;
-        });
-    }
 })
-
-
