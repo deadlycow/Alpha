@@ -16,7 +16,6 @@
 
 .relative-container {
     position: relative;
-    margin-bottom: .5rem;
 }
 
 .member-list {
@@ -69,4 +68,9 @@
 
 .hidden {
     display: none;
+}
+
+.input-complete-project {
+    height: 1.25rem;
+    aspect-ratio: 1;
 }

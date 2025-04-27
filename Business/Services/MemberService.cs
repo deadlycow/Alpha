@@ -130,29 +130,20 @@ public class MemberService(UserManager<MemberEntity> userManager, IMemberReposit
     try
     {
       var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == id);
-      if (user == null)
+      if (user != null)
       {
-        await _repository.RollbackTransactionAsync();
-        return Result.NotFound("Member not found");
+        var isAdmin = await _userManager.IsInRoleAsync(user, "Admin");
+        if (role == "Admin" && !isAdmin)
+          await _userManager.AddToRoleAsync(user, "Admin");
+        else if (role == "User" && isAdmin)
+          await _userManager.RemoveFromRoleAsync(user, "Admin");
+
+        await _repository.CommitTransactionAsync();
+        return Result.Ok();
       }
 
-      var currentRoles = await _userManager.GetRolesAsync(user);
-
-      var removeResult = await _userManager.RemoveFromRolesAsync(user, currentRoles);
-      if (!removeResult.Succeeded)
-      {
-        await _repository.RollbackTransactionAsync();
-        return Result.BadRequest("Could not remove existing roles");
-      }
-
-      var addResult = await _userManager.AddToRoleAsync(user, role);
-      if (!addResult.Succeeded)
-      {
-        await _repository.RollbackTransactionAsync();
-        return Result.BadRequest("Could not assign new role");
-      }
-      await _repository.CommitTransactionAsync();
-      return Result.Ok();
+      await _repository.RollbackTransactionAsync();
+      return Result.NotFound("Member not found");
     }
     catch (Exception ex)
     {

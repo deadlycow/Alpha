@@ -14,6 +14,7 @@
     text-transform: uppercase;
     font-size: var(--font-12);
     color: var(--color-or-text);
+    margin-top: 2rem;
 }
 
     .or-text::before, .or-text::after {

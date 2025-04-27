@@ -1,8 +1,7 @@
 ﻿.form-input {
     display: grid;
-    gap: 0.563rem;
     min-width: 25rem;
-    padding-top: 1.875rem;
+    margin-block: 1.5rem 1rem;
     position: relative;
 }
 
@@ -10,28 +9,31 @@
         font-size: var(--font-15);
         font-weight: var(--font-weight-semibold);
         color: var(--color-heading);
+        margin-bottom: 0.5rem;
     }
 
 .input-field {
-    border: 1px solid var(--color-input-border);
+    border: 3px solid var(--color-input-border);
     border-radius: var(--border-radius-14);
     padding: 0.875rem 1rem;
     font-size: var(--font-15);
-    position:relative;
-    z-index:1;
-    
+    width: 100%;
+    z-index: 1;
 }
+
+    .input-field:focus {
+        outline: none;
+    }
+
     .input-field::placeholder {
         color: var(--placeholder);
     }
 
-.password-container {
-    position: relative;
-}
 .toggle-password {
     position: absolute;
-    right: .75rem;
-    bottom: .8rem;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 1.3rem;
     border: none;
     background: none;
     cursor: pointer;
@@ -39,8 +41,14 @@
     align-items: center;
     justify-content: center;
 }
+
 .eye-icon {
     height: 1.5rem;
     aspect-ratio: 1/1;
+    z-index: 1;
+}
+
+.center-eye {
+    position: relative;
     z-index: 1;
 }

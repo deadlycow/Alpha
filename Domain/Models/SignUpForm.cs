@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Domain.Validation;
+using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Models;
 public class SignUpForm
@@ -29,8 +30,6 @@ public class SignUpForm
   [Required(ErrorMessage = "Required")]
   public string ConfirmPassword { get; set; } = null!;
 
-  //[Range(typeof(bool), "true", "true")]
-  //[Required(ErrorMessage = "Required")]
   [MustBeTrue(ErrorMessage = "You must accept the terms and conditions.")]
   public bool TermsConfirmed { get; set; }
 }

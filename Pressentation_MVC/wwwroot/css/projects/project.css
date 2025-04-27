@@ -17,6 +17,7 @@
     display: flex;
     gap: 2rem;
     border-bottom: 1px solid var(--layout-border);
+    
 }
 
     .sort-options ul li {
@@ -24,10 +25,39 @@
         font-size: var(--font-15);
         font-weight: var(--font-weight-bold);
         padding-bottom: 0.875rem;
+        cursor: pointer;
+        position: relative;
     }
+
+        .sort-options ul li:hover::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background-color: var(--color-list-options);
+            border-radius: 10px 10px 0 0;
+            filter: opacity(0.3);
+        }
 
 .project-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(auto, 18.75rem));
     gap: 1.875rem;
+}
+
+.options-list li.active{
+    color: var(--color-link)
+}
+
+.options-list li.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background-color: var(--color-link);
+    border-radius: 10px 10px 0 0;
 }

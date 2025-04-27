@@ -13,7 +13,9 @@ public static class ProjectFactory
     EndDate = entity.EndDate,
     Budget = entity.Budget,
     ProjectImage = entity.ProjectImage,
+    Status = entity.Status,
     ClientId = entity.ClientId,
+
     Members = entity.MemberProject?.Select(mp => new Member
     {
       ProfileImage = mp.Member.ProfileImage,
@@ -48,6 +50,7 @@ public static class ProjectFactory
     entity.Budget = form.Budget ?? 0m;
     entity.ClientId = form.ClientId;
     entity.Client = null;
+    entity.Status = form.Status;
     return entity;
   }
 

@@ -22,6 +22,8 @@
     padding-block: 0.875rem 1.375rem;
     font-size: var(--font-15);
     color: var(--color-checkbox-text);
+    display: flex;
+    gap: 0.5rem;
 }
 
 .btn {
@@ -33,14 +35,22 @@
     text-align: center;
 }
 
-.form-input .field-validation-error {
+#terms-invalid {
+    padding: .7rem;
+    border-radius: var(--border-radius-8);
     position: absolute;
-    font-size: var(--font-12);
-    color: var(--validation-error-text);
-    border-top-right-radius: var(--border-radius-14);
-    border-top-left-radius: var(--border-radius-14);
-    right: 0;
-    top: 2.2rem;
-    background-color: var(--validation-error-bg);
-    padding: .5rem .5rem 1rem .5rem;
+    left: -.3rem;
+    bottom: 0;
+    right: unset;
+    width: 15rem;
+}
+
+#acceptTerms {
+    z-index: 1;
+}
+
+.terms-span-container {
+    display: grid;
+    align-items: center;
+    position: relative;
 }

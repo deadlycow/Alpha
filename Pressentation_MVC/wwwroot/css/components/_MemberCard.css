@@ -28,6 +28,11 @@
     top: 1rem;
     cursor: pointer;
 }
+    .member-card-role:hover {
+        background-color: var(--bg-card-color-span);
+        border-radius: var(--border-radius-8);
+        padding: .5rem;
+    }
 
 .dropdown-roles {
     position: absolute;

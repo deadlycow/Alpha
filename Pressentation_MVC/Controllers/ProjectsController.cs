@@ -1,20 +1,15 @@
 ﻿using Business.Interfaces;
 using Business.Models;
 using Business.Services;
-using Data.Entities;
 using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
-using Pressentation_MVC.Hubs;
 using Pressentation_MVC.ViewModels;
-using System.Security.Claims;
 
 namespace Pressentation_MVC.Controllers
 {
   [Authorize]
-  public class ProjectsController(ProjectService projectService, ClientService clientServce, MemberService memberService, ImageService imageService, MpService mpService, INotificationService notificationService, IHubContext<NotificationHub> notificationHub) : Controller
+  public class ProjectsController(ProjectService projectService, ClientService clientServce, MemberService memberService, ImageService imageService, MpService mpService, INotificationService notificationService, INotificationDispatcher notificationDispatcher) : Controller
   {
     private readonly ProjectService _projectService = projectService;
     private readonly ClientService _clientServce = clientServce;
@@ -22,7 +17,7 @@ namespace Pressentation_MVC.Controllers
     private readonly ImageService _imageService = imageService;
     private readonly MpService _mpService = mpService;
     private readonly INotificationService _notificationService = notificationService;
-    private readonly IHubContext<NotificationHub> _notificationHub = notificationHub;
+    private readonly INotificationDispatcher _notificationDispatcher = notificationDispatcher;
 
     [Route("/")]
     public async Task<IActionResult> Project()
@@ -39,6 +34,7 @@ namespace Pressentation_MVC.Controllers
           Description = project.Description,
           StartDate = project.StartDate,
           EndDate = project.EndDate,
+          Status = project.Status,
           Members = project.Members!.Select(member => new MemberViewModel { Id = member.Id, Name = $"{member.FirstName} {member.LastName}", ProfileImage = member.ProfileImage! }),
           Budget = project.Budget ?? 0m,
         }).ToList();
@@ -91,22 +87,11 @@ namespace Pressentation_MVC.Controllers
       else
         form.ProjectImage = null;
 
-      //var user = await _userManager.FindByEmailAsync(form.Email);
-      //if (user != null)
-      //{
-      //  var notifications = await _notificationService.GetNotificationsAsync(user.Id);
-      //  var newNotification = notifications.OrderByDescending(n => n.CreatedAt).FirstOrDefault();
-      //  if (newNotification != null)
-      //  {
-      //    await _notificationHub.Clients.User(user.Id).SendAsync("ReceiveNotification", newNotification);
-      //  }
-      //}
-
       var result = await _projectService.Create(form);
       if (!result.Success)
         return BadRequest(result.ErrorMessage);
 
-      var notification = new NotificationEntity
+      var notification = new NotificationCreateModel
       {
         Icon = $"{form.ProjectUrl}",
         Message = $"Project \"{form.Name}\" has been created.",
@@ -115,7 +100,7 @@ namespace Pressentation_MVC.Controllers
       };
 
       await _notificationService.AddNotificationAsync(notification);
-      await _notificationHub.Clients.All.SendAsync("ReceiveNotification", notification);
+      await _notificationDispatcher.SendNotificationAsync(notification);
 
       return RedirectToAction("Project");
     }
@@ -129,7 +114,7 @@ namespace Pressentation_MVC.Controllers
       var respons = await _projectService.DeleteAsync(id);
       if (respons.Success)
       {
-        var notification = new NotificationEntity
+        var notification = new NotificationCreateModel
         {
           Icon = "images/delete-icon.svg",
           Message = $"Project \"{project}\" deleted.",
@@ -138,8 +123,7 @@ namespace Pressentation_MVC.Controllers
         };
 
         await _notificationService.AddNotificationAsync(notification);
-        await _notificationHub.Clients.All.SendAsync("ReceiveNotification", notification);
-
+        await _notificationDispatcher.SendNotificationAsync(notification);
         return RedirectToAction("Project");
       }
 
@@ -202,9 +186,47 @@ namespace Pressentation_MVC.Controllers
         var mpResult = await _mpService.Update(form.Id, form.MembersId!);
         if (!mpResult.Success)
           return BadRequest("Faild to update members.");
-      }
 
+        var notification = new NotificationCreateModel
+        {
+          Icon = "images/delete-icon.svg",
+          Message = $"Project \"{form.Name}\" updated.",
+          CreatedAt = DateTime.UtcNow,
+          NotificationTypeId = 2,
+        };
+
+        await _notificationService.AddNotificationAsync(notification);
+        await _notificationDispatcher.SendNotificationAsync(notification);
+      }
       return RedirectToAction("Project");
+    }
+    [HttpPost("Project/Update/{id}/{status}")]
+    public async Task<IActionResult> UpdateStatus(int id, bool status)
+    {
+      if (id < 1) return BadRequest();
+
+      var form = await _projectService.GetAsync(id);
+
+      if (form is Result<Project> project)
+      {
+        project.Data!.Status = status;
+        var res = await _projectService.UpdateAsync(project.Data);
+        if (!res.Success)
+          return BadRequest("Faild to update status.");
+
+        var notification = new NotificationCreateModel
+        {
+          Icon = "images/delete-icon.svg",
+          Message = $"Project \"{project.Data.Name}\" status changed.",
+          CreatedAt = DateTime.UtcNow,
+          NotificationTypeId = 2,
+        };
+
+        await _notificationService.AddNotificationAsync(notification);
+        await _notificationDispatcher.SendNotificationAsync(notification);
+        return RedirectToAction("Project");
+      }
+      return BadRequest("Failed to update project status.");
     }
   }
 }

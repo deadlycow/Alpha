@@ -8,6 +8,7 @@ using Data.Seeders;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Pressentation_MVC.Dispatchers;
 using Pressentation_MVC.Hubs;
 using System.Security.Claims;
 
@@ -85,6 +86,7 @@ builder.Services.AddScoped<ProjectService>();
 builder.Services.AddScoped<ImageService>();
 builder.Services.AddScoped<MpService>();
 
+builder.Services.AddScoped<INotificationDispatcher, NotificationDispatcher>();
 builder.Services.AddScoped<INotificationService, NotificationService>();
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 builder.Services.AddScoped<IClientRepository, ClientRepository>();

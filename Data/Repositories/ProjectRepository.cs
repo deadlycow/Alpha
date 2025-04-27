@@ -26,6 +26,7 @@ public class ProjectRepository(DataContext context) : BaseRepository<ProjectEnti
       EndDate = project.EndDate,
       Budget = project.Budget,
       ClientId = project.ClientId,
+      Status = project.Status,
       Client = new Client
       {
         Id = project.Client!.Id,

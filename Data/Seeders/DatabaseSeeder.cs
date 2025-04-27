@@ -36,7 +36,7 @@ public class DatabaseSeeder
       var result = await userManager.CreateAsync(adminUser, "Admin!123");
 
       if (result.Succeeded)
-        await userManager.AddToRoleAsync(adminUser, "Admin");
+        await userManager.AddToRolesAsync(adminUser, roleNames);
     }
   }
 }

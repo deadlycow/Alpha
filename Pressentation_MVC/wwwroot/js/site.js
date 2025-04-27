@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let title = ""
             const id = event.currentTarget.getAttribute('data-id');
             const target = event.currentTarget.getAttribute('data-controller');
-            if (target === 'project') {
+            if (target === 'projects') {
                 title = event.currentTarget.closest('.project-card').querySelector('h6').innerText;
             }
             else if (target === 'members') {

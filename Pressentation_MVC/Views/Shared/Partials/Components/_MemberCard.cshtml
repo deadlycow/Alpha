@@ -3,10 +3,7 @@
 
 <div class="member-card" data-id="@Model.Id">
     <div class="member-card-role">
-        @foreach (var role in Model.Roles)
-        {
-            @role
-        }
+        @(Model.Roles.Count > 1 ? Model.Roles[0] : Model.Roles[0])
         <div class="dropdown-roles">
             <ul class="dropdown-roles-ul">
                 <li data-role="User">User</li>

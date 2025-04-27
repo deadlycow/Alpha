@@ -10,9 +10,10 @@
     </div>
     <div class="sort-options">
         <ul class="options-list">
-            <li>ALL [0]</li>
-            <li>STARTED [?]</li>
-            <li>COMPLETED [?]</li>
+            <li data-filter="all" class="active">ALL [@Model.Count()]</li>
+            <li data-filter="started">STARTED [@Model.Count(p => p.StartDate <= DateOnly.FromDateTime(DateTime.Now) && p.EndDate >= DateOnly.FromDateTime(DateTime.Now) || !p.EndDate.HasValue)]</li>
+            <li data-filter="completed">COMPLETED [@Model.Where(p => p.Status == true).Count()]</li>
+            <li data-filter="expired">EXPIRED [@Model.Count(p => p.EndDate.HasValue && p.EndDate < DateOnly.FromDateTime(DateTime.Now) && p.Status == false)]</li>
         </ul>
     </div>
     <div class="project-grid">
@@ -25,3 +26,5 @@
 
 <script src="~/js/formDataLoaderClients.js" asp-append-version="true"></script>
 <script src="~/js/formDataLoaderProject.js" type="module" asp-append-version="true"></script>
+<script src="~/js/sortProject.js" asp-append-version="true"></script>
+<script src="~/js/completeProject.js" asp-append-version="true"></script>

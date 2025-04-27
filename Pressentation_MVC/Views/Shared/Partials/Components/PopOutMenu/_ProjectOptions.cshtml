@@ -7,14 +7,20 @@
     </a>
     <div class="relative-container">
         <a data-menu-modal="true" data-target="#memberMenuList" data-id="@Model.Id" class="options-group">
-            <img src="~/images/add-user-icon.svg" />
-            Add Member
+            <img src="~/images/add-user-icon.svg" /> Add Member
         </a>
         <div id="memberMenuList" class="member-list hidden">
             <select multiple class="member-select">
             </select>
         </div>
     </div>
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="options-group">
+            <input class="input-complete-project" type="checkbox" checked="@Model.Status" data-id="@Model.Id" />
+            Completed
+        </div>
+    }
     <a data-delete="true" data-controller="projects" data-id="@Model.Id" class="options-group delete-link">
         <img src="~/images/delete-icon.svg" />
         Delete Project

@@ -11,6 +11,7 @@ public class ProjectViewModel
   public DateOnly StartDate { get; set; } = new DateOnly();
   public DateOnly? EndDate { get; set; }
   public IEnumerable<MemberViewModel> Members { get; set; } = [];
+  public bool Status { get; set; } = false;
   public decimal Budget { get; set; }
 
   public string TimeLeft

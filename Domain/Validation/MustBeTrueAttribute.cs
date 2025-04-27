@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Domain;
+namespace Domain.Validation;
 public class MustBeTrueAttribute : ValidationAttribute
 {
   public override bool IsValid(object? value)
@@ -9,6 +9,6 @@ public class MustBeTrueAttribute : ValidationAttribute
   }
   public override string FormatErrorMessage(string name)
   {
-    return $"{name} must be accepted.";
+    return $" ";
   }
 }

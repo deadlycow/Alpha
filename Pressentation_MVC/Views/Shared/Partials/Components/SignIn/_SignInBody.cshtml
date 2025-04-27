@@ -8,9 +8,11 @@
     </div>
     <div class="form-input password-container">
         <label asp-for="Password"></label>
-        <input asp-for="Password" class="input-field" />
+        <div class="center-eye">
+            <input asp-for="Password" class="input-field" />
+            <img class="toggle-password eye-icon" src="/images/eye-closed.svg" alt="Toggle Password">
+        </div>
         <span asp-validation-for="Password"></span>
-        <img class="toggle-password eye-icon" src="/images/eye-closed.svg" alt="Toggle Password">
     </div>
     <div class="form-me">
         <div>

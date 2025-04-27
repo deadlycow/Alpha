@@ -1,23 +1,19 @@
 ﻿using Business.Interfaces;
 using Business.Models;
 using Business.Services;
-using Data.Entities;
 using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
-using Pressentation_MVC.Hubs;
-using System.Security.Claims;
 
 namespace Pressentation_MVC.Controllers
 {
-  public class MembersController(MemberService memberService, ImageService imageService, MpService mpService, INotificationService notificationService, IHubContext<NotificationHub> notificationHub) : Controller
+  public class MembersController(MemberService memberService, ImageService imageService, MpService mpService, INotificationService notificationService, INotificationDispatcher notificationDispatcher) : Controller
   {
     private readonly MemberService _memberService = memberService;
     private readonly ImageService _imageService = imageService;
     private readonly MpService _mpService = mpService;
     private readonly INotificationService _notificationService = notificationService;
-    private readonly IHubContext<NotificationHub> _notificationHub = notificationHub;
+    private readonly INotificationDispatcher _notificationDispatcher = notificationDispatcher;
 
     [Authorize(Roles = "Admin")]
     [Route("team")]
@@ -46,7 +42,6 @@ namespace Pressentation_MVC.Controllers
       }
 
       var imgUploaded = await _imageService.Upload(form.MemberImage!);
-
       if (imgUploaded.Success)
         form.ProfileImage = imgUploaded.Message;
       else
@@ -56,7 +51,7 @@ namespace Pressentation_MVC.Controllers
       if (!result.Success)
         return BadRequest(result.ErrorMessage);
 
-      var notification = new NotificationEntity
+      var notification = new NotificationCreateModel
       {
         Icon = $"{form.ProfileImage}",
         Message = $"Member \"{form.FirstName} {form.LastName}\" created.",
@@ -66,8 +61,7 @@ namespace Pressentation_MVC.Controllers
       };
 
       await _notificationService.AddNotificationAsync(notification);
-      await _notificationHub.Clients.Group("Admin").SendAsync("ReceiveNotification", notification);
-      Console.WriteLine($"Skickar till grupp: {notification.NotificationTargetGroupId}"); // letar fel
+      await _notificationDispatcher.SendNotificationAsync(notification);
       return RedirectToAction("Member");
     }
 
@@ -98,6 +92,17 @@ namespace Pressentation_MVC.Controllers
       if (!result.Success)
         return BadRequest(result.ErrorMessage);
 
+      var notification = new NotificationCreateModel
+      {
+        Icon = $"{form.ProfileImage}",
+        Message = $"Member \"{form.FirstName} {form.LastName}\" updated.",
+        CreatedAt = DateTime.UtcNow,
+        NotificationTypeId = 1,
+        NotificationTargetGroupId = 2,
+      };
+
+      await _notificationService.AddNotificationAsync(notification);
+      await _notificationDispatcher.SendNotificationAsync(notification);
       return RedirectToAction("Member", "Members");
     }
 
@@ -112,7 +117,7 @@ namespace Pressentation_MVC.Controllers
       if (respons.Success)
       {
         //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        var notification = new NotificationEntity
+        var notification = new NotificationCreateModel
         {
           Icon = "images/delete-icon.svg",
           Message = $"Member \"{name}\" deleted.",
@@ -122,8 +127,7 @@ namespace Pressentation_MVC.Controllers
         };
 
         await _notificationService.AddNotificationAsync(notification);
-        await _notificationHub.Clients.Group("Admins").SendAsync("ReceiveNotification", notification);
-
+        await _notificationDispatcher.SendNotificationAsync(notification);
         return RedirectToAction("Member");
       }
 

@@ -33,6 +33,8 @@ public class ProjectEntity
   [Required]
   public ClientEntity? Client { get; set; }
   
+  public bool Status { get; set; } = false;
+
   public ICollection<MemberProjectEntity>? MemberProject { get; set; }
   
 }
