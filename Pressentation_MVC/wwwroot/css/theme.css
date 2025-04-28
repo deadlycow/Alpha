@@ -13,6 +13,7 @@
     --border-300: #C6C8CC;
     --border-23: #232324;
     --background: #F1F3F7;
+    --dark-100: #313133;
     --dark-background-card: #202123;
     --dark-background-card-drop: #1C1D1F;
     --dark-time: #38383B;
@@ -39,7 +40,9 @@
     --black-25: #00000040;
     --black-30: #0000004D;
     --black-70: #000000B3;
+    --hover: #F0F0F0;
     --overlay: #1A1A1A33;
+    --placerholder-darkmode: #9E9E9E;
     --surface1: 0px 20px 30px -18px #040F151A;
     --surface2: 0px 40px 30px -30px #040F150F;
     --popup: 0px 40px 30px -30px #040F1526, 0px 50px 50px 0px #040F1526;
@@ -130,6 +133,20 @@
     --notification-header: var(--heading);
     --notification-item-bg: var(--gray-100);
     --notification-time-text: var(--body-light);
+    --dark-mode-text: var(--body-dark);
+    --logout-link: var(--body-dark);
+    --notification-item-title: var(--body-dark);
+    --notification-dot: var(--background);
+    --member-card-text: var(--body-dark);
+    --member-card-role: var(--body-dark);
+    --dropdown-roles: var(--body-dark);
+    --image-previewer-bg: var(--surface);
+    --input-text-color: var(--body-dark);
+    --input-bg-color: var(--surface);
+    --arrow-color: 0;
+    --bg-compact-search: var(--surface);
+    --hover-compact-search: var(--hover);
+    --calander-icon: 0;
 }
 
 [data-theme="dark"] {
@@ -142,8 +159,9 @@
     --surface2: 0px 20px 30px -18px var(--black-25);
     --color-card-description: var(--gray-50);
     --color-card-company-name: var(--gray);
+    --color-modal-label: var(--surface);
     --bg-more-hover: var(--black-25);
-    --bg-popout-menu: var(--dark-background-card);
+    --bg-popout-menu: var(--bg-color);
     --color-link-menu: var(--surface);
     --popup-80: 0px 16px 80px 0px var(--black-30), 0px 40px 20px -30px var(--black-70);
     --color-card-summary-text: var(--surface);
@@ -151,6 +169,32 @@
     --clock-bg: var(--gray-50);
     --clock-hands: var(--gray-50);
     --btn-primary-border-color: transparent;
+    --color-current-user-text: var(--surface);
+    --bg-current-user: var(--dark-background-card);
+    --logout-link: var(--surface);
+    --dark-mode-text: var(--surface);
+    --notification-item-bg: var(--dark-background-card);
+    --notification-item-title: var(--surface);
+    --notification-header: var(--surface);
+    --filter-remove-btn: 10;
+    --bell: 9;
+    --notification-dot: var(--bg-color);
+    --member-card-text: var(--gray-50);
+    --member-card-role: var(--gray-50);
+    --dropdown-roles: var(--gray-50);
+    --color-logo-text: var(--surface);
+    --bg-modal: var(--dark-background-card);
+    --image-previewer-bg: var(--dark-background-card-drop);
+    --layout-border-menu: #2F2F30;
+    --input-bg-color: var(--bg-modal);
+    --input-text-color: var(--placerholder-darkmode);
+    --arrow-color: 1;
+    --border-compact: var(--layout-border-menu);
+    --bg-compact-search: var(--input-bg-color);
+    --bg-compact-li: var(--dark-100);
+    --color-text-search: var(--gray-50);
+    --hover-compact-search: var(--bg-more-hover);
+    --calander-icon: 1;
 }
 
 h1 {

@@ -1,28 +1,29 @@
 ﻿.modal-overlay {
-  display: none;
-  place-content: center;
-  flex-wrap: wrap;
-  position: absolute;
-  inset: 0;
-  background-color: var(--bg-overlay);
-  margin: 0;
-  z-index: 1;
+    display: none;
+    place-content: center;
+    flex-wrap: wrap;
+    position: absolute;
+    inset: 0;
+    background-color: var(--bg-overlay);
+    margin: 0;
+    z-index: 1;
 }
 
 .bg-modal {
-  background-color: var(--bg-modal);
-  display: grid;
-  padding: 1.875rem;
-  border-radius: var(--border-radius-16);
+    background-color: var(--bg-modal);
+    display: grid;
+    padding: 1.875rem;
+    border-radius: var(--border-radius-16);
 }
 
 .member-header {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 
 .close-modal {
-  cursor: pointer;
+    cursor: pointer;
+    filter: brightness(var(--bell));
 }
 
 .image-previewer {
@@ -32,7 +33,6 @@
     margin: 2rem auto 1.5rem auto;
     border: 2px dashed var(--border-camera);
     height: 9.375rem;
-/*    width: 9.375rem;*/
     aspect-ratio: 1/1;
     cursor: pointer;
     overflow: hidden;
@@ -53,7 +53,6 @@
         border-radius: 50%;
         position: relative;
         align-self: center;
-        /*        bottom: 0;*/
     }
 
     .image-previewer.selected::after {
@@ -64,20 +63,21 @@
         border: none;
     }
 
-  .image-previewer.circle {
-    border-radius: 50%;
-  }
+    .image-previewer.circle {
+        border-radius: 50%;
+        background-color: var(--image-previewer-bg);
+    }
 
-  .image-previewer.square {
-    border-radius: 2.5rem;
-  }
+    .image-previewer.square {
+        border-radius: 2.5rem;
+    }
 
 .image-preview {
     display: flex;
 }
 
 .hide {
-  display: none;
+    display: none;
 }
 
 .form-group-flex {
@@ -90,51 +90,59 @@
     width: 100%;
 }
 
-  .form-group label {
-    font-size: var(--font-15);
-    font-weight: var(--font-weight-medium);
-    color: var(--color-modal-label);
-  }
+    .form-group label {
+        font-size: var(--font-15);
+        font-weight: var(--font-weight-medium);
+        color: var(--color-modal-label);
+    }
 
 .field-group {
     margin-top: 9px;
+    z-index: 1;
 }
 
-  .field-group input {
-    font-size: var(--font-15);
-    padding: .875rem 1rem;
-    border-radius: var(--border-radius-14);
-    border: 1px solid var(--layout-border-menu);
-    width: 100%;
-  }
-
-    .field-group input:focus {
-      outline: none;
+    .field-group input {
+        font-size: var(--font-15);
+        padding: .875rem 1rem;
+        border-radius: var(--border-radius-14);
+        border: 1px solid var(--layout-border-menu);
+        background-color: var(--input-bg-color);
+        color: var(--input-text-color);
+        width: 100%;
     }
+
+        .field-group input:focus {
+            outline: none;
+        }
 
 .custom-arrow {
-  width: 100%;
-  position: relative;
+    width: 100%;
+    position: relative;
 }
 
-  .custom-arrow::after {
-    content: url(/images/arrow-down-icon.svg);
-    filter: grayscale(100%) brightness(0);
-    position: absolute;
-    right: .875rem;
-    top: 1rem;
-  }
+.custom-arrow select {
+    background-color: var(--input-bg-color);
+    color: var(--input-text-color);
+}
 
-  .custom-arrow select {
-    appearance: none;
-    font-size: var(--font-15);
-    padding: .875rem 1rem;
-    cursor: pointer;
-    border: 1px solid var(--layout-border-menu);
-    border-radius: var(--border-radius-14);
-    width: 100%;
-  }
-
-    .custom-arrow select:focus {
-      outline: none;
+    .custom-arrow::after {
+        content: url(/images/arrow-down-icon.svg);
+        filter: grayscale(100%) brightness(var(--arrow-color));
+        position: absolute;
+        right: .875rem;
+        top: 1rem;
     }
+
+    .custom-arrow select {
+        appearance: none;
+        font-size: var(--font-15);
+        padding: .875rem 1rem;
+        cursor: pointer;
+        border: 1px solid var(--layout-border-menu);
+        border-radius: var(--border-radius-14);
+        width: 100%;
+    }
+
+        .custom-arrow select:focus {
+            outline: none;
+        }

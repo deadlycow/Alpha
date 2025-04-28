@@ -1,7 +1,7 @@
 ﻿<link rel="stylesheet" href="~/css/notification/_Notification.css" asp-append-version="true" />
 @{
     var userId = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "anonymous";
-    var notifications = await notificationService.GetNotificationsAsync(userId, 5);
+    var notifications = await notificationService.GetNotificationsAsync(userId, 10);
     notifications = notifications.OrderByDescending(n => n.CreatedAt);
 }
 

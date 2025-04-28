@@ -24,6 +24,7 @@
 
 .close-modal {
     cursor: pointer;
+    filter: brightness(var(--bell));
 }
 
 .image-previewer {
@@ -96,8 +97,14 @@
         color: var(--color-modal-label);
     }
 
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(var(--calander-icon));
+}
+
 .field-group {
     margin-top: 9px;
+    position: relative;
+    z-index: 1;
 }
 
     .field-group select,
@@ -106,7 +113,9 @@
         padding: .875rem 1rem;
         border-radius: var(--border-radius-14);
         border: 1px solid var(--layout-border-menu);
+        background-color: var(--input-bg-color);
         width: 100%;
+        color: var(--input-text-color);
     }
 
         .field-group input:focus {
@@ -120,7 +129,7 @@
 
     .custom-arrow::after {
         content: url(/images/arrow-down-icon.svg);
-        filter: grayscale(100%) brightness(0);
+        filter: grayscale(100%) brightness(var(--arrow-color));
         position: absolute;
         right: .875rem;
         top: 1rem;
@@ -155,4 +164,11 @@
         left: .8rem;
         top: 50%;
         transform: translateY(-50%);
+        color: var(--input-text-color);
     }
+#submit-btn-form-reg-update{
+    margin-top: 2rem;
+}
+#add-project {
+    margin-top: 2rem;
+}

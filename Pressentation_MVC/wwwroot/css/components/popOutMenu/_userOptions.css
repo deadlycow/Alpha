@@ -94,8 +94,20 @@
 .logout-container {
     border-top: 1px solid var(--layout-border-menu);
 }
-
+    .switch-container:hover,
     .logout-container:hover {
         background-color: var(--bg-current-user);
         border-radius: var(--border-radius-14);
     }
+
+.dark-mode-text{
+    color: var(--dark-mode-text);
+}
+
+.logout-link {
+    color: var(--logout-link);
+}
+
+.logout-img{
+    filter: drop-shadow(0 0 .05rem white);
+}

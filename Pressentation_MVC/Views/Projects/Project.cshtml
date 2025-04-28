@@ -11,7 +11,7 @@
     <div class="sort-options">
         <ul class="options-list">
             <li data-filter="all" class="active">ALL [@Model.Count()]</li>
-            <li data-filter="started">STARTED [@Model.Count(p => p.StartDate <= DateOnly.FromDateTime(DateTime.Now) && p.EndDate >= DateOnly.FromDateTime(DateTime.Now) || !p.EndDate.HasValue)]</li>
+            <li data-filter="started">STARTED [@Model.Count(p => !p.Status && p.StartDate <= DateOnly.FromDateTime(DateTime.Now) && p.EndDate >= DateOnly.FromDateTime(DateTime.Now) || !p.EndDate.HasValue)]</li>
             <li data-filter="completed">COMPLETED [@Model.Where(p => p.Status == true).Count()]</li>
             <li data-filter="expired">EXPIRED [@Model.Count(p => p.EndDate.HasValue && p.EndDate < DateOnly.FromDateTime(DateTime.Now) && p.Status == false)]</li>
         </ul>

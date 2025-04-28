@@ -16,6 +16,7 @@
 
 .compact-search-icon {
     cursor: pointer;
+    filter: brightness(var(--bell));
 }
 
 .compact-search {
@@ -34,6 +35,8 @@
     outline: none;
     font-size: var(--font-15);
     display: flex;
+    background-color: var(--bg-compact-search);
+    color: var(--input-text-color);
 }
 
 .compact-ul {
@@ -50,6 +53,7 @@
     padding: .438rem 1.75rem .438rem .438rem;
     background-color: var(--bg-compact-li);
     border-radius: var(--border-radius-8);
+    color: var(--color-text-search);
     font-size: var(--font-14);
     position: relative;
     white-space: nowrap;
@@ -58,6 +62,7 @@
 .compact-li-img {
     height: 1.375rem;
     aspect-ratio: 1/1;
+    border-radius: 50%;
 }
 
 .compact-li-close {
@@ -66,13 +71,15 @@
     height: .75rem;
     aspect-ratio: 1/1;
     cursor: pointer;
+    filter: brightness(var(--bell));
 }
 
 .dropdown {
     position: absolute;
     width: 100%;
     border: 1px solid #ccc;
-    background: white;
+    background: var(--input-bg-color);
+    color: var(--color-text-search);
     max-height: 150px;
     overflow-y: auto;
     display: none;
@@ -86,5 +93,5 @@
     }
 
         .dropdown div:hover {
-            background: #f0f0f0;
+            background: var(--hover-compact-search);
         }

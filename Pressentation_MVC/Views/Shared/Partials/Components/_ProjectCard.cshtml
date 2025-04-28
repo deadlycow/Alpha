@@ -1,7 +1,7 @@
 ﻿<link rel="stylesheet" href="~/css/components/_ProjectCard.css" asp-append-version="true" />
 @model ProjectViewModel
 
-<div class="project-card" data-status="@Model.Status" data-start-date="@Model.StartDate" data-end-date="@Model.EndDate">
+<div class="project-card" data-search-target="project-card" data-value-1="@Model.Name" data-value-2="@Model.Client.Name" data-status="@Model.Status" data-start-date="@Model.StartDate" data-end-date="@Model.EndDate">
     @if (Model.ProjectImage != null)
     {
         <img src="@Model.ProjectImage" />

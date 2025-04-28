@@ -10,7 +10,7 @@
     <div class="switch-container">
         <div class="switch-header">
             <img src="~/images/setting-icon.svg" />
-            <p>Dark Mode</p>
+            <p class="dark-mode-text">Dark Mode</p>
         </div>
         <label class="switch">
             <input type="checkbox" id="theme-switch" />
@@ -18,8 +18,8 @@
         </label>
     </div>
     <div class="logout-container">
-        <a asp-controller="Auth" asp-action="Logout">
-            <img src="~/images/logout-icon.svg" />
+        <a asp-controller="Auth" asp-action="Logout" class="logout-link">
+            <img class="logout-img" src="~/images/logout-icon.svg" />
             <p>Logout</p>
         </a>
     </div>

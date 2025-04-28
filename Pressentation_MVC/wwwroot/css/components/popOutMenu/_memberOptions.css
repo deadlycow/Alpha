@@ -11,13 +11,16 @@
     min-width: 14.375rem;
     gap: .5rem;
 }
+    .member-options-container a {
+        color: var(--logout-link);
+    }
 
 
-.member-options-group {
-    display: flex;
-    padding: 0.75rem;
-    gap: 1rem;
-}
+    .member-options-group {
+        display: flex;
+        padding: 0.75rem;
+        gap: 1rem;
+    }
 
 .options-group {
     display: flex;
@@ -51,4 +54,8 @@
     background-color: var(--bg-current-user);
     border-radius: var(--border-radius-14);
     cursor: pointer;
+}
+
+.edit-icon{
+    filter: brightness(var(--bell));
 }

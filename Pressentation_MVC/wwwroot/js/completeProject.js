@@ -10,6 +10,7 @@
                     method: 'POST'
                 })
                 if (res.ok) {
+                    window.location.reload()
                     console.log('Project completion status updated successfully.');
                 } else {
                     console.error('Failed to update project completion status.');

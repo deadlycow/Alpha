@@ -27,9 +27,12 @@
     left: 1rem;
     top: 1rem;
     cursor: pointer;
+    color: var(--member-card-role);
 }
+
     .member-card-role:hover {
         background-color: var(--bg-card-color-span);
+        color: var(--body-dark);
         border-radius: var(--border-radius-8);
         padding: .5rem;
     }
@@ -39,7 +42,7 @@
     display: none;
     left: 0;
     top: 0;
-    background-color: var(--bg-popout-menu);
+    background-color: var(--bg-card-color);
     z-index: 10;
 }
 
@@ -47,12 +50,17 @@
     text-align: left;
 }
 
-    .dropdown-roles-ul li:hover {
-        background-color: var(--bg-card-color-span);
-        border-radius: var(--border-radius-8);
-        padding: .5rem;
-        cursor: pointer;
+    .dropdown-roles-ul li {
+        color: var(--dropdown-roles);
     }
+
+        .dropdown-roles-ul li:hover {
+            background-color: var(--bg-card-color-span);
+            border-radius: var(--border-radius-8);
+            color: var(--body-dark);
+            padding: .5rem;
+            cursor: pointer;
+        }
 
 .member-card-more {
     position: absolute;
@@ -96,10 +104,12 @@
 
 .member-card-email {
     padding-top: 1.438rem;
+    color: var(--member-card-text);
 }
 
 .member-card-phone {
-    padding-top: 0.813rem
+    padding-top: 0.813rem;
+    color: var(--member-card-text);
 }
 
 .member-card-button {

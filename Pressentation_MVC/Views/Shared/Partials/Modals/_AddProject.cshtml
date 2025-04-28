@@ -7,7 +7,7 @@
             <h2>Add Project</h2>
             <img class="close-modal" data-close="true" src="~/images/close-icon.svg" />
         </div>
-        <form id="form-reg-project" novalidate asp-action="Create" asp-controller="Projects">
+        <form id="form-reg-project" class="quill-form" novalidate asp-action="Create" asp-controller="Projects">
             <div class="image-previewer square">
                 <img class="image-preview" src="" />
                 <input asp-for="ProjectImage" type="file" accept="image/*" class="hide" />
@@ -49,7 +49,8 @@
             <div class="form-group">
                 <label asp-for="Description"></label>
                 <div class="field-group">
-                    <textarea asp-for="Description"></textarea>
+                    <textarea class="content-input" hidden asp-for="Description"></textarea>
+                    <div class="editor"></div>
                     <span asp-validation-for="Description"></span>
                 </div>
             </div>
@@ -67,10 +68,9 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary">Add Project</button>
+            <button type="submit" id="add-project" class="btn btn-primary">Add Project</button>
         </form>
     </div>
 </div>
 
 <script src="~/js/formCreateProject.js" type="module" asp-append-version="true"></script>
-@* @await Html.PartialAsync("Scripts/_ValidationScript") *@

@@ -3,6 +3,7 @@
     min-width: 25rem;
     margin-block: 1.5rem 1rem;
     position: relative;
+    z-index: 1;
 }
 
     .form-input label {

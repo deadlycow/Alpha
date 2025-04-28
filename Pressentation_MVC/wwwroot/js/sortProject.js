@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					show = true
 				}
 				else if (filterValue == 'started') {
-					if (startDate <= currentDate && (!endDate || endDate >= currentDate))
+					if (startDate <= currentDate && (!endDate || endDate >= currentDate) && status === 'False')
 						show = true;
 				}
 				else if (filterValue === 'completed') {

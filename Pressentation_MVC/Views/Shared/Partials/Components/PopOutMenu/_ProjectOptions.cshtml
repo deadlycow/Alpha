@@ -2,12 +2,12 @@
 @model ProjectViewModel
 <div data-display="true" class="project-options-container">
     <a data-modal="true" data-target="#editProjectModal" data-id="@Model.Id" class="options-group">
-        <img src="~/images/edit-icon.svg" />
+        <img class="edit-icon" src="~/images/edit-icon.svg" />
         Edit
     </a>
     <div class="relative-container">
         <a data-menu-modal="true" data-target="#memberMenuList" data-id="@Model.Id" class="options-group">
-            <img src="~/images/add-user-icon.svg" /> Add Member
+            <img class="add-icon" src="~/images/add-user-icon.svg" /> Add Member
         </a>
         <div id="memberMenuList" class="member-list hidden">
             <select multiple class="member-select">

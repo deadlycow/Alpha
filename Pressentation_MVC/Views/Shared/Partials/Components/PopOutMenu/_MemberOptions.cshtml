@@ -2,8 +2,8 @@
 @model Member
 <div data-display="true" class="member-options-container">
     <a data-modal="true" data-target="#editMemberModal" data-id="@Model.Id" class="member-options-group">
-        <img src="~/images/edit-icon.svg" />
-        <p>Edit</p>
+        <img class="edit-icon" src="~/images/edit-icon.svg" />
+        Edit
     </a>
     <div class="member-options-group">
         <a data-delete="true" data-controller="members" data-id="@Model.Id" class="options-group">

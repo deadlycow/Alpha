@@ -5,6 +5,6 @@
 
     form.querySelectorAll('[data-valmsg-for]').forEach(span => {
         span.innerText = ''
-        span.classList.remove('filed-validation-error')
+        span.classList.remove('field-validation-error')
     })
 }

@@ -5,12 +5,14 @@
 
 .search-icon {
     user-select: none;
+    filter: brightness(var(--bell));
 }
 
 .search-input {
     border: none;
     background-color: transparent;
     font-size: var(--font-15);
+    color: var(--input-text-color);
 }
     .search-input::placeholder {
         color: var(--color-body);

@@ -189,7 +189,7 @@ namespace Pressentation_MVC.Controllers
 
         var notification = new NotificationCreateModel
         {
-          Icon = "images/delete-icon.svg",
+          Icon = form.ProjectImage!,
           Message = $"Project \"{form.Name}\" updated.",
           CreatedAt = DateTime.UtcNow,
           NotificationTypeId = 2,
@@ -216,7 +216,7 @@ namespace Pressentation_MVC.Controllers
 
         var notification = new NotificationCreateModel
         {
-          Icon = "images/delete-icon.svg",
+          Icon = project.Data.ProjectImage!,
           Message = $"Project \"{project.Data.Name}\" status changed.",
           CreatedAt = DateTime.UtcNow,
           NotificationTypeId = 2,
