@@ -1,0 +1,55 @@
+﻿<link rel="stylesheet" href="~/css/modals/_cookieConsent.css" asp-append-version="true" />
+
+<div id="cookieModal" class="modal-overlay">
+    <div class="bg-modal">
+        <div class="consent-text">
+            <h2>We value your privacy</h2>
+            <p>We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic.</p>
+            <p>By clicking "Accept All", you consent to our use of cookies. For more information, see our policy.</p>
+            <a href="#">Cookie Policy.</a>
+        </div>
+        <form>
+            <div class="consent-cookies">
+                <div class="space">
+                    <h4>Cookies</h4>
+                    <div class="consent-option">
+                        <p>Necessary (Always active)</p>
+                        <label class="switch">
+                            <input type="checkbox" disabled checked id="necessary" />
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="consent-option">
+                        <p>Functional</p>
+                        <label class="switch">
+                            <input type="checkbox" id="functional" />
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="consent-option">
+                        <p>Analytics & Statistics</p>
+                        <label class="switch">
+                            <input type="checkbox" id="analytics" />
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="consent-option">
+                        <p>Marketing</p>
+                        <label class="switch">
+                            <input type="checkbox" id="marketing" />
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="btn-container">
+                    <button class="accept btn-primary">Accept All</button>
+                    <button class="confirm btn-primary">Confirm Choices</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    Cookie
+</div>

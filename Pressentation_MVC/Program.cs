@@ -27,6 +27,12 @@ builder.Services.AddIdentity<MemberEntity, IdentityRole>(options =>
   .AddEntityFrameworkStores<DataContext>()
   .AddDefaultTokenProviders();
 
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+  options.CheckConsentNeeded = context => !context.Request.Cookies.ContainsKey("cookieConsent");
+  options.MinimumSameSitePolicy = SameSiteMode.Lax;
+});
+
 builder.Services.ConfigureApplicationCookie(options =>
 {
   options.LoginPath = "/Auth/SignIn";
@@ -103,6 +109,7 @@ app.UseRouting();
 
 await DatabaseSeeder.SeedRolesAndAdminAsync(app.Services);
 
+app.UseCookiePolicy();
 app.UseAuthentication();
 app.UseAuthorization();
 
