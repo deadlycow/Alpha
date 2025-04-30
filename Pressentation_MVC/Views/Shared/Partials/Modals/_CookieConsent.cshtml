@@ -1,55 +1,57 @@
 ﻿<link rel="stylesheet" href="~/css/modals/_cookieConsent.css" asp-append-version="true" />
 
-<div id="cookieModal" class="modal-overlay">
-    <div class="bg-modal">
+<div id="cookieModal" class="modal-consent-overlay">
+    <div class="bg-consent-modal">
         <div class="consent-text">
             <h2>We value your privacy</h2>
             <p>We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic.</p>
             <p>By clicking "Accept All", you consent to our use of cookies. For more information, see our policy.</p>
             <a href="#">Cookie Policy.</a>
         </div>
-        <form>
+        <form id="cookieConsentForm">
             <div class="consent-cookies">
                 <div class="space">
                     <h4>Cookies</h4>
                     <div class="consent-option">
-                        <p>Necessary (Always active)</p>
+                        <p>Essentials (Always active)</p>
                         <label class="switch">
-                            <input type="checkbox" disabled checked id="necessary" />
+                            <input type="checkbox" disabled checked id="cookieEssential" name="essential" />
                             <span class="slider"></span>
                         </label>
                     </div>
                     <div class="consent-option">
                         <p>Functional</p>
                         <label class="switch">
-                            <input type="checkbox" id="functional" />
+                            <input type="checkbox" id="cookieFunctional" name="functional" />
                             <span class="slider"></span>
                         </label>
                     </div>
                     <div class="consent-option">
                         <p>Analytics & Statistics</p>
                         <label class="switch">
-                            <input type="checkbox" id="analytics" />
+                            <input type="checkbox" id="cookieAnalytics" name="analytics" />
                             <span class="slider"></span>
                         </label>
                     </div>
                     <div class="consent-option">
                         <p>Marketing</p>
                         <label class="switch">
-                            <input type="checkbox" id="marketing" />
+                            <input type="checkbox" id="cookieMarketing" name="marketing" />
                             <span class="slider"></span>
                         </label>
                     </div>
                 </div>
                 <div class="btn-container">
-                    <button class="accept btn-primary">Accept All</button>
-                    <button class="confirm btn-primary">Confirm Choices</button>
+                    <button class="accept btn-primary" onclick="acceptAll()">Accept All</button>
+                    <button class="confirm btn-primary" onclick="confirmChoices()">Confirm Choices</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    Cookie
+<div class="consent-cookieIcon" onclick="showCookie()">
+    <i class="fa-solid fa-cookie-bite"></i>
 </div>
+
+<script src="~/js/cookieConsent.js" asp-append-version="true"></script>

@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - Pressentation_MVC</title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/css/main.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="~/css/layouts/_PortalLayout.css" asp-append-version="true" />
 
 </head>
@@ -16,7 +17,6 @@
         </div>
     </div>
     <partial name="Partials/Modals/_CookieConsent" />
-
     @await Html.PartialAsync("Scripts/_ValidationScript")
     @await Html.PartialAsync("Scripts/_ShowPasswordScript")
     @await RenderSectionAsync("Scripts", required: false)

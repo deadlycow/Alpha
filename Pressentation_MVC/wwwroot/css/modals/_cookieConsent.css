@@ -1,14 +1,14 @@
-﻿.modal-overlay {
+﻿.modal-consent-overlay {
     background-color: var(--bg-overlay);
     position: absolute;
     inset: 0;
-    display: grid;
+    display: none;
     z-index: 2;
     align-items: center;
     justify-content: center;
 }
 
-.bg-modal {
+.bg-consent-modal {
     display: grid;
     align-content: center;
     justify-content: center;
@@ -107,3 +107,10 @@
         left: 2px;
         transition: .4s;
     }
+
+.consent-cookieIcon {
+    position: fixed;
+    left: 1rem;
+    bottom: 1rem;
+    cursor: pointer;
+}
