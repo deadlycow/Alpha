@@ -4,7 +4,7 @@
 
     const items = document.querySelectorAll(`.${dataTarget}`)
 
-    searchInput.addEventListener('change', function () {
+    searchInput.addEventListener('input', function () {
         const searhTerm = this.value.toLowerCase()
 
         items.forEach(item => {

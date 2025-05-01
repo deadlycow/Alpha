@@ -1,7 +1,8 @@
-﻿document.addEventListener('DOMContentLoaded', function () {
+﻿export const quillInstances = []
+
+document.addEventListener('DOMContentLoaded', function () {
     const forms = document.querySelectorAll('.quill-form')
 
-    const quillInstances = []
 
     forms.forEach(form => {
         const editor = form.querySelector('.editor')
@@ -12,14 +13,13 @@
             modules: {
                 toolbar: [
                     ['bold', 'italic', 'underline'],
-                    [{ 'list': 'ordered' }, { 'list:': 'bullet' }]
+                    [{ 'align': [] }],
+                    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                    ['link']
                 ]
-            }
+            },
+            placeholder: 'Type somthing',
         })
-        quillInstances.push(quill)
-
-        form.addEventListener('submit', function (e) {
-            input.value = quill.root.innerHTML
-        })
+        quillInstances.push({ form, quill })
     })
 })

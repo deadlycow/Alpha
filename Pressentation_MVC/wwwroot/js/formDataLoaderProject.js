@@ -1,4 +1,5 @@
 ﻿import { addToList } from './compact-search.js'
+import { quillInstances } from './initQuill.js'
 
 document.querySelectorAll('[data-modal="true"').forEach(button => {
     button.addEventListener('click', async function () {
@@ -25,11 +26,16 @@ document.querySelectorAll('[data-modal="true"').forEach(button => {
 
             form.querySelector('[name="Id"]').value = project.id
             form.querySelector('[name="Name"]').value = project.name
-            form.querySelector('[name="Description"]').value = project.description
             form.querySelector('[name="StartDate"]').value = project.startDate
             form.querySelector('[name="EndDate"]').value = project.endDate
             form.querySelector('[name="ClientId"]').value = project.clientId
             form.querySelector('[name="Budget"]').value = project.budget
+
+            const item = quillInstances.find(x => x.form === form)
+
+            if (item) {
+                item.quill.clipboard.dangerouslyPasteHTML(project.description)
+            }
 
             project.members.forEach(member => {
                 addToList(form, {

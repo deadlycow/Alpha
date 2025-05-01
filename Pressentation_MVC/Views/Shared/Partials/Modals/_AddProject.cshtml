@@ -35,7 +35,7 @@
                 <div class="form-group">
                     <label asp-for="StartDate"></label>
                     <div class="field-group">
-                        <input type="date" asp-for="StartDate" value="@DateTime.Today" />
+                        <input type="date" asp-for="StartDate" value="@DateTime.Today.ToString("yyyy-MM-dd")" />
                         <span asp-validation-for="StartDate"></span>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Description"></label>
-                <div class="field-group">
+                <div class="field-group quill-container">
                     <textarea class="content-input" hidden asp-for="Description"></textarea>
                     <div class="editor"></div>
                     <span asp-validation-for="Description"></span>

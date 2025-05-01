@@ -18,7 +18,7 @@
         <img src="~/images/more-icon.svg" />
         <partial name="Partials/Components/PopOutMenu/_ProjectOptions" model="Model" />
     </div>
-    <p class="project-description">@Model.Description</p>
+    <div class="project-description">@Html.Raw(Model.Description)</div>
     <div class="project-time-summary">
         @if (!Model.Status)
         {

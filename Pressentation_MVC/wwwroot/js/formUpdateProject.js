@@ -1,6 +1,7 @@
 ﻿import { clearErrorMessages } from './utils.js'
 import { getPreviewImagePath } from './imageHandler.js'
 import { selectedItems } from './compact-search.js'
+import { quillInstances } from './initQuill.js'
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -11,8 +12,12 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault()
         clearErrorMessages(form)
 
+        const instance = quillInstances.find(x => x.form === form)
+        if (instance) {
+            const input = form.querySelector('.content-input')
+            input.value = instance.quill.root.innerHTML
+        }
         const formData = new FormData(form)
-        
         const fileInput = form.querySelector('input[type="file"]')
         if (!fileInput.files.length) {
             const imagePath = getPreviewImagePath(form)
