@@ -156,6 +156,7 @@
     --layout-border: var(--border-23);
     --bg-card-color: var(--dark-background-card);
     --bg-card-color-drop: var(--dark-background-card-drop);
+    --bg-card-color-span: var(--time-container-bg-color);
     --surface2: 0px 20px 30px -18px var(--black-25);
     --color-card-description: var(--gray-50);
     --color-card-company-name: var(--gray);

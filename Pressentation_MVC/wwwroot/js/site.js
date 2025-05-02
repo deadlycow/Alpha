@@ -77,10 +77,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const id = event.currentTarget.getAttribute('data-id');
             const target = event.currentTarget.getAttribute('data-controller');
             if (target === 'projects') {
-                title = event.currentTarget.closest('.project-card').querySelector('h6').innerText;
+                title = event.currentTarget.closest('.project-card').querySelector('h6').innerText
             }
             else if (target === 'members') {
-                title = event.currentTarget.closest('.member-card').querySelector('h4').innerText;
+                title = event.currentTarget.closest('.member-card').querySelector('h4').innerText
             }
 
             try {
@@ -92,11 +92,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: JSON.stringify({ id, title })
                 })
                 if (res.ok) {
-                    window.location.reload();
+                    window.location.reload()
                 }
             }
             catch (error) {
-                console.error(`Error deleting ${target}:`, error);
+                console.error(`Error deleting ${target}:`, error)
             }
 
         })

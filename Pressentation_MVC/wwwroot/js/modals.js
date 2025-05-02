@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             try {
                 const res = await fetch(form.action, {
-                    method: 'post',
+                    method: 'POST',
                     body: formData,
                 })
 

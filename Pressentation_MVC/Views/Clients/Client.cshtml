@@ -1,29 +1,31 @@
 ﻿<link rel="stylesheet" href="~/css/clients/client.css" asp-append-version="true" />
 @model IEnumerable<Client>
 
-<partial name="Partials/Modals/_AddClient" model="new ClientViewModel()"/>
+<partial name="Partials/Modals/_AddClient" model="new ClientViewModel()" />
 <div class="clients-container">
     <div class="clients-header">
         <h2>Clients</h2>
         <button type="button" data-modal="true" data-target="#addClientModal" class="btn btn-primary"><img src="~/images/plus-icon.svg" />Add Client</button>
     </div>
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-            </tr>
-        </thead>
+    <table data-search-target="client-row">
         <tbody>
             @foreach (var client in Model)
             {
-                <tr>
+                <tr class="client-row" data-value-1="@client.Name">
                     <td>
-                        <img src="~/images/projectIcons/1.svg" />
+                        @if (client.ClientImage != null)
+                        {
+                            <img src="@client.ClientImage" />
+                        }
+                        else
+                        {
+                            <img src="~/images/projectIcons/1.svg" />
+                        }
                     </td>
                     <td>
                         @client.Name
                     </td>
-                    <td>
+                    <td data-client-delete="true" data-id="@client.Id">
                         <i class="fas fa-trash"></i>
                     </td>
                 </tr>
@@ -31,3 +33,5 @@
         </tbody>
     </table>
 </div>
+
+<script src="~/js/deleteClient.js" asp-append-version="true"></script>

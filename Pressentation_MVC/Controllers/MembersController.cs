@@ -116,7 +116,6 @@ namespace Pressentation_MVC.Controllers
       var respons = await _memberService.DeleteAsync(id);
       if (respons.Success)
       {
-        //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
         var notification = new NotificationCreateModel
         {
           Icon = "images/delete-icon.svg",

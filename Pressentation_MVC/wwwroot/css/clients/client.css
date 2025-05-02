@@ -1,7 +1,9 @@
 ﻿.clients-container {
     padding: 2rem;
     display: grid;
+    grid-template-rows: auto 1fr;
     gap: 2rem;
+    height: 100%;
 }
 
 .clients-header {
@@ -15,20 +17,32 @@
 
 table {
     display: grid;
-    background-color: var(--bg-table);
-    width: 100%;
+    grid-template-rows: auto 1fr;
+    background-color: var(--bg-card-color);
     padding: 1rem;
     border-radius: var(--border-radius-16);
+    color: var(--color-current-user-text);
 }
 
-    table tr {
+    table tbody tr {
         border-radius: var(--border-radius-16);
         display: grid;
         grid-template-columns: auto 1fr auto;
+        grid-column-gap: 2rem;
         padding: 1rem;
+        align-items: center;
     }
 
-        table tr:hover {
-            background-color: orange;
-            cursor: pointer;
-        }
+    table tr:hover {
+        background-color: var(--hover-compact-search);
+    }
+
+.fas {
+    padding: 1rem;
+}
+
+    .fas:hover {
+        background-color: var(--bg-more-hover);
+        border-radius: var(--border-radius-8);
+        cursor: pointer;
+    }

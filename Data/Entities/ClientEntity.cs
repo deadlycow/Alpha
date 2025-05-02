@@ -9,6 +9,7 @@ public class ClientEntity
   [Required]
   [Column(TypeName = "nvarchar(100)")]
   public string Name { get; set; } = null!;
+  public string? ClientImage { get; set; }
 
   public ICollection<ProjectEntity>? Projects { get; set; }
 }
