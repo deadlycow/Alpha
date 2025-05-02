@@ -362,3 +362,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /Pressentation_MVC/appsettings.json
+/Pressentation_MVC/wwwroot/images/uploads
